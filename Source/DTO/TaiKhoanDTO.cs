@@ -5,13 +5,15 @@ using System.Text;
 
 namespace DTO
 {
-    public class LoaiTaiKhoanDTO
+    public class TaiKhoanDTO
     {
         private string email;
         private string hoTen;
         private string matKhau;
         private string loaiTaiKhoan;
+        private List<LichLamViecDTO> lichLamViec;
 
+        #region Properties
         public string Email
         {
             get { return email; }
@@ -32,21 +34,21 @@ namespace DTO
             get { return loaiTaiKhoan; }
             set { loaiTaiKhoan = value; }
         }
-
-        public LoaiTaiKhoanDTO(string _Email, string _HoTen, string _MatKhau, string _LoaiTaiKhoan)
+        public List<LichLamViecDTO> LichLamViec
         {
-            this.email = _Email;
-            this.hoTen = _HoTen;
-            this.matKhau = _MatKhau;
-            this.loaiTaiKhoan = _LoaiTaiKhoan;
+            get { return lichLamViec; }
+            set { lichLamViec = value; }
         }
+        #endregion
 
-        public LoaiTaiKhoanDTO()
+
+        public TaiKhoanDTO()
         {
-            this.email = "";
-            this.hoTen = "";
-            this.matKhau = "";
-            this.loaiTaiKhoan = "";
+            this.Email = "";
+            this.HoTen = "";
+            this.MatKhau = "";
+            this.LoaiTaiKhoan = "";
+            this.LichLamViec = new List<LichLamViecDTO>();
         }
     }
 }

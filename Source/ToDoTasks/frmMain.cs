@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DAO;
 
 namespace ToDoTasks
 {
@@ -38,6 +39,12 @@ namespace ToDoTasks
         {
             lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
             lblDate.Text = DateTime.Now.ToLongDateString();
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            CaiDatHeThongDAO caidat = new CaiDatHeThongDAO("config.xml");
+            caidat.ReadConfiguration();
         }
 
 

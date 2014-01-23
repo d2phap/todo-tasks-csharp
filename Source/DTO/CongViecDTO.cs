@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace DTO
 {
@@ -11,10 +12,11 @@ namespace DTO
         private List<ThoiGianDienRaDTO> thoiGianDienRa;
         private string diaDiem;
         private string mieuTa;
-        private ConsoleColor mauSacLich;
-        private string danhSachThoiGianNhacNho;
+        private Color mauSacLich;
+        private List<int> danhSachThoiGianNhacNho;
         private List<HinhThucNhacNhoDTO> hinhThucNhacNho;
 
+        #region Properties
         public string Ten
         {
             get { return ten; }
@@ -35,12 +37,12 @@ namespace DTO
             get { return mieuTa; }
             set { mieuTa = value; }
         }
-        public ConsoleColor MauSacLich
+        public Color MauSacLich
         {
             get { return mauSacLich; }
             set { mauSacLich = value; }
         }
-        public string DanhSachThoiGianNhacNho
+        public List<int> DanhSachThoiGianNhacNho
         {
             get { return danhSachThoiGianNhacNho; }
             set { danhSachThoiGianNhacNho = value; }
@@ -50,8 +52,10 @@ namespace DTO
             get { return hinhThucNhacNho; }
             set { hinhThucNhacNho = value; }
         }
+        #endregion
 
-        public CongViecDTO(string _Ten, List<ThoiGianDienRaDTO> _ThoiGianDienRa, string _DiaDiem, string _MieuTa, ConsoleColor _MauSac, string _DSThoiGian, List<HinhThucNhacNhoDTO> _HinhThucNhacNho)
+        public CongViecDTO(string _Ten, List<ThoiGianDienRaDTO> _ThoiGianDienRa, string _DiaDiem, 
+            string _MieuTa, Color _MauSac, List<int> _DSThoiGian, List<HinhThucNhacNhoDTO> _HinhThucNhacNho)
         {
             this.ten = _Ten;
             this.thoiGianDienRa = _ThoiGianDienRa;
@@ -62,12 +66,16 @@ namespace DTO
             this.hinhThucNhacNho = _HinhThucNhacNho;
         }
 
+
         public CongViecDTO()
         {
             this.ten = "";
             this.diaDiem = "";
             this.mieuTa = "";
-            this.danhSachThoiGianNhacNho = "";
+            this.danhSachThoiGianNhacNho = new List<int>();
+            this.mauSacLich = Color.Blue;
+            this.HinhThucNhacNho = new List<HinhThucNhacNhoDTO>();
+            this.ThoiGianDienRa = new List<ThoiGianDienRaDTO>();
         }
 
     }

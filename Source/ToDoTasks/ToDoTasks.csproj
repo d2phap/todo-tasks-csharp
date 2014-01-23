@@ -82,6 +82,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAO\DAO.csproj">
+      <Project>{f220c595-0414-4698-897d-ba081b3a8bc4}</Project>
+      <Name>DAO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{5064e1be-946a-4bad-bcc7-3df350b8af76}</Project>
       <Name>DTO</Name>
