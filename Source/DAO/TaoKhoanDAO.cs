@@ -54,7 +54,7 @@ namespace DAO
                     XmlElement nColor = (XmlElement)nTask.SelectNodes("color")[0];
                     //CongViec.MauSacLich =  nColor.InnerText;
                     XmlElement nTime = (XmlElement)nTask.SelectNodes("time")[0];
-                    XmlElement n
+                    //XmlElement n
                 }
             }
 

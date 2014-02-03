@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{F220C595-0414-4698-897D-BA081B3A8BC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{328554DB-0502-4C61-A60A-B77E936BDC71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F220C595-0414-4698-897D-BA081B3A8BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F220C595-0414-4698-897D-BA081B3A8BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F220C595-0414-4698-897D-BA081B3A8BC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{328554DB-0502-4C61-A60A-B77E936BDC71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{328554DB-0502-4C61-A60A-B77E936BDC71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{328554DB-0502-4C61-A60A-B77E936BDC71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{328554DB-0502-4C61-A60A-B77E936BDC71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

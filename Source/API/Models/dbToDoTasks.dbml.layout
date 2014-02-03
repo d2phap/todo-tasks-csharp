@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="dbToDoTasks">
+  <DataContextMoniker Name="/dbToDoTasksDataContext" />
+  <nestedChildShapes>
+    <classShape Id="c1d45b94-0489-48b6-8ce7-11171477b822" absoluteBounds="0.75, 0.875, 2, 1.3862939453124998">
+      <DataClassMoniker Name="/dbToDoTasksDataContext/Account" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e3cc7fe4-1f0b-45ec-aac9-fd0b58b1b314" absoluteBounds="0.765, 1.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e1385b4a-bb3b-45ef-969e-7226d978d11a" absoluteBounds="3.5, 0.875, 2, 1.3862939453124998">
+      <DataClassMoniker Name="/dbToDoTasksDataContext/Sync" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0dd76925-f2a9-4749-8fbd-4b0259641120" absoluteBounds="3.515, 1.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 1.56814697265625); (3.5 : 1.56814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbToDoTasksDataContext/Account/Account_Sync" />
+      <nodes>
+        <classShapeMoniker Id="c1d45b94-0489-48b6-8ce7-11171477b822" />
+        <classShapeMoniker Id="e1385b4a-bb3b-45ef-969e-7226d978d11a" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

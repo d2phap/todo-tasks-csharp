@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DAO;
+using System.Net.Http;
 
 namespace ToDoTasks
 {
@@ -43,8 +44,19 @@ namespace ToDoTasks
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            CaiDatHeThongDAO caidat = new CaiDatHeThongDAO("config.xml");
-            caidat.ReadConfiguration();
+            //CaiDatHeThongDAO caidat = new CaiDatHeThongDAO("config.xml");
+            //caidat.ReadConfiguration();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string api = "http://localhost:53456/api/account/sync";
+
+            using (var client = new HttpClient())
+            {
+
+            }
+
         }
 
 

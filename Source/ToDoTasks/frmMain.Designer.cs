@@ -41,9 +41,12 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.timSys = new System.Windows.Forms.Timer(this.components);
+            this.panStatus = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.panControl.SuspendLayout();
+            this.panStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // panMenu
@@ -58,7 +61,7 @@
             this.panMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panMenu.Location = new System.Drawing.Point(0, 0);
             this.panMenu.Name = "panMenu";
-            this.panMenu.Size = new System.Drawing.Size(919, 70);
+            this.panMenu.Size = new System.Drawing.Size(903, 70);
             this.panMenu.TabIndex = 0;
             // 
             // radTabLogin
@@ -72,7 +75,7 @@
             this.radTabLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(189)))), ((int)(((byte)(239)))));
             this.radTabLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radTabLogin.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.radTabLogin.Location = new System.Drawing.Point(799, 0);
+            this.radTabLogin.Location = new System.Drawing.Point(783, 0);
             this.radTabLogin.Name = "radTabLogin";
             this.radTabLogin.Size = new System.Drawing.Size(120, 70);
             this.radTabLogin.TabIndex = 11;
@@ -93,7 +96,7 @@
             this.radTabSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(189)))), ((int)(((byte)(239)))));
             this.radTabSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radTabSettings.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.radTabSettings.Location = new System.Drawing.Point(678, 0);
+            this.radTabSettings.Location = new System.Drawing.Point(662, 0);
             this.radTabSettings.Name = "radTabSettings";
             this.radTabSettings.Size = new System.Drawing.Size(120, 70);
             this.radTabSettings.TabIndex = 10;
@@ -114,7 +117,7 @@
             this.radTabSchedule.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(189)))), ((int)(((byte)(239)))));
             this.radTabSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radTabSchedule.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.radTabSchedule.Location = new System.Drawing.Point(557, 0);
+            this.radTabSchedule.Location = new System.Drawing.Point(541, 0);
             this.radTabSchedule.Name = "radTabSchedule";
             this.radTabSchedule.Size = new System.Drawing.Size(120, 70);
             this.radTabSchedule.TabIndex = 9;
@@ -135,7 +138,7 @@
             this.rabTabStatus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(189)))), ((int)(((byte)(239)))));
             this.rabTabStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rabTabStatus.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.rabTabStatus.Location = new System.Drawing.Point(436, 0);
+            this.rabTabStatus.Location = new System.Drawing.Point(420, 0);
             this.rabTabStatus.Name = "rabTabStatus";
             this.rabTabStatus.Size = new System.Drawing.Size(120, 70);
             this.rabTabStatus.TabIndex = 2;
@@ -174,7 +177,7 @@
             this.panControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panControl.Location = new System.Drawing.Point(0, 406);
             this.panControl.Name = "panControl";
-            this.panControl.Size = new System.Drawing.Size(919, 80);
+            this.panControl.Size = new System.Drawing.Size(903, 80);
             this.panControl.TabIndex = 1;
             // 
             // lblDate
@@ -203,6 +206,28 @@
             this.timSys.Interval = 1000;
             this.timSys.Tick += new System.EventHandler(this.timSys_Tick);
             // 
+            // panStatus
+            // 
+            this.panStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panStatus.BackColor = System.Drawing.Color.White;
+            this.panStatus.Controls.Add(this.button1);
+            this.panStatus.Location = new System.Drawing.Point(55, 105);
+            this.panStatus.Name = "panStatus";
+            this.panStatus.Size = new System.Drawing.Size(792, 265);
+            this.panStatus.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(323, 74);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 39);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -210,7 +235,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(189)))), ((int)(((byte)(239)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(919, 486);
+            this.ClientSize = new System.Drawing.Size(903, 486);
+            this.Controls.Add(this.panStatus);
             this.Controls.Add(this.panControl);
             this.Controls.Add(this.panMenu);
             this.DoubleBuffered = true;
@@ -226,6 +252,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.panControl.ResumeLayout(false);
             this.panControl.PerformLayout();
+            this.panStatus.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -243,6 +270,8 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Timer timSys;
+        private System.Windows.Forms.Panel panStatus;
+        private System.Windows.Forms.Button button1;
 
 
 
