@@ -43,6 +43,22 @@
             this.timSys = new System.Windows.Forms.Timer(this.components);
             this.panStatus = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
             this.panMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.panControl.SuspendLayout();
@@ -172,6 +188,8 @@
             // panControl
             // 
             this.panControl.BackColor = System.Drawing.Color.White;
+            this.panControl.Controls.Add(this.button3);
+            this.panControl.Controls.Add(this.button2);
             this.panControl.Controls.Add(this.lblDate);
             this.panControl.Controls.Add(this.lblTime);
             this.panControl.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -212,6 +230,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panStatus.BackColor = System.Drawing.Color.White;
+            this.panStatus.Controls.Add(this.button16);
+            this.panStatus.Controls.Add(this.button17);
+            this.panStatus.Controls.Add(this.button15);
+            this.panStatus.Controls.Add(this.button14);
+            this.panStatus.Controls.Add(this.button12);
+            this.panStatus.Controls.Add(this.button13);
+            this.panStatus.Controls.Add(this.button11);
+            this.panStatus.Controls.Add(this.button10);
+            this.panStatus.Controls.Add(this.button9);
+            this.panStatus.Controls.Add(this.button8);
+            this.panStatus.Controls.Add(this.button7);
+            this.panStatus.Controls.Add(this.button6);
+            this.panStatus.Controls.Add(this.button5);
+            this.panStatus.Controls.Add(this.button4);
             this.panStatus.Controls.Add(this.button1);
             this.panStatus.Location = new System.Drawing.Point(55, 105);
             this.panStatus.Name = "panStatus";
@@ -220,13 +252,223 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(323, 74);
+            this.button1.Location = new System.Drawing.Point(25, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 39);
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(622, 21);
+            this.button2.Name = "button2";
+            this.button2.Padding = new System.Windows.Forms.Padding(10);
+            this.button2.Size = new System.Drawing.Size(203, 45);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Minimize to system tray";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Location = new System.Drawing.Point(831, 21);
+            this.button3.Name = "button3";
+            this.button3.Padding = new System.Windows.Forms.Padding(10);
+            this.button3.Size = new System.Drawing.Size(45, 45);
+            this.button3.TabIndex = 3;
+            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.Location = new System.Drawing.Point(17, 201);
+            this.button4.Name = "button4";
+            this.button4.Padding = new System.Windows.Forms.Padding(10);
+            this.button4.Size = new System.Drawing.Size(88, 45);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "OK";
+            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
+            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button5.Location = new System.Drawing.Point(111, 201);
+            this.button5.Name = "button5";
+            this.button5.Padding = new System.Windows.Forms.Padding(10);
+            this.button5.Size = new System.Drawing.Size(108, 45);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Cancel";
+            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
+            this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button6.Location = new System.Drawing.Point(423, 19);
+            this.button6.Name = "button6";
+            this.button6.Padding = new System.Windows.Forms.Padding(10);
+            this.button6.Size = new System.Drawing.Size(110, 45);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "Normal";
+            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
+            this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button7.Location = new System.Drawing.Point(539, 19);
+            this.button7.Name = "button7";
+            this.button7.Padding = new System.Windows.Forms.Padding(10);
+            this.button7.Size = new System.Drawing.Size(110, 45);
+            this.button7.TabIndex = 6;
+            this.button7.Text = "Week";
+            this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button8.Image = ((System.Drawing.Image)(resources.GetObject("button8.Image")));
+            this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button8.Location = new System.Drawing.Point(655, 19);
+            this.button8.Name = "button8";
+            this.button8.Padding = new System.Windows.Forms.Padding(10);
+            this.button8.Size = new System.Drawing.Size(110, 45);
+            this.button8.TabIndex = 7;
+            this.button8.Text = "Month";
+            this.button8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button9.Image = ((System.Drawing.Image)(resources.GetObject("button9.Image")));
+            this.button9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button9.Location = new System.Drawing.Point(423, 84);
+            this.button9.Name = "button9";
+            this.button9.Padding = new System.Windows.Forms.Padding(10);
+            this.button9.Size = new System.Drawing.Size(94, 45);
+            this.button9.TabIndex = 8;
+            this.button9.Text = "Sync";
+            this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // button10
+            // 
+            this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button10.Image = ((System.Drawing.Image)(resources.GetObject("button10.Image")));
+            this.button10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button10.Location = new System.Drawing.Point(523, 84);
+            this.button10.Name = "button10";
+            this.button10.Padding = new System.Windows.Forms.Padding(10);
+            this.button10.Size = new System.Drawing.Size(101, 45);
+            this.button10.TabIndex = 9;
+            this.button10.Text = "Log in";
+            this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button11.Image = ((System.Drawing.Image)(resources.GetObject("button11.Image")));
+            this.button11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button11.Location = new System.Drawing.Point(630, 84);
+            this.button11.Name = "button11";
+            this.button11.Padding = new System.Windows.Forms.Padding(10);
+            this.button11.Size = new System.Drawing.Size(140, 45);
+            this.button11.TabIndex = 10;
+            this.button11.Text = "New account";
+            this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button11.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button12.Image = ((System.Drawing.Image)(resources.GetObject("button12.Image")));
+            this.button12.Location = new System.Drawing.Point(674, 201);
+            this.button12.Name = "button12";
+            this.button12.Padding = new System.Windows.Forms.Padding(10);
+            this.button12.Size = new System.Drawing.Size(45, 45);
+            this.button12.TabIndex = 12;
+            this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // button13
+            // 
+            this.button13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button13.Image = ((System.Drawing.Image)(resources.GetObject("button13.Image")));
+            this.button13.Location = new System.Drawing.Point(623, 201);
+            this.button13.Name = "button13";
+            this.button13.Padding = new System.Windows.Forms.Padding(10);
+            this.button13.Size = new System.Drawing.Size(45, 45);
+            this.button13.TabIndex = 11;
+            this.button13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button13.UseVisualStyleBackColor = true;
+            // 
+            // button14
+            // 
+            this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button14.Image = ((System.Drawing.Image)(resources.GetObject("button14.Image")));
+            this.button14.Location = new System.Drawing.Point(572, 201);
+            this.button14.Name = "button14";
+            this.button14.Padding = new System.Windows.Forms.Padding(10);
+            this.button14.Size = new System.Drawing.Size(45, 45);
+            this.button14.TabIndex = 13;
+            this.button14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button14.UseVisualStyleBackColor = true;
+            // 
+            // button15
+            // 
+            this.button15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button15.Image = ((System.Drawing.Image)(resources.GetObject("button15.Image")));
+            this.button15.Location = new System.Drawing.Point(725, 201);
+            this.button15.Name = "button15";
+            this.button15.Padding = new System.Windows.Forms.Padding(10);
+            this.button15.Size = new System.Drawing.Size(45, 45);
+            this.button15.TabIndex = 14;
+            this.button15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button15.UseVisualStyleBackColor = true;
+            // 
+            // button16
+            // 
+            this.button16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button16.Image = ((System.Drawing.Image)(resources.GetObject("button16.Image")));
+            this.button16.Location = new System.Drawing.Point(423, 201);
+            this.button16.Name = "button16";
+            this.button16.Padding = new System.Windows.Forms.Padding(10);
+            this.button16.Size = new System.Drawing.Size(45, 45);
+            this.button16.TabIndex = 16;
+            this.button16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button16.UseVisualStyleBackColor = true;
+            // 
+            // button17
+            // 
+            this.button17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button17.Image = ((System.Drawing.Image)(resources.GetObject("button17.Image")));
+            this.button17.Location = new System.Drawing.Point(474, 201);
+            this.button17.Name = "button17";
+            this.button17.Padding = new System.Windows.Forms.Padding(10);
+            this.button17.Size = new System.Drawing.Size(45, 45);
+            this.button17.TabIndex = 15;
+            this.button17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button17.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
@@ -272,6 +514,22 @@
         private System.Windows.Forms.Timer timSys;
         private System.Windows.Forms.Panel panStatus;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button17;
 
 
 
