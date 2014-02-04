@@ -9,6 +9,8 @@ using System.Text;
 using System.Windows.Forms;
 using DAO;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.IO;
 
 namespace ToDoTasks
 {
@@ -22,10 +24,10 @@ namespace ToDoTasks
         }
 
         private void radTab_CheckedChanged(object sender, EventArgs e)
-        {            
+        {
             RadioButton rad = (RadioButton)sender;
 
-            if(rad.Checked)
+            if (rad.Checked)
             {
                 rad.ForeColor = Color.White;
             }
@@ -33,7 +35,7 @@ namespace ToDoTasks
             {
                 rad.ForeColor = _FONT_COLOR;
             }
-            
+
         }
 
         private void timSys_Tick(object sender, EventArgs e)
@@ -50,11 +52,37 @@ namespace ToDoTasks
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string api = "http://localhost:53456/api/account/sync";
-
-            using (var client = new HttpClient())
+            OpenFileDialog o = new OpenFileDialog();
+            if(o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                string api = "http://localhost:53456/";
 
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(api);
+                    using (var content = new MultipartFormDataContent())
+                    {
+                        var fileContent = new ByteArrayContent(System.IO.File.ReadAllBytes(o.FileName));
+                        fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                        {
+                            Name = "d2phap@gmail.com",
+                            FileName = Path.GetFileName(o.FileName)
+                        };
+                        content.Add(fileContent);
+
+                        var requestUri = "api/account/sync";
+                        var result = client.PostAsync(requestUri, content).Result;
+
+                        if(result.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show(result.Headers.GetValues("Filename").ToList()[0]);
+                        }
+                        else
+                        {
+                            MessageBox.Show(result.StatusCode.ToString());
+                        }
+                    }
+                }
             }
 
         }

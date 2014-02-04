@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Diagnostics;
+using System.IO;
+using System.Net.Http.Headers;
 
 namespace API.Controllers
 {
@@ -150,19 +152,49 @@ namespace API.Controllers
 
             string root = HttpContext.Current.Server.MapPath("~/App_Data");
             var provider = new MultipartFormDataStreamProvider(root);
+            string uploadedFilename = string.Empty;
+            string user_dir = string.Empty;
+            dbToDoTasksDataContext db = new dbToDoTasksDataContext();
 
             try
             {
                 // Read the form data.
                 await Request.Content.ReadAsMultipartAsync(provider);
-
+                
                 // This illustrates how to get the file names.
                 foreach (MultipartFileData file in provider.FileData)
                 {
-                    Trace.WriteLine(file.Headers.ContentDisposition.FileName);
-                    Trace.WriteLine("Server file path: " + file.LocalFileName);
+                    uploadedFilename = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-");                    
+                    uploadedFilename += file.Headers.ContentDisposition.FileName;
+
+                    Models.Sync sy = new Sync();
+                    sy.email = file.Headers.ContentDisposition.Name.Replace('\"', ' ').Trim(); //email
+                    sy.filesync = uploadedFilename;
+                    sy.datesync = DateTime.Now;
+
+                    user_dir = root + "//" + sy.email + "//";
+                    if(!Directory.Exists(user_dir))
+                    {
+                        Directory.CreateDirectory(user_dir);
+                    }
+
+                    //Rename file
+                    File.Move(file.LocalFileName, user_dir + uploadedFilename);
+
+                    //Them vao CSDL
+                    db.Syncs.InsertOnSubmit(sy);
+                    db.SubmitChanges();
                 }
-                return Request.CreateResponse(HttpStatusCode.OK);
+
+                var res = Request.CreateResponse(HttpStatusCode.OK);
+
+                //Luu link vao header
+                res.Content = new StringContent(user_dir + uploadedFilename);
+                res.Content.Headers.Expires = DateTime.Now.AddHours(4);
+                res.Content.Headers.ContentType.MediaType = "text/plain";
+                res.Content.Headers.Add("Filename", user_dir + uploadedFilename);
+
+                return res;
             }
             catch (System.Exception e)
             {
