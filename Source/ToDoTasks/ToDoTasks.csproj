@@ -38,6 +38,8 @@
     <ApplicationIcon>todotask_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Utility, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.Expression.WebServer, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -48,6 +50,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms.Calendar, Version=1.0.3526.15150, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\System.Windows.Forms.Calendar.dll</HintPath>
@@ -68,10 +71,19 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPagesControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TabPagesControl.Designer.cs">
+      <DependentUpon>TabPagesControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPagesControl.resx">
+      <DependentUpon>TabPagesControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

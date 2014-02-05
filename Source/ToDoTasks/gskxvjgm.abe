@@ -50,6 +50,9 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -63,16 +66,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtLogInEmail = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.tpRegisterNewAccount = new System.Windows.Forms.TabPage();
-            this.txtAccountName = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtAccountConfirmPassword = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtAccountPassword = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtAccountEmail = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.tbRegister = new System.Windows.Forms.TabPage();
             this.tpAccount = new System.Windows.Forms.TabPage();
             this.lblAccountName = new System.Windows.Forms.Label();
             this.tabsFun = new ToDoTasks.TabPagesControl();
@@ -86,31 +80,34 @@
             this.tpFunScheduleNewTask = new System.Windows.Forms.TabPage();
             this.tpFunScheduleEditTask = new System.Windows.Forms.TabPage();
             this.tpFunSettings = new System.Windows.Forms.TabPage();
-            this.btnSettingsOK = new System.Windows.Forms.Button();
             this.tpFunSettingsSync = new System.Windows.Forms.TabPage();
-            this.btnSyncCancel = new System.Windows.Forms.Button();
-            this.btnSync = new System.Windows.Forms.Button();
             this.tpFunLogin = new System.Windows.Forms.TabPage();
             this.btnNewAccount = new System.Windows.Forms.Button();
             this.btnLogIn = new System.Windows.Forms.Button();
             this.tpFunLoginNewAccount = new System.Windows.Forms.TabPage();
-            this.btnAccountCancel = new System.Windows.Forms.Button();
-            this.btnAccountOK = new System.Windows.Forms.Button();
+            this.btnNewAccountOK = new System.Windows.Forms.Button();
             this.tpFunLogout = new System.Windows.Forms.TabPage();
             this.btnLogOut = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.panMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.panControl.SuspendLayout();
             this.tabs.SuspendLayout();
             this.tpStatus.SuspendLayout();
             this.tpLogin.SuspendLayout();
-            this.tpRegisterNewAccount.SuspendLayout();
+            this.tbRegister.SuspendLayout();
             this.tpAccount.SuspendLayout();
             this.tabsFun.SuspendLayout();
             this.tpFunStatus.SuspendLayout();
             this.tpFunSchedule.SuspendLayout();
-            this.tpFunSettings.SuspendLayout();
-            this.tpFunSettingsSync.SuspendLayout();
             this.tpFunLogin.SuspendLayout();
             this.tpFunLoginNewAccount.SuspendLayout();
             this.tpFunLogout.SuspendLayout();
@@ -292,7 +289,7 @@
             this.tabs.Controls.Add(this.tpSettings);
             this.tabs.Controls.Add(this.tpSync);
             this.tabs.Controls.Add(this.tpLogin);
-            this.tabs.Controls.Add(this.tpRegisterNewAccount);
+            this.tabs.Controls.Add(this.tbRegister);
             this.tabs.Controls.Add(this.tpAccount);
             this.tabs.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabs.Location = new System.Drawing.Point(40, 95);
@@ -310,6 +307,9 @@
             this.tpStatus.Controls.Add(this.button14);
             this.tpStatus.Controls.Add(this.button12);
             this.tpStatus.Controls.Add(this.button13);
+            this.tpStatus.Controls.Add(this.button11);
+            this.tpStatus.Controls.Add(this.button10);
+            this.tpStatus.Controls.Add(this.button9);
             this.tpStatus.Controls.Add(this.button5);
             this.tpStatus.Controls.Add(this.button4);
             this.tpStatus.Controls.Add(this.button1);
@@ -392,6 +392,48 @@
             this.button13.TabIndex = 26;
             this.button13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button13.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button11.Image = ((System.Drawing.Image)(resources.GetObject("button11.Image")));
+            this.button11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button11.Location = new System.Drawing.Point(639, 93);
+            this.button11.Name = "button11";
+            this.button11.Padding = new System.Windows.Forms.Padding(10);
+            this.button11.Size = new System.Drawing.Size(140, 45);
+            this.button11.TabIndex = 25;
+            this.button11.Text = "New account";
+            this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button11.UseVisualStyleBackColor = true;
+            // 
+            // button10
+            // 
+            this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button10.Image = ((System.Drawing.Image)(resources.GetObject("button10.Image")));
+            this.button10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button10.Location = new System.Drawing.Point(532, 93);
+            this.button10.Name = "button10";
+            this.button10.Padding = new System.Windows.Forms.Padding(10);
+            this.button10.Size = new System.Drawing.Size(101, 45);
+            this.button10.TabIndex = 24;
+            this.button10.Text = "Log in";
+            this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button9.Image = ((System.Drawing.Image)(resources.GetObject("button9.Image")));
+            this.button9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button9.Location = new System.Drawing.Point(432, 93);
+            this.button9.Name = "button9";
+            this.button9.Padding = new System.Windows.Forms.Padding(10);
+            this.button9.Size = new System.Drawing.Size(94, 45);
+            this.button9.TabIndex = 23;
+            this.button9.Text = "Sync";
+            this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button9.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
@@ -535,113 +577,24 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Email:";
             // 
-            // tpRegisterNewAccount
+            // tbRegister
             // 
-            this.tpRegisterNewAccount.Controls.Add(this.txtAccountName);
-            this.tpRegisterNewAccount.Controls.Add(this.label9);
-            this.tpRegisterNewAccount.Controls.Add(this.txtAccountConfirmPassword);
-            this.tpRegisterNewAccount.Controls.Add(this.label8);
-            this.tpRegisterNewAccount.Controls.Add(this.label5);
-            this.tpRegisterNewAccount.Controls.Add(this.txtAccountPassword);
-            this.tpRegisterNewAccount.Controls.Add(this.label6);
-            this.tpRegisterNewAccount.Controls.Add(this.txtAccountEmail);
-            this.tpRegisterNewAccount.Controls.Add(this.label7);
-            this.tpRegisterNewAccount.Location = new System.Drawing.Point(4, 24);
-            this.tpRegisterNewAccount.Name = "tpRegisterNewAccount";
-            this.tpRegisterNewAccount.Padding = new System.Windows.Forms.Padding(3);
-            this.tpRegisterNewAccount.Size = new System.Drawing.Size(813, 260);
-            this.tpRegisterNewAccount.TabIndex = 6;
-            this.tpRegisterNewAccount.Text = "Register";
-            this.tpRegisterNewAccount.UseVisualStyleBackColor = true;
-            // 
-            // txtAccountName
-            // 
-            this.txtAccountName.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtAccountName.Location = new System.Drawing.Point(355, 100);
-            this.txtAccountName.Name = "txtAccountName";
-            this.txtAccountName.Size = new System.Drawing.Size(209, 23);
-            this.txtAccountName.TabIndex = 13;
-            // 
-            // label9
-            // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label9.Location = new System.Drawing.Point(227, 101);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 19);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "Name:";
-            // 
-            // txtAccountConfirmPassword
-            // 
-            this.txtAccountConfirmPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtAccountConfirmPassword.Location = new System.Drawing.Point(355, 187);
-            this.txtAccountConfirmPassword.Name = "txtAccountConfirmPassword";
-            this.txtAccountConfirmPassword.Size = new System.Drawing.Size(209, 23);
-            this.txtAccountConfirmPassword.TabIndex = 11;
-            this.txtAccountConfirmPassword.UseSystemPasswordChar = true;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label8.Location = new System.Drawing.Point(227, 188);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(122, 19);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Re-type password:";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Light", 20F);
-            this.label5.Location = new System.Drawing.Point(35, 34);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(742, 37);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Register new account";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtAccountPassword
-            // 
-            this.txtAccountPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtAccountPassword.Location = new System.Drawing.Point(355, 158);
-            this.txtAccountPassword.Name = "txtAccountPassword";
-            this.txtAccountPassword.Size = new System.Drawing.Size(209, 23);
-            this.txtAccountPassword.TabIndex = 8;
-            this.txtAccountPassword.UseSystemPasswordChar = true;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label6.Location = new System.Drawing.Point(227, 159);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 19);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "Password:";
-            // 
-            // txtAccountEmail
-            // 
-            this.txtAccountEmail.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtAccountEmail.Location = new System.Drawing.Point(355, 129);
-            this.txtAccountEmail.Name = "txtAccountEmail";
-            this.txtAccountEmail.Size = new System.Drawing.Size(209, 23);
-            this.txtAccountEmail.TabIndex = 6;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label7.Location = new System.Drawing.Point(227, 130);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 19);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "Email:";
+            this.tbRegister.Controls.Add(this.textBox4);
+            this.tbRegister.Controls.Add(this.label9);
+            this.tbRegister.Controls.Add(this.textBox3);
+            this.tbRegister.Controls.Add(this.label8);
+            this.tbRegister.Controls.Add(this.label5);
+            this.tbRegister.Controls.Add(this.textBox1);
+            this.tbRegister.Controls.Add(this.label6);
+            this.tbRegister.Controls.Add(this.textBox2);
+            this.tbRegister.Controls.Add(this.label7);
+            this.tbRegister.Location = new System.Drawing.Point(4, 24);
+            this.tbRegister.Name = "tbRegister";
+            this.tbRegister.Padding = new System.Windows.Forms.Padding(3);
+            this.tbRegister.Size = new System.Drawing.Size(813, 260);
+            this.tbRegister.TabIndex = 6;
+            this.tbRegister.Text = "Register";
+            this.tbRegister.UseVisualStyleBackColor = true;
             // 
             // tpAccount
             // 
@@ -800,7 +753,6 @@
             // 
             // tpFunSettings
             // 
-            this.tpFunSettings.Controls.Add(this.btnSettingsOK);
             this.tpFunSettings.Location = new System.Drawing.Point(4, 24);
             this.tpFunSettings.Name = "tpFunSettings";
             this.tpFunSettings.Size = new System.Drawing.Size(486, 55);
@@ -808,59 +760,14 @@
             this.tpFunSettings.Text = "tpFunSettings";
             this.tpFunSettings.UseVisualStyleBackColor = true;
             // 
-            // btnSettingsOK
-            // 
-            this.btnSettingsOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSettingsOK.Image = ((System.Drawing.Image)(resources.GetObject("btnSettingsOK.Image")));
-            this.btnSettingsOK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSettingsOK.Location = new System.Drawing.Point(392, 11);
-            this.btnSettingsOK.Name = "btnSettingsOK";
-            this.btnSettingsOK.Padding = new System.Windows.Forms.Padding(10);
-            this.btnSettingsOK.Size = new System.Drawing.Size(88, 45);
-            this.btnSettingsOK.TabIndex = 20;
-            this.btnSettingsOK.Text = "OK";
-            this.btnSettingsOK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSettingsOK.UseVisualStyleBackColor = true;
-            // 
             // tpFunSettingsSync
             // 
-            this.tpFunSettingsSync.Controls.Add(this.btnSyncCancel);
-            this.tpFunSettingsSync.Controls.Add(this.btnSync);
             this.tpFunSettingsSync.Location = new System.Drawing.Point(4, 24);
             this.tpFunSettingsSync.Name = "tpFunSettingsSync";
             this.tpFunSettingsSync.Size = new System.Drawing.Size(486, 55);
             this.tpFunSettingsSync.TabIndex = 4;
             this.tpFunSettingsSync.Text = "tpFunSettingsSync";
             this.tpFunSettingsSync.UseVisualStyleBackColor = true;
-            // 
-            // btnSyncCancel
-            // 
-            this.btnSyncCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSyncCancel.Image = ((System.Drawing.Image)(resources.GetObject("btnSyncCancel.Image")));
-            this.btnSyncCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSyncCancel.Location = new System.Drawing.Point(372, 11);
-            this.btnSyncCancel.Name = "btnSyncCancel";
-            this.btnSyncCancel.Padding = new System.Windows.Forms.Padding(10);
-            this.btnSyncCancel.Size = new System.Drawing.Size(108, 45);
-            this.btnSyncCancel.TabIndex = 24;
-            this.btnSyncCancel.Text = "Cancel";
-            this.btnSyncCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSyncCancel.UseVisualStyleBackColor = true;
-            this.btnSyncCancel.Click += new System.EventHandler(this.btnSyncCancel_Click);
-            // 
-            // btnSync
-            // 
-            this.btnSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSync.Image = ((System.Drawing.Image)(resources.GetObject("btnSync.Image")));
-            this.btnSync.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSync.Location = new System.Drawing.Point(272, 11);
-            this.btnSync.Name = "btnSync";
-            this.btnSync.Padding = new System.Windows.Forms.Padding(10);
-            this.btnSync.Size = new System.Drawing.Size(94, 45);
-            this.btnSync.TabIndex = 23;
-            this.btnSync.Text = "Sync";
-            this.btnSync.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSync.UseVisualStyleBackColor = true;
             // 
             // tpFunLogin
             // 
@@ -906,8 +813,7 @@
             // 
             // tpFunLoginNewAccount
             // 
-            this.tpFunLoginNewAccount.Controls.Add(this.btnAccountCancel);
-            this.tpFunLoginNewAccount.Controls.Add(this.btnAccountOK);
+            this.tpFunLoginNewAccount.Controls.Add(this.btnNewAccountOK);
             this.tpFunLoginNewAccount.Location = new System.Drawing.Point(4, 24);
             this.tpFunLoginNewAccount.Name = "tpFunLoginNewAccount";
             this.tpFunLoginNewAccount.Size = new System.Drawing.Size(486, 55);
@@ -915,35 +821,19 @@
             this.tpFunLoginNewAccount.Text = "tpFunLoginNewAccount";
             this.tpFunLoginNewAccount.UseVisualStyleBackColor = true;
             // 
-            // btnAccountCancel
+            // btnNewAccountOK
             // 
-            this.btnAccountCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAccountCancel.Image = ((System.Drawing.Image)(resources.GetObject("btnAccountCancel.Image")));
-            this.btnAccountCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAccountCancel.Location = new System.Drawing.Point(372, 11);
-            this.btnAccountCancel.Name = "btnAccountCancel";
-            this.btnAccountCancel.Padding = new System.Windows.Forms.Padding(10);
-            this.btnAccountCancel.Size = new System.Drawing.Size(108, 45);
-            this.btnAccountCancel.TabIndex = 21;
-            this.btnAccountCancel.Text = "Cancel";
-            this.btnAccountCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAccountCancel.UseVisualStyleBackColor = true;
-            this.btnAccountCancel.Click += new System.EventHandler(this.btnAccountCancel_Click);
-            // 
-            // btnAccountOK
-            // 
-            this.btnAccountOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAccountOK.Image = ((System.Drawing.Image)(resources.GetObject("btnAccountOK.Image")));
-            this.btnAccountOK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAccountOK.Location = new System.Drawing.Point(278, 11);
-            this.btnAccountOK.Name = "btnAccountOK";
-            this.btnAccountOK.Padding = new System.Windows.Forms.Padding(10);
-            this.btnAccountOK.Size = new System.Drawing.Size(88, 45);
-            this.btnAccountOK.TabIndex = 20;
-            this.btnAccountOK.Text = "OK";
-            this.btnAccountOK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAccountOK.UseVisualStyleBackColor = true;
-            this.btnAccountOK.Click += new System.EventHandler(this.btnAccountOK_Click);
+            this.btnNewAccountOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNewAccountOK.Image = ((System.Drawing.Image)(resources.GetObject("btnNewAccountOK.Image")));
+            this.btnNewAccountOK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNewAccountOK.Location = new System.Drawing.Point(392, 11);
+            this.btnNewAccountOK.Name = "btnNewAccountOK";
+            this.btnNewAccountOK.Padding = new System.Windows.Forms.Padding(10);
+            this.btnNewAccountOK.Size = new System.Drawing.Size(88, 45);
+            this.btnNewAccountOK.TabIndex = 20;
+            this.btnNewAccountOK.Text = "OK";
+            this.btnNewAccountOK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnNewAccountOK.UseVisualStyleBackColor = true;
             // 
             // tpFunLogout
             // 
@@ -969,6 +859,95 @@
             this.btnLogOut.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Light", 20F);
+            this.label5.Location = new System.Drawing.Point(35, 40);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(742, 37);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Register new account";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox1.Location = new System.Drawing.Point(355, 164);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(209, 23);
+            this.textBox1.TabIndex = 8;
+            this.textBox1.UseSystemPasswordChar = true;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label6.Location = new System.Drawing.Point(227, 165);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(70, 19);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Password:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox2.Location = new System.Drawing.Point(355, 135);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(209, 23);
+            this.textBox2.TabIndex = 6;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label7.Location = new System.Drawing.Point(227, 136);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 19);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Email:";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox3.Location = new System.Drawing.Point(355, 193);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(209, 23);
+            this.textBox3.TabIndex = 11;
+            this.textBox3.UseSystemPasswordChar = true;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label8.Location = new System.Drawing.Point(227, 194);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(122, 19);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Re-type password:";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox4.Location = new System.Drawing.Point(355, 106);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(209, 23);
+            this.textBox4.TabIndex = 13;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label9.Location = new System.Drawing.Point(227, 107);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 19);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Name:";
             // 
             // frmMain
             // 
@@ -998,14 +977,12 @@
             this.tpStatus.ResumeLayout(false);
             this.tpLogin.ResumeLayout(false);
             this.tpLogin.PerformLayout();
-            this.tpRegisterNewAccount.ResumeLayout(false);
-            this.tpRegisterNewAccount.PerformLayout();
+            this.tbRegister.ResumeLayout(false);
+            this.tbRegister.PerformLayout();
             this.tpAccount.ResumeLayout(false);
             this.tabsFun.ResumeLayout(false);
             this.tpFunStatus.ResumeLayout(false);
             this.tpFunSchedule.ResumeLayout(false);
-            this.tpFunSettings.ResumeLayout(false);
-            this.tpFunSettingsSync.ResumeLayout(false);
             this.tpFunLogin.ResumeLayout(false);
             this.tpFunLoginNewAccount.ResumeLayout(false);
             this.tpFunLogout.ResumeLayout(false);
@@ -1035,7 +1012,9 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button btnSync;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
@@ -1046,7 +1025,7 @@
         private System.Windows.Forms.TabPage tpSettings;
         private System.Windows.Forms.TabPage tpSync;
         private System.Windows.Forms.TabPage tpLogin;
-        private System.Windows.Forms.TabPage tpRegisterNewAccount;
+        private System.Windows.Forms.TabPage tbRegister;
         private System.Windows.Forms.NotifyIcon tray;
         private System.Windows.Forms.TabPage tpAccount;
         private TabPagesControl tabsFun;
@@ -1062,7 +1041,7 @@
         private System.Windows.Forms.TabPage tpFunSettings;
         private System.Windows.Forms.TabPage tpFunSettingsSync;
         private System.Windows.Forms.TabPage tpFunLoginNewAccount;
-        private System.Windows.Forms.Button btnAccountOK;
+        private System.Windows.Forms.Button btnNewAccountOK;
         private System.Windows.Forms.TextBox txtLogInPassword;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtLogInEmail;
@@ -1072,17 +1051,14 @@
         private System.Windows.Forms.TabPage tpFunLogout;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtAccountPassword;
+        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtAccountEmail;
+        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtAccountName;
+        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtAccountConfirmPassword;
+        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btnSettingsOK;
-        private System.Windows.Forms.Button btnSyncCancel;
-        private System.Windows.Forms.Button btnAccountCancel;
 
 
 

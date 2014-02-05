@@ -73,7 +73,7 @@ namespace API.Controllers
         /// <returns></returns>
         [HttpGet, ActionName("login")]
         [AcceptVerbs("GET")]
-        public bool LogIn(string email, string password)
+        public string LogIn(string email, string password)
         {
             dbToDoTasksDataContext db = new dbToDoTasksDataContext();
 
@@ -81,15 +81,15 @@ namespace API.Controllers
             string hashedPassword = SHA1(password);
 
             //Truy van kq
-            var acc = db.Accounts.SingleOrDefault(a => a.email.CompareTo(email) == 0 && 
+            var acc = db.Accounts.SingleOrDefault(a => a.email.CompareTo(email) == 0 &&
                 a.password.CompareTo(hashedPassword) == 0);
 
-            if(acc != null)
+            if (acc != null)
             {
-                return true;
+                return acc.name;
             }
 
-            return false;
+            return null;
         }
 
         /// <summary>

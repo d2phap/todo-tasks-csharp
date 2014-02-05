@@ -11,12 +11,14 @@ using DAO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace ToDoTasks
 {
     public partial class frmMain : Form
     {
         private Color _FONT_COLOR = Color.FromArgb(255, 86, 90, 95);
+        private string _API = "http://localhost:53456/";
 
         public frmMain()
         {
@@ -36,6 +38,31 @@ namespace ToDoTasks
                 rad.ForeColor = _FONT_COLOR;
             }
 
+            switch (rad.Name)
+            {
+                case "rabTabStatus":
+                    tabs.SelectedTab = tpStatus;
+                    tabsFun.SelectedTab = tpFunStatus;
+                    break;
+
+                case "radTabSchedule":
+                    tabs.SelectedTab = tpSchedule;
+                    tabsFun.SelectedTab = tpFunSchedule;
+                    break;
+
+                case "radTabSettings":
+                    tabs.SelectedTab = tpSettings;
+                    tabsFun.SelectedTab = tpFunSettings;
+                    break;
+
+                case "radTabLogin":
+                    tabs.SelectedTab = tpLogin;
+                    tabsFun.SelectedTab = tpFunLogin;
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         private void timSys_Tick(object sender, EventArgs e)
@@ -85,6 +112,149 @@ namespace ToDoTasks
                 }
             }
 
+        }
+
+        private void btnMinimizeToSystemTray_Click(object sender, EventArgs e)
+        {
+            tray.Visible = true;
+            this.Hide();
+            tray.ShowBalloonTip(3000, "To do tasks", "I am here!\nDouble click to open", ToolTipIcon.Info);
+        }
+
+        private void tray_DoubleClick(object sender, EventArgs e)
+        {
+            tray.Visible = false;
+            this.Show();
+        }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            tabs.Visible = false;
+        }
+
+        private void btnNewAccount_Click(object sender, EventArgs e)
+        {
+            txtAccountName.Text = string.Empty;
+            txtAccountEmail.Text = string.Empty;
+            txtAccountPassword.Text = string.Empty;
+            txtAccountConfirmPassword.Text = string.Empty;
+
+            tabs.SelectedTab = tpRegisterNewAccount;
+            tabsFun.SelectedTab = tpFunLoginNewAccount;
+        }
+        
+
+        private void btnLogIn_Click(object sender, EventArgs e)
+        {
+            if(!PhuongThuc.IsValidEmail(txtLogInEmail.Text) || txtLogInPassword.Text.Length == 0)
+            {
+                MessageBox.Show("Invalid email or password!");
+                return;
+            }
+
+            string email = txtLogInEmail.Text.Trim();
+            string password = PhuongThuc.SHA1(txtLogInPassword.Text);
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_API);
+                var requestUri = string.Format("api/account/login?email={0}&password={1}", email, password);
+
+                var result = client.GetAsync(requestUri).Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    var name = result.Content.ReadAsAsync<string>().Result;
+
+                    //Dang nhap that bai
+                    if(name == null)
+                    {
+                        MessageBox.Show("Login failed!");
+                    }
+                    else //Dang nhap thanh cong
+                    {
+                        radTabLogin.Text = "Account";
+                        lblAccountName.Text = "Welcome " + name + "!";
+                        lblAccountName.Tag = name;
+                        tabs.SelectedTab = tpAccount;
+                        tabsFun.SelectedTab = tpFunLogout;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Connect timeout!");
+                }
+
+            }
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            radTabLogin.Text = "Log in";
+            lblAccountName.Text = "Welcome #";
+            tabs.SelectedTab = tpLogin;
+            tabsFun.SelectedTab = tpFunLogin;
+        }
+
+        private void btnAccountOK_Click(object sender, EventArgs e)
+        {
+            if(txtAccountName.Text.Trim().Length == 0 ||
+                !PhuongThuc.IsValidEmail(txtAccountEmail.Text) ||
+                txtAccountPassword.Text.CompareTo(txtAccountConfirmPassword.Text) != 0)
+            {
+                MessageBox.Show("Invalid input data!");
+                return;
+            }
+            string email = txtAccountEmail.Text.Trim();
+            string password = PhuongThuc.SHA1(txtAccountPassword.Text);
+            string name = txtAccountName.Text.Trim();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_API);
+                var requestUri = string.Format("api/account/register?email={0}&password={1}&name={2}", 
+                    email, password, name);
+
+                var result = client.GetAsync(requestUri).Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    var kq = result.Content.ReadAsAsync<bool>().Result;
+
+                    //Dang ky that bai
+                    if (!kq)
+                    {
+                        MessageBox.Show("Email " + email + " is already existed!\nPlease try another email.");
+                    }
+                    else //Dang ky thanh cong
+                    {
+                        MessageBox.Show("Your account has been created!");
+
+                        txtLogInEmail.Text = string.Empty;
+                        txtLogInPassword.Text = string.Empty;
+
+                        tabs.SelectedTab = tpLogin;
+                        tabsFun.SelectedTab = tpFunLogin;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Connect timeout!");
+                }
+
+            }
+        }
+
+        private void btnAccountCancel_Click(object sender, EventArgs e)
+        {
+            tabs.SelectedTab = tpLogin;
+            tabsFun.SelectedTab = tpFunLogin;
+        }
+
+        private void btnSyncCancel_Click(object sender, EventArgs e)
+        {
+            tabs.SelectedTab = tpSettings;
+            tabsFun.SelectedTab = tpFunSettings;
         }
 
 
