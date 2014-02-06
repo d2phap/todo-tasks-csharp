@@ -48,6 +48,7 @@ namespace ToDoTasks
                 case "radTabSchedule":
                     tabs.SelectedTab = tpSchedule;
                     tabsFun.SelectedTab = tpFunSchedule;
+
                     break;
 
                 case "radTabSettings":
@@ -56,6 +57,8 @@ namespace ToDoTasks
                     break;
 
                 case "radTabLogin":
+
+
                     tabs.SelectedTab = tpLogin;
                     tabsFun.SelectedTab = tpFunLogin;
                     break;
@@ -82,11 +85,9 @@ namespace ToDoTasks
             OpenFileDialog o = new OpenFileDialog();
             if(o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string api = "http://localhost:53456/";
-
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri(api);
+                    client.BaseAddress = new Uri(_API);
                     using (var content = new MultipartFormDataContent())
                     {
                         var fileContent = new ByteArrayContent(System.IO.File.ReadAllBytes(o.FileName));
@@ -114,6 +115,7 @@ namespace ToDoTasks
 
         }
 
+        #region Tab Status
         private void btnMinimizeToSystemTray_Click(object sender, EventArgs e)
         {
             tray.Visible = true;
@@ -131,7 +133,9 @@ namespace ToDoTasks
         {
             tabs.Visible = false;
         }
+        #endregion
 
+        #region Tab Login
         private void btnNewAccount_Click(object sender, EventArgs e)
         {
             txtAccountName.Text = string.Empty;
@@ -160,29 +164,36 @@ namespace ToDoTasks
                 client.BaseAddress = new Uri(_API);
                 var requestUri = string.Format("api/account/login?email={0}&password={1}", email, password);
 
-                var result = client.GetAsync(requestUri).Result;
-
-                if (result.IsSuccessStatusCode)
+                try
                 {
-                    var name = result.Content.ReadAsAsync<string>().Result;
+                    var result = client.GetAsync(requestUri).Result;
 
-                    //Dang nhap that bai
-                    if(name == null)
+                    if (result.IsSuccessStatusCode)
                     {
-                        MessageBox.Show("Login failed!");
+                        var name = result.Content.ReadAsAsync<string>().Result;
+
+                        //Dang nhap that bai
+                        if (name == null)
+                        {
+                            MessageBox.Show("Login failed!");
+                        }
+                        else //Dang nhap thanh cong
+                        {
+                            radTabLogin.Text = "Account";
+                            lblAccountName.Text = "Welcome " + name + "!";
+                            lblAccountName.Tag = name;
+                            tabs.SelectedTab = tpAccount;
+                            tabsFun.SelectedTab = tpFunLogout;
+                        }
                     }
-                    else //Dang nhap thanh cong
+                    else
                     {
-                        radTabLogin.Text = "Account";
-                        lblAccountName.Text = "Welcome " + name + "!";
-                        lblAccountName.Tag = name;
-                        tabs.SelectedTab = tpAccount;
-                        tabsFun.SelectedTab = tpFunLogout;
+                        MessageBox.Show("Connection timeout!");
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Connect timeout!");
+                    MessageBox.Show(ex.Message, "Error");
                 }
 
             }
@@ -192,6 +203,7 @@ namespace ToDoTasks
         {
             radTabLogin.Text = "Log in";
             lblAccountName.Text = "Welcome #";
+            lblAccountName.Tag = string.Empty;
             tabs.SelectedTab = tpLogin;
             tabsFun.SelectedTab = tpFunLogin;
         }
@@ -215,33 +227,39 @@ namespace ToDoTasks
                 var requestUri = string.Format("api/account/register?email={0}&password={1}&name={2}", 
                     email, password, name);
 
-                var result = client.GetAsync(requestUri).Result;
-
-                if (result.IsSuccessStatusCode)
+                try
                 {
-                    var kq = result.Content.ReadAsAsync<bool>().Result;
+                    var result = client.GetAsync(requestUri).Result;
 
-                    //Dang ky that bai
-                    if (!kq)
+                    if (result.IsSuccessStatusCode)
                     {
-                        MessageBox.Show("Email " + email + " is already existed!\nPlease try another email.");
+                        var kq = result.Content.ReadAsAsync<bool>().Result;
+
+                        //Dang ky that bai
+                        if (!kq)
+                        {
+                            MessageBox.Show("Email " + email + " is already existed!\nPlease try another email.");
+                        }
+                        else //Dang ky thanh cong
+                        {
+                            MessageBox.Show("Your account has been created!");
+
+                            txtLogInEmail.Text = string.Empty;
+                            txtLogInPassword.Text = string.Empty;
+
+                            tabs.SelectedTab = tpLogin;
+                            tabsFun.SelectedTab = tpFunLogin;
+                        }
                     }
-                    else //Dang ky thanh cong
+                    else
                     {
-                        MessageBox.Show("Your account has been created!");
-
-                        txtLogInEmail.Text = string.Empty;
-                        txtLogInPassword.Text = string.Empty;
-
-                        tabs.SelectedTab = tpLogin;
-                        tabsFun.SelectedTab = tpFunLogin;
+                        MessageBox.Show("Connection timeout!");
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Connect timeout!");
+                    MessageBox.Show(ex.Message, "Error");
                 }
-
             }
         }
 
@@ -250,12 +268,103 @@ namespace ToDoTasks
             tabs.SelectedTab = tpLogin;
             tabsFun.SelectedTab = tpFunLogin;
         }
+        #endregion
 
         private void btnSyncCancel_Click(object sender, EventArgs e)
         {
             tabs.SelectedTab = tpSettings;
             tabsFun.SelectedTab = tpFunSettings;
         }
+
+        private void radCompleteSync_CheckedChanged(object sender, EventArgs e)
+        {
+            dtSyncStart.Enabled = false;
+            dtSyncEnd.Enabled = false;
+        }
+
+        private void radCustomSync_CheckedChanged(object sender, EventArgs e)
+        {
+            dtSyncStart.Enabled = true;
+            dtSyncEnd.Enabled = true;
+        }
+
+        private void btnSync_Click(object sender, EventArgs e)
+        {
+
+            if (radCustomSync.Checked &&
+                (dtSyncEnd.Value.Date - dtSyncStart.Value.Date).TotalDays < 0)
+            {
+                MessageBox.Show("End date must be greater than start date!");
+                return;
+            }
+
+            string email = "";
+            string tasksFile = "";
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_API);
+                using (var content = new MultipartFormDataContent())
+                {
+                    var fileContent = new ByteArrayContent(System.IO.File.ReadAllBytes(tasksFile));
+                    fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                    {
+                        Name = email,
+                        FileName = Path.GetFileName(tasksFile)
+                    };
+                    content.Add(fileContent);
+
+                    var requestUri = "api/account/sync";
+                    var result = client.PostAsync(requestUri, content).Result;
+
+                    if (result.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show(result.Headers.GetValues("Filename").ToList()[0]);
+                    }
+                    else
+                    {
+                        MessageBox.Show(result.StatusCode.ToString());
+                    }
+                }
+            }
+
+
+        }
+
+        private void trbVolume_Scroll(object sender, EventArgs e)
+        {
+            lblVolumeValue.Text = trbVolume.Value.ToString();
+        }
+
+        private void btnSoundBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog o = new OpenFileDialog();
+            o.Filter = "Supported audio files (*.wav)|*wav;|All files (*.*)|*.*";
+
+            if(o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                txtSoundFile.Text = o.FileName;
+            }
+        }
+
+        private void lnkStartSync_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (lblAccountName.Tag == null || lblAccountName.Tag.ToString() == "")
+            {
+                radTabLogin.Checked = true;
+                radTab_CheckedChanged(radTabLogin, null);
+                return;
+            }
+            
+            tabs.SelectedTab = tpSync;
+            tabsFun.SelectedTab = tpFunSettingsSync;
+        }
+
+        private void btnSettingsOK_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
 
     }
