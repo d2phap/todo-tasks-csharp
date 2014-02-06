@@ -208,15 +208,6 @@
         C7Op5xaDrFvpAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="btnSettingsOK.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        xAAADsQBlSsOGwAAAKFJREFUWEftkM0NQEAQRlf0wJHEQW86cKYTXWiDFqjDk+wcJCTWz0hkXvIldpl5
-        XzjDMLQpsrwhlT/qgrglMyn9lR4mN7kqJr8kZygisT8Gc0u+wmBNOhJcgplVPpHrv53hlIwkqATf3pcL
-        LAkqwTfPyQWWnSrBu+flAksTcliCu/fkAst3S/D8vlxAsilB9OQCMikxqMsFX6L/RG4YP8e5BSGETEIo
-        H8ioAAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="btnSyncCancel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -455,6 +446,9 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>482, 7</value>
   </metadata>
+  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>482, 7</value>
+  </metadata>
   <data name="toolStripButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -493,6 +487,9 @@
         oxYQBBVA7Ath0gZIAbEAhEkMYGAAADQwJVynIIDCAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>587, 7</value>
+  </metadata>
   <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>587, 7</value>
   </metadata>

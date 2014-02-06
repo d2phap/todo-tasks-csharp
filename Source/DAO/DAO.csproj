@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CaiDatHeThongDAO.cs" />
-    <Compile Include="PhuongThuc.cs" />
+    <Compile Include="HeThong.cs" />
     <Compile Include="TaoKhoanDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

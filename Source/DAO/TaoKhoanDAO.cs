@@ -8,17 +8,17 @@ using DTO;
 
 namespace DAO
 {
-    public class TaoKhoanDAO
+    public class TaiKhoanDAO
     {
         private string _xmlPath = string.Empty;
-        public TaoKhoanDAO(string xmlPath)
+        public TaiKhoanDAO(string xmlPath)
         {
             this._xmlPath = xmlPath;
         }
 
         public TaiKhoanDTO ReadUser()
         {
-            TaiKhoanDTO TaiKhoan = new TaiKhoanDTO();
+            TaiKhoanDTO taiKhoan = new TaiKhoanDTO();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(this._xmlPath);
@@ -26,17 +26,25 @@ namespace DAO
             XmlElement nUser = (XmlElement)root.SelectNodes("user")[0];
 
             XmlElement nEmail = (XmlElement)nUser.SelectNodes("email")[0];
-            TaiKhoan.Email = nEmail.InnerText;
+            taiKhoan.Email = nEmail.InnerText;
 
             XmlElement nName = (XmlElement)nUser.SelectNodes("name")[0];
-            TaiKhoan.HoTen = nName.InnerText;
+            taiKhoan.HoTen = nName.InnerText;
 
-            XmlElement nLoaiNguoiDung = (XmlElement)nUser.SelectNodes("type")[0];
-            TaiKhoan.LoaiTaiKhoan = nLoaiNguoiDung.InnerText;
+            XmlElement nLoaiTaiKhoan = (XmlElement)nUser.SelectNodes("type")[0];
+
+            if (nLoaiTaiKhoan.InnerText.ToLower().CompareTo("registered") == 0)
+            {
+                taiKhoan.LoaiTaiKhoan = DTO.LoaiTaiKhoan.Registered;
+            }
+            else
+            {
+                taiKhoan.LoaiTaiKhoan = DTO.LoaiTaiKhoan.Anomyous;
+            }
 
             XmlElement nSchedules = (XmlElement)nUser.SelectNodes("schedules")[0];
-            TaiKhoan.LichLamViec = new List<LichLamViecDTO>();
-            for (int i = 0; i < TaiKhoan.LichLamViec.Count; i++)
+            taiKhoan.LichLamViec = new List<LichLamViecDTO>();
+            for (int i = 0; i < taiKhoan.LichLamViec.Count; i++)
             {
 
                 XmlElement nItem = (XmlElement)nSchedules.SelectNodes( " " +(i + 1).ToString())[0];

@@ -5,12 +5,18 @@ using System.Text;
 
 namespace DTO
 {
+    public enum LoaiTaiKhoan
+    {
+        Anomyous,
+        Registered
+    }
+
     public class TaiKhoanDTO
     {
         private string email;
         private string hoTen;
         private string matKhau;
-        private string loaiTaiKhoan;
+        private LoaiTaiKhoan loaiTaiKhoan;
         private List<LichLamViecDTO> lichLamViec;
 
         #region Properties
@@ -29,7 +35,7 @@ namespace DTO
             get { return matKhau; }
             set { matKhau = value; }
         }
-        public string LoaiTaiKhoan
+        public LoaiTaiKhoan LoaiTaiKhoan
         {
             get { return loaiTaiKhoan; }
             set { loaiTaiKhoan = value; }
@@ -41,13 +47,12 @@ namespace DTO
         }
         #endregion
 
-
         public TaiKhoanDTO()
         {
             this.Email = "";
             this.HoTen = "";
             this.MatKhau = "";
-            this.LoaiTaiKhoan = "";
+            this.LoaiTaiKhoan = LoaiTaiKhoan.Anomyous;
             this.LichLamViec = new List<LichLamViecDTO>();
         }
     }

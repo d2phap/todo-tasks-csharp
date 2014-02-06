@@ -38,6 +38,8 @@ namespace ToDoTasks
                 rad.ForeColor = _FONT_COLOR;
             }
 
+            tabs.Visible = true;
+
             switch (rad.Name)
             {
                 case "rabTabStatus":
@@ -53,7 +55,6 @@ namespace ToDoTasks
 
                 case "radTabSettings":
                     tabs.SelectedTab = tpSettings;
-                    tabsFun.SelectedTab = tpFunSettings;
                     break;
 
                 case "radTabLogin":
@@ -61,6 +62,40 @@ namespace ToDoTasks
 
                     tabs.SelectedTab = tpLogin;
                     tabsFun.SelectedTab = tpFunLogin;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void tabs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (tabs.SelectedTab.Name)
+            {
+                case "tpSettings":
+                    //Load all settings
+                    HeThong.LoadSettings();
+
+                    trbVolume.Value = HeThong.CaiDat.AmLuongThongBao;
+                    lblVolumeValue.Text = trbVolume.Value.ToString();
+
+                    chkStartWithOS.Checked = HeThong.CaiDat.KhoiDongCungHeDieuHanh;
+                    chkHideOnStarting.Checked = HeThong.CaiDat.AnCTKhiKhoiDong;
+                    chkHideOnMinimizing.Checked = HeThong.CaiDat.AnCTKhiThuNho;
+
+                    txtSoundFile.Text = HeThong.CaiDat.TapTinAmThanh;
+
+                    if(HeThong.TaiKhoan.LoaiTaiKhoan == DTO.LoaiTaiKhoan.Anomyous)
+                    {
+                        lblLastSync.Text = "Last sync: never";
+                    }
+                    else
+                    {
+                        ///////////////////////////////////////////////
+                        lblLastSync.Text = "Last sync: never";
+                    }
+
                     break;
 
                 default:
@@ -150,14 +185,14 @@ namespace ToDoTasks
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            if(!PhuongThuc.IsValidEmail(txtLogInEmail.Text) || txtLogInPassword.Text.Length == 0)
+            if(!HeThong.IsValidEmail(txtLogInEmail.Text) || txtLogInPassword.Text.Length == 0)
             {
                 MessageBox.Show("Invalid email or password!");
                 return;
             }
 
             string email = txtLogInEmail.Text.Trim();
-            string password = PhuongThuc.SHA1(txtLogInPassword.Text);
+            string password = HeThong.SHA1(txtLogInPassword.Text);
 
             using (var client = new HttpClient())
             {
@@ -211,14 +246,14 @@ namespace ToDoTasks
         private void btnAccountOK_Click(object sender, EventArgs e)
         {
             if(txtAccountName.Text.Trim().Length == 0 ||
-                !PhuongThuc.IsValidEmail(txtAccountEmail.Text) ||
+                !HeThong.IsValidEmail(txtAccountEmail.Text) ||
                 txtAccountPassword.Text.CompareTo(txtAccountConfirmPassword.Text) != 0)
             {
                 MessageBox.Show("Invalid input data!");
                 return;
             }
             string email = txtAccountEmail.Text.Trim();
-            string password = PhuongThuc.SHA1(txtAccountPassword.Text);
+            string password = HeThong.SHA1(txtAccountPassword.Text);
             string name = txtAccountName.Text.Trim();
 
             using (var client = new HttpClient())
@@ -273,7 +308,6 @@ namespace ToDoTasks
         private void btnSyncCancel_Click(object sender, EventArgs e)
         {
             tabs.SelectedTab = tpSettings;
-            tabsFun.SelectedTab = tpFunSettings;
         }
 
         private void radCompleteSync_CheckedChanged(object sender, EventArgs e)
@@ -334,6 +368,7 @@ namespace ToDoTasks
         private void trbVolume_Scroll(object sender, EventArgs e)
         {
             lblVolumeValue.Text = trbVolume.Value.ToString();
+            HeThong.SetApplicationVolume(trbVolume.Value);
         }
 
         private void btnSoundBrowse_Click(object sender, EventArgs e)
@@ -344,6 +379,10 @@ namespace ToDoTasks
             if(o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 txtSoundFile.Text = o.FileName;
+                HeThong.CaiDat.TapTinAmThanh = o.FileName;
+
+                //Test
+                //HeThong.PlayAudio(o.FileName);                
             }
         }
 
@@ -360,10 +399,22 @@ namespace ToDoTasks
             tabsFun.SelectedTab = tpFunSettingsSync;
         }
 
-        private void btnSettingsOK_Click(object sender, EventArgs e)
+        private void chkStartWithOS_CheckedChanged(object sender, EventArgs e)
         {
-
+            HeThong.CaiDat.KhoiDongCungHeDieuHanh = chkStartWithOS.Checked;
         }
+
+        private void chkHideOnStarting_CheckedChanged(object sender, EventArgs e)
+        {
+            HeThong.CaiDat.AnCTKhiKhoiDong = chkHideOnStarting.Checked;
+        }
+
+        private void chkHideOnMinimizing_CheckedChanged(object sender, EventArgs e)
+        {
+            HeThong.CaiDat.AnCTKhiThuNho = chkHideOnMinimizing.Checked;
+        }
+
+        
 
 
 

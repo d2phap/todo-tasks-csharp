@@ -12,7 +12,7 @@ namespace DTO
         private bool anCTKhiKhoiDong;
         private bool khoiDongCungHeDieuHanh;
         private bool anCTKhiThuNho;
-        private List<ThongTinChuongTrinhDTO> thongTinChuongTrinh;
+        private ThongTinChuongTrinhDTO thongTinChuongTrinh;
 
         public int AmLuongThongBao
         {
@@ -39,13 +39,14 @@ namespace DTO
             get { return anCTKhiThuNho; }
             set { anCTKhiThuNho = value; }
         }
-        public List<ThongTinChuongTrinhDTO> ThongTinChuongTrinh
+        public ThongTinChuongTrinhDTO ThongTinChuongTrinh
         {
             get { return thongTinChuongTrinh; }
             set { thongTinChuongTrinh = value; }
         }
 
-        public CaiDatHeThongDTO(int _amLuongTB, string _TapTinAmThanh, bool _AnCTKhoiDong, bool _KhoiDongHeDieuHanh, bool _AnCTThuNho, List<ThongTinChuongTrinhDTO> _ThongTinCT)
+        public CaiDatHeThongDTO(int _amLuongTB, string _TapTinAmThanh, bool _AnCTKhoiDong, 
+            bool _KhoiDongHeDieuHanh, bool _AnCTThuNho, ThongTinChuongTrinhDTO _ThongTinCT)
         {
             this.amLuongThongBao = _amLuongTB;
             this.tapTinAmThanh = _TapTinAmThanh;
@@ -57,11 +58,13 @@ namespace DTO
 
         public CaiDatHeThongDTO()
         {
-            this.amLuongThongBao = 0;
+            this.amLuongThongBao = 800;
             this.tapTinAmThanh = "";
-            this.anCTKhiKhoiDong = true;
+            this.anCTKhiKhoiDong = false;
             this.khoiDongCungHeDieuHanh = true;
-            this.anCTKhiThuNho = true;
+            this.anCTKhiThuNho = false;
+            this.thongTinChuongTrinh = new ThongTinChuongTrinhDTO("To do tasks", 
+                "Dương Diệu Pháp, Bùi Bá Lộc", "1.0", "d2phap@gmail.com");
         }
     }
 }
