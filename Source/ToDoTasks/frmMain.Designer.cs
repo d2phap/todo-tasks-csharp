@@ -895,6 +895,7 @@
             this.txtSoundFile.Name = "txtSoundFile";
             this.txtSoundFile.Size = new System.Drawing.Size(163, 23);
             this.txtSoundFile.TabIndex = 16;
+            this.txtSoundFile.TextChanged += new System.EventHandler(this.txtSoundFile_TextChanged);
             // 
             // label15
             // 

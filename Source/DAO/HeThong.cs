@@ -78,6 +78,8 @@ namespace DAO
                 Directory.CreateDirectory(GetDirectoryName(ConfigFile));
             }
 
+            CaiDatHeThongDAO cd = new CaiDatHeThongDAO(ConfigFile);
+            cd.SaveConfiguration(HeThong.CaiDat);
         }
 
         /// <summary>

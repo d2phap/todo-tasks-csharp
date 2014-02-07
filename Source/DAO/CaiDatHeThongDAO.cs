@@ -64,5 +64,46 @@ namespace DAO
 
             return caiDatHeThong;
         }
+
+        /// <summary>
+        /// Lưu thiết lập xuống file config.xml
+        /// </summary>
+        /// <param name="cd"></param>
+        public void SaveConfiguration(CaiDatHeThongDTO cd)
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlElement root = doc.CreateElement("to_do_tasks");//<to_do_tasks>
+
+            XmlElement nDesc = doc.CreateElement("description");//<description>
+            nDesc.InnerText = "Tập tin cấu hình chương trình";
+            root.AppendChild(nDesc);
+
+            XmlElement nConf = doc.CreateElement("configurations");//<configurations>
+            XmlElement n = doc.CreateElement("volume");// <volume>
+            n.SetAttribute("value", cd.AmLuongThongBao.ToString());
+            nConf.AppendChild(n);
+
+            n = doc.CreateElement("notice_sound");// <notice_sound>
+            n.SetAttribute("value", cd.TapTinAmThanh);
+            nConf.AppendChild(n);
+
+            n = doc.CreateElement("is_hide_on_starting");// <is_hide_on_starting>
+            n.SetAttribute("value", cd.AnCTKhiKhoiDong.ToString());
+            nConf.AppendChild(n);
+
+            n = doc.CreateElement("is_start_with_os");// <is_start_with_os>
+            n.SetAttribute("value", cd.KhoiDongCungHeDieuHanh.ToString());
+            nConf.AppendChild(n);
+
+            n = doc.CreateElement("is_hide_window_on_minimizing");// <is_hide_window_on_minimizing>
+            n.SetAttribute("value", cd.AnCTKhiThuNho.ToString());
+            nConf.AppendChild(n);
+
+            root.AppendChild(nConf);
+            doc.AppendChild(root);
+
+            doc.Save(this._xmlPath); //save file
+        }
+
     }
 }

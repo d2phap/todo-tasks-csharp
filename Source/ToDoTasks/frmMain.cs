@@ -369,12 +369,13 @@ namespace ToDoTasks
         {
             lblVolumeValue.Text = trbVolume.Value.ToString();
             HeThong.SetApplicationVolume(trbVolume.Value);
+            HeThong.CaiDat.AmLuongThongBao = trbVolume.Value;
         }
 
         private void btnSoundBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog o = new OpenFileDialog();
-            o.Filter = "Supported audio files (*.wav)|*wav;|All files (*.*)|*.*";
+            o.Filter = "All files (*.*)|*.*";
 
             if(o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -382,8 +383,13 @@ namespace ToDoTasks
                 HeThong.CaiDat.TapTinAmThanh = o.FileName;
 
                 //Test
-                //HeThong.PlayAudio(o.FileName);                
+                //HeThong.PlayAudio(o.FileName);
             }
+        }
+
+        private void txtSoundFile_TextChanged(object sender, EventArgs e)
+        {
+            HeThong.CaiDat.TapTinAmThanh = txtSoundFile.Text.Trim();
         }
 
         private void lnkStartSync_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -413,6 +419,8 @@ namespace ToDoTasks
         {
             HeThong.CaiDat.AnCTKhiThuNho = chkHideOnMinimizing.Checked;
         }
+
+        
 
         
 
