@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="CaiDatHeThongDAO.cs" />
     <Compile Include="HeThong.cs" />
-    <Compile Include="TaoKhoanDAO.cs" />
+    <Compile Include="TaiKhoanDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

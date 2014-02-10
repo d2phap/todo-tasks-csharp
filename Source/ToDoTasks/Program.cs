@@ -17,9 +17,13 @@ namespace ToDoTasks
         {
             //Định nghĩa đường dẫn tập tin config.xml
             HeThong.ConfigFile = Application.UserAppDataPath + @"\config.xml";
+            //Định nghĩa đường dẫn tập tin users.xml
+            HeThong.UsersFile = Application.UserAppDataPath + @"\users.xml";
 
             //Load all settings
             HeThong.LoadSettings();
+
+
 
             Application.ApplicationExit += Application_ApplicationExit;
             Application.EnableVisualStyles();

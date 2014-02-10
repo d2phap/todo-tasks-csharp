@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="CaiDatHeThongDTO.cs" />
     <Compile Include="CongViecDTO.cs" />
-    <Compile Include="HinhThucNhacNhoDTO.cs" />
     <Compile Include="LichDanhSachDTO.cs" />
     <Compile Include="LichLamViecDTO.cs" />
     <Compile Include="LichThangDTO.cs" />

@@ -5,15 +5,21 @@ using System.Text;
 
 namespace DTO
 {
+    public enum LoaiThoiGianDienRa
+    {
+        Unique,
+        Repeated
+    }
+
     public class ThoiGianDienRaDTO
     {
-        private string loai;
+        private LoaiThoiGianDienRa loai;
         private DateTime thoiGianBatDau;
         private DateTime thoiGianKetThuc;
         private int soLanLap;
         private int donViLap;
 
-        public string Loai
+        public LoaiThoiGianDienRa Loai
         {
             get { return loai; }
             set { loai = value; }
@@ -39,7 +45,7 @@ namespace DTO
             set { donViLap = value; }
         }
 
-        public ThoiGianDienRaDTO(string _Loai, DateTime _ThoiGianBatDau, DateTime _ThoiGianKetThuc, int _SoLanLap, int _DonViLap)
+        public ThoiGianDienRaDTO(LoaiThoiGianDienRa _Loai, DateTime _ThoiGianBatDau, DateTime _ThoiGianKetThuc, int _SoLanLap, int _DonViLap)
         {
             this.loai = _Loai;
             this.thoiGianBatDau = _ThoiGianBatDau;
@@ -50,7 +56,7 @@ namespace DTO
 
         public ThoiGianDienRaDTO()
         {
-            this.loai = "";
+            this.loai = LoaiThoiGianDienRa.Unique;
             this.thoiGianBatDau = DateTime.Now;
             this.thoiGianKetThuc = DateTime.Now.AddMinutes(1);
             this.soLanLap = 0;
