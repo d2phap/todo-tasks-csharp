@@ -1,4 +1,5 @@
 ﻿using DAO;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,13 +24,18 @@ namespace ToDoTasks
             //Load all settings
             HeThong.LoadSettings();
 
-
+            HeThong.CaiDat.ThongTinChuongTrinh = new ThongTinChuongTrinhDTO(
+                Application.ProductName,
+                "Dương Diệu Pháp (1241378), Bùi Bá Lộc (1241363)",
+                Application.ProductVersion,
+                "d2phap@gmail.com",
+                Application.ExecutablePath
+                );
 
             Application.ApplicationExit += Application_ApplicationExit;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
-
+            Application.Run(new frmMain(HeThong.CaiDat.AnCTKhiKhoiDong));
             
         }
 
@@ -40,6 +46,7 @@ namespace ToDoTasks
         /// <param name="e"></param>
         static void Application_ApplicationExit(object sender, EventArgs e)
         {
+            HeThong.ApplyAllSettings();
             HeThong.SaveAllSettings();
         }
     }

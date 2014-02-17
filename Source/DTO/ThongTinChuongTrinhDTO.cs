@@ -11,6 +11,7 @@ namespace DTO
         private string tacGia;
         private string phienBan;
         private string lienHe;
+        private string duongDanExe;
 
         public string TenChuongTrinh
         {
@@ -32,13 +33,20 @@ namespace DTO
             get { return lienHe; }
             set { lienHe = value; }
         }
+        public string DuongDanExe
+        {
+            get { return duongDanExe; }
+            set { duongDanExe = value; }
+        }
 
-        public ThongTinChuongTrinhDTO(string _TenChuongTrinh, string _TacGia, string _PhienBan, string _LienHe)
+        public ThongTinChuongTrinhDTO(string _TenChuongTrinh, string _TacGia, 
+            string _PhienBan, string _LienHe, string _duongDanExe)
         {
             this.tenChuongTrinh = _TenChuongTrinh;
             this.tacGia = _TacGia;
             this.phienBan = _PhienBan;
             this.lienHe = _LienHe;
+            this.duongDanExe = _duongDanExe;
         }
 
         public ThongTinChuongTrinhDTO()
@@ -47,6 +55,7 @@ namespace DTO
             this.tacGia = "";
             this.phienBan = "";
             this.lienHe = "";
+            this.duongDanExe = "";
         }
     }
 }

@@ -38,27 +38,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.panControl = new System.Windows.Forms.Panel();
-            this.tabsFun = new ToDoTasks.TabPagesControl();
-            this.tpFunStatus = new System.Windows.Forms.TabPage();
-            this.btnAbout = new System.Windows.Forms.Button();
-            this.btnMinimizeToSystemTray = new System.Windows.Forms.Button();
-            this.tpFunSchedule = new System.Windows.Forms.TabPage();
-            this.radScheduleMonth = new System.Windows.Forms.RadioButton();
-            this.radScheduleWeek = new System.Windows.Forms.RadioButton();
-            this.radScheduleList = new System.Windows.Forms.RadioButton();
-            this.tpFunScheduleNewTask = new System.Windows.Forms.TabPage();
-            this.tpFunScheduleEditTask = new System.Windows.Forms.TabPage();
-            this.tpFunSettingsSync = new System.Windows.Forms.TabPage();
-            this.btnSyncCancel = new System.Windows.Forms.Button();
-            this.btnSync = new System.Windows.Forms.Button();
-            this.tpFunLogin = new System.Windows.Forms.TabPage();
-            this.btnNewAccount = new System.Windows.Forms.Button();
-            this.btnLogIn = new System.Windows.Forms.Button();
-            this.tpFunLoginNewAccount = new System.Windows.Forms.TabPage();
-            this.btnAccountCancel = new System.Windows.Forms.Button();
-            this.btnAccountOK = new System.Windows.Forms.Button();
-            this.tpFunLogout = new System.Windows.Forms.TabPage();
-            this.btnLogOut = new System.Windows.Forms.Button();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.timSys = new System.Windows.Forms.Timer(this.components);
@@ -119,16 +98,31 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tpAccount = new System.Windows.Forms.TabPage();
             this.lblAccountName = new System.Windows.Forms.Label();
+            this.tabsFun = new ToDoTasks.TabPagesControl();
+            this.tpFunStatus = new System.Windows.Forms.TabPage();
+            this.btnAbout = new System.Windows.Forms.Button();
+            this.btnMinimizeToSystemTray = new System.Windows.Forms.Button();
+            this.tpFunSchedule = new System.Windows.Forms.TabPage();
+            this.radScheduleMonth = new System.Windows.Forms.RadioButton();
+            this.radScheduleWeek = new System.Windows.Forms.RadioButton();
+            this.radScheduleList = new System.Windows.Forms.RadioButton();
+            this.tpFunScheduleNewTask = new System.Windows.Forms.TabPage();
+            this.tpFunScheduleEditTask = new System.Windows.Forms.TabPage();
+            this.tpFunSettings = new System.Windows.Forms.TabPage();
+            this.tpFunSettingsSync = new System.Windows.Forms.TabPage();
+            this.btnSyncCancel = new System.Windows.Forms.Button();
+            this.btnSync = new System.Windows.Forms.Button();
+            this.tpFunLogin = new System.Windows.Forms.TabPage();
+            this.btnNewAccount = new System.Windows.Forms.Button();
+            this.btnLogIn = new System.Windows.Forms.Button();
+            this.tpFunLoginNewAccount = new System.Windows.Forms.TabPage();
+            this.btnAccountCancel = new System.Windows.Forms.Button();
+            this.btnAccountOK = new System.Windows.Forms.Button();
+            this.tpFunLogout = new System.Windows.Forms.TabPage();
+            this.btnLogOut = new System.Windows.Forms.Button();
             this.panMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.panControl.SuspendLayout();
-            this.tabsFun.SuspendLayout();
-            this.tpFunStatus.SuspendLayout();
-            this.tpFunSchedule.SuspendLayout();
-            this.tpFunSettingsSync.SuspendLayout();
-            this.tpFunLogin.SuspendLayout();
-            this.tpFunLoginNewAccount.SuspendLayout();
-            this.tpFunLogout.SuspendLayout();
             this.tabs.SuspendLayout();
             this.tpStatus.SuspendLayout();
             this.tpSchedule.SuspendLayout();
@@ -142,6 +136,13 @@
             this.tpLogin.SuspendLayout();
             this.tpRegisterNewAccount.SuspendLayout();
             this.tpAccount.SuspendLayout();
+            this.tabsFun.SuspendLayout();
+            this.tpFunStatus.SuspendLayout();
+            this.tpFunSchedule.SuspendLayout();
+            this.tpFunSettingsSync.SuspendLayout();
+            this.tpFunLogin.SuspendLayout();
+            this.tpFunLoginNewAccount.SuspendLayout();
+            this.tpFunLogout.SuspendLayout();
             this.SuspendLayout();
             // 
             // panMenu
@@ -276,288 +277,6 @@
             this.panControl.Name = "panControl";
             this.panControl.Size = new System.Drawing.Size(903, 80);
             this.panControl.TabIndex = 1;
-            // 
-            // tabsFun
-            // 
-            this.tabsFun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabsFun.Controls.Add(this.tpFunStatus);
-            this.tabsFun.Controls.Add(this.tpFunSchedule);
-            this.tabsFun.Controls.Add(this.tpFunScheduleNewTask);
-            this.tabsFun.Controls.Add(this.tpFunScheduleEditTask);
-            this.tabsFun.Controls.Add(this.tpFunSettingsSync);
-            this.tabsFun.Controls.Add(this.tpFunLogin);
-            this.tabsFun.Controls.Add(this.tpFunLoginNewAccount);
-            this.tabsFun.Controls.Add(this.tpFunLogout);
-            this.tabsFun.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabsFun.Location = new System.Drawing.Point(375, 8);
-            this.tabsFun.Name = "tabsFun";
-            this.tabsFun.SelectedIndex = 0;
-            this.tabsFun.Size = new System.Drawing.Size(494, 83);
-            this.tabsFun.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
-            this.tabsFun.TabIndex = 32;
-            this.tabsFun.TabStop = false;
-            // 
-            // tpFunStatus
-            // 
-            this.tpFunStatus.Controls.Add(this.btnAbout);
-            this.tpFunStatus.Controls.Add(this.btnMinimizeToSystemTray);
-            this.tpFunStatus.Location = new System.Drawing.Point(4, 24);
-            this.tpFunStatus.Name = "tpFunStatus";
-            this.tpFunStatus.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFunStatus.Size = new System.Drawing.Size(486, 55);
-            this.tpFunStatus.TabIndex = 0;
-            this.tpFunStatus.Text = "tpFunStatus";
-            this.tpFunStatus.UseVisualStyleBackColor = true;
-            // 
-            // btnAbout
-            // 
-            this.btnAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAbout.Image = ((System.Drawing.Image)(resources.GetObject("btnAbout.Image")));
-            this.btnAbout.Location = new System.Drawing.Point(435, 11);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Padding = new System.Windows.Forms.Padding(10);
-            this.btnAbout.Size = new System.Drawing.Size(45, 45);
-            this.btnAbout.TabIndex = 5;
-            this.btnAbout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAbout.UseVisualStyleBackColor = true;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
-            // 
-            // btnMinimizeToSystemTray
-            // 
-            this.btnMinimizeToSystemTray.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMinimizeToSystemTray.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimizeToSystemTray.Image")));
-            this.btnMinimizeToSystemTray.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMinimizeToSystemTray.Location = new System.Drawing.Point(226, 11);
-            this.btnMinimizeToSystemTray.Name = "btnMinimizeToSystemTray";
-            this.btnMinimizeToSystemTray.Padding = new System.Windows.Forms.Padding(10);
-            this.btnMinimizeToSystemTray.Size = new System.Drawing.Size(203, 45);
-            this.btnMinimizeToSystemTray.TabIndex = 4;
-            this.btnMinimizeToSystemTray.Text = "Minimize to system tray";
-            this.btnMinimizeToSystemTray.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMinimizeToSystemTray.UseVisualStyleBackColor = true;
-            this.btnMinimizeToSystemTray.Click += new System.EventHandler(this.btnMinimizeToSystemTray_Click);
-            // 
-            // tpFunSchedule
-            // 
-            this.tpFunSchedule.Controls.Add(this.radScheduleMonth);
-            this.tpFunSchedule.Controls.Add(this.radScheduleWeek);
-            this.tpFunSchedule.Controls.Add(this.radScheduleList);
-            this.tpFunSchedule.Location = new System.Drawing.Point(4, 24);
-            this.tpFunSchedule.Name = "tpFunSchedule";
-            this.tpFunSchedule.Padding = new System.Windows.Forms.Padding(10);
-            this.tpFunSchedule.Size = new System.Drawing.Size(486, 55);
-            this.tpFunSchedule.TabIndex = 2;
-            this.tpFunSchedule.Text = "tpFunSchedule";
-            this.tpFunSchedule.UseVisualStyleBackColor = true;
-            // 
-            // radScheduleMonth
-            // 
-            this.radScheduleMonth.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radScheduleMonth.Image = ((System.Drawing.Image)(resources.GetObject("radScheduleMonth.Image")));
-            this.radScheduleMonth.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.radScheduleMonth.Location = new System.Drawing.Point(382, 11);
-            this.radScheduleMonth.Name = "radScheduleMonth";
-            this.radScheduleMonth.Padding = new System.Windows.Forms.Padding(10);
-            this.radScheduleMonth.Size = new System.Drawing.Size(106, 45);
-            this.radScheduleMonth.TabIndex = 25;
-            this.radScheduleMonth.Text = "Month";
-            this.radScheduleMonth.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radScheduleMonth.UseVisualStyleBackColor = true;
-            // 
-            // radScheduleWeek
-            // 
-            this.radScheduleWeek.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radScheduleWeek.Image = ((System.Drawing.Image)(resources.GetObject("radScheduleWeek.Image")));
-            this.radScheduleWeek.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.radScheduleWeek.Location = new System.Drawing.Point(277, 11);
-            this.radScheduleWeek.Name = "radScheduleWeek";
-            this.radScheduleWeek.Padding = new System.Windows.Forms.Padding(10);
-            this.radScheduleWeek.Size = new System.Drawing.Size(99, 45);
-            this.radScheduleWeek.TabIndex = 24;
-            this.radScheduleWeek.Text = "Week";
-            this.radScheduleWeek.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radScheduleWeek.UseVisualStyleBackColor = true;
-            // 
-            // radScheduleList
-            // 
-            this.radScheduleList.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radScheduleList.Image = ((System.Drawing.Image)(resources.GetObject("radScheduleList.Image")));
-            this.radScheduleList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.radScheduleList.Location = new System.Drawing.Point(182, 11);
-            this.radScheduleList.Name = "radScheduleList";
-            this.radScheduleList.Padding = new System.Windows.Forms.Padding(10);
-            this.radScheduleList.Size = new System.Drawing.Size(89, 45);
-            this.radScheduleList.TabIndex = 23;
-            this.radScheduleList.Text = "List";
-            this.radScheduleList.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radScheduleList.UseVisualStyleBackColor = true;
-            // 
-            // tpFunScheduleNewTask
-            // 
-            this.tpFunScheduleNewTask.Location = new System.Drawing.Point(4, 24);
-            this.tpFunScheduleNewTask.Name = "tpFunScheduleNewTask";
-            this.tpFunScheduleNewTask.Size = new System.Drawing.Size(486, 55);
-            this.tpFunScheduleNewTask.TabIndex = 6;
-            this.tpFunScheduleNewTask.Text = "tpFunScheduleNewTask";
-            this.tpFunScheduleNewTask.UseVisualStyleBackColor = true;
-            // 
-            // tpFunScheduleEditTask
-            // 
-            this.tpFunScheduleEditTask.Location = new System.Drawing.Point(4, 24);
-            this.tpFunScheduleEditTask.Name = "tpFunScheduleEditTask";
-            this.tpFunScheduleEditTask.Size = new System.Drawing.Size(486, 55);
-            this.tpFunScheduleEditTask.TabIndex = 7;
-            this.tpFunScheduleEditTask.Text = "tpFunScheduleEditTask";
-            this.tpFunScheduleEditTask.UseVisualStyleBackColor = true;
-            // 
-            // tpFunSettingsSync
-            // 
-            this.tpFunSettingsSync.Controls.Add(this.btnSyncCancel);
-            this.tpFunSettingsSync.Controls.Add(this.btnSync);
-            this.tpFunSettingsSync.Location = new System.Drawing.Point(4, 24);
-            this.tpFunSettingsSync.Name = "tpFunSettingsSync";
-            this.tpFunSettingsSync.Size = new System.Drawing.Size(486, 55);
-            this.tpFunSettingsSync.TabIndex = 4;
-            this.tpFunSettingsSync.Text = "tpFunSettingsSync";
-            this.tpFunSettingsSync.UseVisualStyleBackColor = true;
-            // 
-            // btnSyncCancel
-            // 
-            this.btnSyncCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSyncCancel.Image = ((System.Drawing.Image)(resources.GetObject("btnSyncCancel.Image")));
-            this.btnSyncCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSyncCancel.Location = new System.Drawing.Point(372, 11);
-            this.btnSyncCancel.Name = "btnSyncCancel";
-            this.btnSyncCancel.Padding = new System.Windows.Forms.Padding(10);
-            this.btnSyncCancel.Size = new System.Drawing.Size(108, 45);
-            this.btnSyncCancel.TabIndex = 24;
-            this.btnSyncCancel.Text = "Cancel";
-            this.btnSyncCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSyncCancel.UseVisualStyleBackColor = true;
-            this.btnSyncCancel.Click += new System.EventHandler(this.btnSyncCancel_Click);
-            // 
-            // btnSync
-            // 
-            this.btnSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSync.Image = ((System.Drawing.Image)(resources.GetObject("btnSync.Image")));
-            this.btnSync.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSync.Location = new System.Drawing.Point(272, 11);
-            this.btnSync.Name = "btnSync";
-            this.btnSync.Padding = new System.Windows.Forms.Padding(10);
-            this.btnSync.Size = new System.Drawing.Size(94, 45);
-            this.btnSync.TabIndex = 23;
-            this.btnSync.Text = "Sync";
-            this.btnSync.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSync.UseVisualStyleBackColor = true;
-            this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
-            // 
-            // tpFunLogin
-            // 
-            this.tpFunLogin.Controls.Add(this.btnNewAccount);
-            this.tpFunLogin.Controls.Add(this.btnLogIn);
-            this.tpFunLogin.Location = new System.Drawing.Point(4, 24);
-            this.tpFunLogin.Name = "tpFunLogin";
-            this.tpFunLogin.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFunLogin.Size = new System.Drawing.Size(486, 55);
-            this.tpFunLogin.TabIndex = 1;
-            this.tpFunLogin.Text = "tpFunLogin";
-            this.tpFunLogin.UseVisualStyleBackColor = true;
-            // 
-            // btnNewAccount
-            // 
-            this.btnNewAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNewAccount.Image = ((System.Drawing.Image)(resources.GetObject("btnNewAccount.Image")));
-            this.btnNewAccount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNewAccount.Location = new System.Drawing.Point(233, 11);
-            this.btnNewAccount.Name = "btnNewAccount";
-            this.btnNewAccount.Padding = new System.Windows.Forms.Padding(10);
-            this.btnNewAccount.Size = new System.Drawing.Size(140, 45);
-            this.btnNewAccount.TabIndex = 27;
-            this.btnNewAccount.Text = "New account";
-            this.btnNewAccount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnNewAccount.UseVisualStyleBackColor = true;
-            this.btnNewAccount.Click += new System.EventHandler(this.btnNewAccount_Click);
-            // 
-            // btnLogIn
-            // 
-            this.btnLogIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogIn.Image = ((System.Drawing.Image)(resources.GetObject("btnLogIn.Image")));
-            this.btnLogIn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogIn.Location = new System.Drawing.Point(379, 11);
-            this.btnLogIn.Name = "btnLogIn";
-            this.btnLogIn.Padding = new System.Windows.Forms.Padding(10);
-            this.btnLogIn.Size = new System.Drawing.Size(101, 45);
-            this.btnLogIn.TabIndex = 26;
-            this.btnLogIn.Text = "Log in";
-            this.btnLogIn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLogIn.UseVisualStyleBackColor = true;
-            this.btnLogIn.Click += new System.EventHandler(this.btnLogIn_Click);
-            // 
-            // tpFunLoginNewAccount
-            // 
-            this.tpFunLoginNewAccount.Controls.Add(this.btnAccountCancel);
-            this.tpFunLoginNewAccount.Controls.Add(this.btnAccountOK);
-            this.tpFunLoginNewAccount.Location = new System.Drawing.Point(4, 24);
-            this.tpFunLoginNewAccount.Name = "tpFunLoginNewAccount";
-            this.tpFunLoginNewAccount.Size = new System.Drawing.Size(486, 55);
-            this.tpFunLoginNewAccount.TabIndex = 5;
-            this.tpFunLoginNewAccount.Text = "tpFunLoginNewAccount";
-            this.tpFunLoginNewAccount.UseVisualStyleBackColor = true;
-            // 
-            // btnAccountCancel
-            // 
-            this.btnAccountCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAccountCancel.Image = ((System.Drawing.Image)(resources.GetObject("btnAccountCancel.Image")));
-            this.btnAccountCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAccountCancel.Location = new System.Drawing.Point(372, 11);
-            this.btnAccountCancel.Name = "btnAccountCancel";
-            this.btnAccountCancel.Padding = new System.Windows.Forms.Padding(10);
-            this.btnAccountCancel.Size = new System.Drawing.Size(108, 45);
-            this.btnAccountCancel.TabIndex = 21;
-            this.btnAccountCancel.Text = "Cancel";
-            this.btnAccountCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAccountCancel.UseVisualStyleBackColor = true;
-            this.btnAccountCancel.Click += new System.EventHandler(this.btnAccountCancel_Click);
-            // 
-            // btnAccountOK
-            // 
-            this.btnAccountOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAccountOK.Image = ((System.Drawing.Image)(resources.GetObject("btnAccountOK.Image")));
-            this.btnAccountOK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAccountOK.Location = new System.Drawing.Point(278, 11);
-            this.btnAccountOK.Name = "btnAccountOK";
-            this.btnAccountOK.Padding = new System.Windows.Forms.Padding(10);
-            this.btnAccountOK.Size = new System.Drawing.Size(88, 45);
-            this.btnAccountOK.TabIndex = 20;
-            this.btnAccountOK.Text = "OK";
-            this.btnAccountOK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAccountOK.UseVisualStyleBackColor = true;
-            this.btnAccountOK.Click += new System.EventHandler(this.btnAccountOK_Click);
-            // 
-            // tpFunLogout
-            // 
-            this.tpFunLogout.Controls.Add(this.btnLogOut);
-            this.tpFunLogout.Location = new System.Drawing.Point(4, 24);
-            this.tpFunLogout.Name = "tpFunLogout";
-            this.tpFunLogout.Size = new System.Drawing.Size(486, 55);
-            this.tpFunLogout.TabIndex = 8;
-            this.tpFunLogout.Text = "tpFunLogout";
-            this.tpFunLogout.UseVisualStyleBackColor = true;
-            // 
-            // btnLogOut
-            // 
-            this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogOut.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOut.Image")));
-            this.btnLogOut.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogOut.Location = new System.Drawing.Point(370, 11);
-            this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Padding = new System.Windows.Forms.Padding(10);
-            this.btnLogOut.Size = new System.Drawing.Size(110, 45);
-            this.btnLogOut.TabIndex = 21;
-            this.btnLogOut.Text = "Log out";
-            this.btnLogOut.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLogOut.UseVisualStyleBackColor = true;
-            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // lblDate
             // 
@@ -1266,6 +985,299 @@
             this.lblAccountName.Text = "Welcome #";
             this.lblAccountName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // tabsFun
+            // 
+            this.tabsFun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabsFun.Controls.Add(this.tpFunStatus);
+            this.tabsFun.Controls.Add(this.tpFunSchedule);
+            this.tabsFun.Controls.Add(this.tpFunScheduleNewTask);
+            this.tabsFun.Controls.Add(this.tpFunScheduleEditTask);
+            this.tabsFun.Controls.Add(this.tpFunSettings);
+            this.tabsFun.Controls.Add(this.tpFunSettingsSync);
+            this.tabsFun.Controls.Add(this.tpFunLogin);
+            this.tabsFun.Controls.Add(this.tpFunLoginNewAccount);
+            this.tabsFun.Controls.Add(this.tpFunLogout);
+            this.tabsFun.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabsFun.Location = new System.Drawing.Point(375, 8);
+            this.tabsFun.Name = "tabsFun";
+            this.tabsFun.SelectedIndex = 0;
+            this.tabsFun.Size = new System.Drawing.Size(494, 83);
+            this.tabsFun.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.tabsFun.TabIndex = 32;
+            this.tabsFun.TabStop = false;
+            // 
+            // tpFunStatus
+            // 
+            this.tpFunStatus.Controls.Add(this.btnAbout);
+            this.tpFunStatus.Controls.Add(this.btnMinimizeToSystemTray);
+            this.tpFunStatus.Location = new System.Drawing.Point(4, 24);
+            this.tpFunStatus.Name = "tpFunStatus";
+            this.tpFunStatus.Padding = new System.Windows.Forms.Padding(3);
+            this.tpFunStatus.Size = new System.Drawing.Size(486, 55);
+            this.tpFunStatus.TabIndex = 0;
+            this.tpFunStatus.Text = "tpFunStatus";
+            this.tpFunStatus.UseVisualStyleBackColor = true;
+            // 
+            // btnAbout
+            // 
+            this.btnAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAbout.Image = ((System.Drawing.Image)(resources.GetObject("btnAbout.Image")));
+            this.btnAbout.Location = new System.Drawing.Point(435, 11);
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Padding = new System.Windows.Forms.Padding(10);
+            this.btnAbout.Size = new System.Drawing.Size(45, 45);
+            this.btnAbout.TabIndex = 5;
+            this.btnAbout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAbout.UseVisualStyleBackColor = true;
+            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            // 
+            // btnMinimizeToSystemTray
+            // 
+            this.btnMinimizeToSystemTray.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMinimizeToSystemTray.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimizeToSystemTray.Image")));
+            this.btnMinimizeToSystemTray.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMinimizeToSystemTray.Location = new System.Drawing.Point(226, 11);
+            this.btnMinimizeToSystemTray.Name = "btnMinimizeToSystemTray";
+            this.btnMinimizeToSystemTray.Padding = new System.Windows.Forms.Padding(10);
+            this.btnMinimizeToSystemTray.Size = new System.Drawing.Size(203, 45);
+            this.btnMinimizeToSystemTray.TabIndex = 4;
+            this.btnMinimizeToSystemTray.Text = "Minimize to system tray";
+            this.btnMinimizeToSystemTray.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMinimizeToSystemTray.UseVisualStyleBackColor = true;
+            this.btnMinimizeToSystemTray.Click += new System.EventHandler(this.btnMinimizeToSystemTray_Click);
+            // 
+            // tpFunSchedule
+            // 
+            this.tpFunSchedule.Controls.Add(this.radScheduleMonth);
+            this.tpFunSchedule.Controls.Add(this.radScheduleWeek);
+            this.tpFunSchedule.Controls.Add(this.radScheduleList);
+            this.tpFunSchedule.Location = new System.Drawing.Point(4, 24);
+            this.tpFunSchedule.Name = "tpFunSchedule";
+            this.tpFunSchedule.Padding = new System.Windows.Forms.Padding(10);
+            this.tpFunSchedule.Size = new System.Drawing.Size(486, 55);
+            this.tpFunSchedule.TabIndex = 2;
+            this.tpFunSchedule.Text = "tpFunSchedule";
+            this.tpFunSchedule.UseVisualStyleBackColor = true;
+            // 
+            // radScheduleMonth
+            // 
+            this.radScheduleMonth.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radScheduleMonth.Image = ((System.Drawing.Image)(resources.GetObject("radScheduleMonth.Image")));
+            this.radScheduleMonth.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.radScheduleMonth.Location = new System.Drawing.Point(382, 11);
+            this.radScheduleMonth.Name = "radScheduleMonth";
+            this.radScheduleMonth.Padding = new System.Windows.Forms.Padding(10);
+            this.radScheduleMonth.Size = new System.Drawing.Size(106, 45);
+            this.radScheduleMonth.TabIndex = 25;
+            this.radScheduleMonth.Text = "Month";
+            this.radScheduleMonth.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.radScheduleMonth.UseVisualStyleBackColor = true;
+            // 
+            // radScheduleWeek
+            // 
+            this.radScheduleWeek.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radScheduleWeek.Image = ((System.Drawing.Image)(resources.GetObject("radScheduleWeek.Image")));
+            this.radScheduleWeek.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.radScheduleWeek.Location = new System.Drawing.Point(277, 11);
+            this.radScheduleWeek.Name = "radScheduleWeek";
+            this.radScheduleWeek.Padding = new System.Windows.Forms.Padding(10);
+            this.radScheduleWeek.Size = new System.Drawing.Size(99, 45);
+            this.radScheduleWeek.TabIndex = 24;
+            this.radScheduleWeek.Text = "Week";
+            this.radScheduleWeek.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.radScheduleWeek.UseVisualStyleBackColor = true;
+            // 
+            // radScheduleList
+            // 
+            this.radScheduleList.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radScheduleList.Image = ((System.Drawing.Image)(resources.GetObject("radScheduleList.Image")));
+            this.radScheduleList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.radScheduleList.Location = new System.Drawing.Point(182, 11);
+            this.radScheduleList.Name = "radScheduleList";
+            this.radScheduleList.Padding = new System.Windows.Forms.Padding(10);
+            this.radScheduleList.Size = new System.Drawing.Size(89, 45);
+            this.radScheduleList.TabIndex = 23;
+            this.radScheduleList.Text = "List";
+            this.radScheduleList.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.radScheduleList.UseVisualStyleBackColor = true;
+            // 
+            // tpFunScheduleNewTask
+            // 
+            this.tpFunScheduleNewTask.Location = new System.Drawing.Point(4, 24);
+            this.tpFunScheduleNewTask.Name = "tpFunScheduleNewTask";
+            this.tpFunScheduleNewTask.Size = new System.Drawing.Size(486, 55);
+            this.tpFunScheduleNewTask.TabIndex = 6;
+            this.tpFunScheduleNewTask.Text = "tpFunScheduleNewTask";
+            this.tpFunScheduleNewTask.UseVisualStyleBackColor = true;
+            // 
+            // tpFunScheduleEditTask
+            // 
+            this.tpFunScheduleEditTask.Location = new System.Drawing.Point(4, 24);
+            this.tpFunScheduleEditTask.Name = "tpFunScheduleEditTask";
+            this.tpFunScheduleEditTask.Size = new System.Drawing.Size(486, 55);
+            this.tpFunScheduleEditTask.TabIndex = 7;
+            this.tpFunScheduleEditTask.Text = "tpFunScheduleEditTask";
+            this.tpFunScheduleEditTask.UseVisualStyleBackColor = true;
+            // 
+            // tpFunSettings
+            // 
+            this.tpFunSettings.Location = new System.Drawing.Point(4, 24);
+            this.tpFunSettings.Name = "tpFunSettings";
+            this.tpFunSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tpFunSettings.Size = new System.Drawing.Size(486, 55);
+            this.tpFunSettings.TabIndex = 9;
+            this.tpFunSettings.Text = "tpFunSettings";
+            this.tpFunSettings.UseVisualStyleBackColor = true;
+            // 
+            // tpFunSettingsSync
+            // 
+            this.tpFunSettingsSync.Controls.Add(this.btnSyncCancel);
+            this.tpFunSettingsSync.Controls.Add(this.btnSync);
+            this.tpFunSettingsSync.Location = new System.Drawing.Point(4, 24);
+            this.tpFunSettingsSync.Name = "tpFunSettingsSync";
+            this.tpFunSettingsSync.Size = new System.Drawing.Size(486, 55);
+            this.tpFunSettingsSync.TabIndex = 4;
+            this.tpFunSettingsSync.Text = "tpFunSettingsSync";
+            this.tpFunSettingsSync.UseVisualStyleBackColor = true;
+            // 
+            // btnSyncCancel
+            // 
+            this.btnSyncCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSyncCancel.Image = ((System.Drawing.Image)(resources.GetObject("btnSyncCancel.Image")));
+            this.btnSyncCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSyncCancel.Location = new System.Drawing.Point(372, 11);
+            this.btnSyncCancel.Name = "btnSyncCancel";
+            this.btnSyncCancel.Padding = new System.Windows.Forms.Padding(10);
+            this.btnSyncCancel.Size = new System.Drawing.Size(108, 45);
+            this.btnSyncCancel.TabIndex = 24;
+            this.btnSyncCancel.Text = "Cancel";
+            this.btnSyncCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSyncCancel.UseVisualStyleBackColor = true;
+            this.btnSyncCancel.Click += new System.EventHandler(this.btnSyncCancel_Click);
+            // 
+            // btnSync
+            // 
+            this.btnSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSync.Image = ((System.Drawing.Image)(resources.GetObject("btnSync.Image")));
+            this.btnSync.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSync.Location = new System.Drawing.Point(272, 11);
+            this.btnSync.Name = "btnSync";
+            this.btnSync.Padding = new System.Windows.Forms.Padding(10);
+            this.btnSync.Size = new System.Drawing.Size(94, 45);
+            this.btnSync.TabIndex = 23;
+            this.btnSync.Text = "Sync";
+            this.btnSync.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSync.UseVisualStyleBackColor = true;
+            this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
+            // 
+            // tpFunLogin
+            // 
+            this.tpFunLogin.Controls.Add(this.btnNewAccount);
+            this.tpFunLogin.Controls.Add(this.btnLogIn);
+            this.tpFunLogin.Location = new System.Drawing.Point(4, 24);
+            this.tpFunLogin.Name = "tpFunLogin";
+            this.tpFunLogin.Padding = new System.Windows.Forms.Padding(3);
+            this.tpFunLogin.Size = new System.Drawing.Size(486, 55);
+            this.tpFunLogin.TabIndex = 1;
+            this.tpFunLogin.Text = "tpFunLogin";
+            this.tpFunLogin.UseVisualStyleBackColor = true;
+            // 
+            // btnNewAccount
+            // 
+            this.btnNewAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNewAccount.Image = ((System.Drawing.Image)(resources.GetObject("btnNewAccount.Image")));
+            this.btnNewAccount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNewAccount.Location = new System.Drawing.Point(233, 11);
+            this.btnNewAccount.Name = "btnNewAccount";
+            this.btnNewAccount.Padding = new System.Windows.Forms.Padding(10);
+            this.btnNewAccount.Size = new System.Drawing.Size(140, 45);
+            this.btnNewAccount.TabIndex = 27;
+            this.btnNewAccount.Text = "New account";
+            this.btnNewAccount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnNewAccount.UseVisualStyleBackColor = true;
+            this.btnNewAccount.Click += new System.EventHandler(this.btnNewAccount_Click);
+            // 
+            // btnLogIn
+            // 
+            this.btnLogIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogIn.Image = ((System.Drawing.Image)(resources.GetObject("btnLogIn.Image")));
+            this.btnLogIn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLogIn.Location = new System.Drawing.Point(379, 11);
+            this.btnLogIn.Name = "btnLogIn";
+            this.btnLogIn.Padding = new System.Windows.Forms.Padding(10);
+            this.btnLogIn.Size = new System.Drawing.Size(101, 45);
+            this.btnLogIn.TabIndex = 26;
+            this.btnLogIn.Text = "Log in";
+            this.btnLogIn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLogIn.UseVisualStyleBackColor = true;
+            this.btnLogIn.Click += new System.EventHandler(this.btnLogIn_Click);
+            // 
+            // tpFunLoginNewAccount
+            // 
+            this.tpFunLoginNewAccount.Controls.Add(this.btnAccountCancel);
+            this.tpFunLoginNewAccount.Controls.Add(this.btnAccountOK);
+            this.tpFunLoginNewAccount.Location = new System.Drawing.Point(4, 24);
+            this.tpFunLoginNewAccount.Name = "tpFunLoginNewAccount";
+            this.tpFunLoginNewAccount.Size = new System.Drawing.Size(486, 55);
+            this.tpFunLoginNewAccount.TabIndex = 5;
+            this.tpFunLoginNewAccount.Text = "tpFunLoginNewAccount";
+            this.tpFunLoginNewAccount.UseVisualStyleBackColor = true;
+            // 
+            // btnAccountCancel
+            // 
+            this.btnAccountCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAccountCancel.Image = ((System.Drawing.Image)(resources.GetObject("btnAccountCancel.Image")));
+            this.btnAccountCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAccountCancel.Location = new System.Drawing.Point(372, 11);
+            this.btnAccountCancel.Name = "btnAccountCancel";
+            this.btnAccountCancel.Padding = new System.Windows.Forms.Padding(10);
+            this.btnAccountCancel.Size = new System.Drawing.Size(108, 45);
+            this.btnAccountCancel.TabIndex = 21;
+            this.btnAccountCancel.Text = "Cancel";
+            this.btnAccountCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAccountCancel.UseVisualStyleBackColor = true;
+            this.btnAccountCancel.Click += new System.EventHandler(this.btnAccountCancel_Click);
+            // 
+            // btnAccountOK
+            // 
+            this.btnAccountOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAccountOK.Image = ((System.Drawing.Image)(resources.GetObject("btnAccountOK.Image")));
+            this.btnAccountOK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAccountOK.Location = new System.Drawing.Point(278, 11);
+            this.btnAccountOK.Name = "btnAccountOK";
+            this.btnAccountOK.Padding = new System.Windows.Forms.Padding(10);
+            this.btnAccountOK.Size = new System.Drawing.Size(88, 45);
+            this.btnAccountOK.TabIndex = 20;
+            this.btnAccountOK.Text = "OK";
+            this.btnAccountOK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAccountOK.UseVisualStyleBackColor = true;
+            this.btnAccountOK.Click += new System.EventHandler(this.btnAccountOK_Click);
+            // 
+            // tpFunLogout
+            // 
+            this.tpFunLogout.Controls.Add(this.btnLogOut);
+            this.tpFunLogout.Location = new System.Drawing.Point(4, 24);
+            this.tpFunLogout.Name = "tpFunLogout";
+            this.tpFunLogout.Size = new System.Drawing.Size(486, 55);
+            this.tpFunLogout.TabIndex = 8;
+            this.tpFunLogout.Text = "tpFunLogout";
+            this.tpFunLogout.UseVisualStyleBackColor = true;
+            // 
+            // btnLogOut
+            // 
+            this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogOut.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOut.Image")));
+            this.btnLogOut.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLogOut.Location = new System.Drawing.Point(370, 11);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Padding = new System.Windows.Forms.Padding(10);
+            this.btnLogOut.Size = new System.Drawing.Size(110, 45);
+            this.btnLogOut.TabIndex = 21;
+            this.btnLogOut.Text = "Log out";
+            this.btnLogOut.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1284,19 +1296,15 @@
             this.MinimumSize = new System.Drawing.Size(720, 510);
             this.Name = "frmMain";
             this.Text = "To do tasks";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.Shown += new System.EventHandler(this.frmMain_Shown);
+            this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.panMenu.ResumeLayout(false);
             this.panMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.panControl.ResumeLayout(false);
             this.panControl.PerformLayout();
-            this.tabsFun.ResumeLayout(false);
-            this.tpFunStatus.ResumeLayout(false);
-            this.tpFunSchedule.ResumeLayout(false);
-            this.tpFunSettingsSync.ResumeLayout(false);
-            this.tpFunLogin.ResumeLayout(false);
-            this.tpFunLoginNewAccount.ResumeLayout(false);
-            this.tpFunLogout.ResumeLayout(false);
             this.tabs.ResumeLayout(false);
             this.tpStatus.ResumeLayout(false);
             this.tpSchedule.ResumeLayout(false);
@@ -1316,6 +1324,13 @@
             this.tpRegisterNewAccount.ResumeLayout(false);
             this.tpRegisterNewAccount.PerformLayout();
             this.tpAccount.ResumeLayout(false);
+            this.tabsFun.ResumeLayout(false);
+            this.tpFunStatus.ResumeLayout(false);
+            this.tpFunSchedule.ResumeLayout(false);
+            this.tpFunSettingsSync.ResumeLayout(false);
+            this.tpFunLogin.ResumeLayout(false);
+            this.tpFunLoginNewAccount.ResumeLayout(false);
+            this.tpFunLogout.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1411,6 +1426,7 @@
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.TabPage tpFunSettings;
 
 
 

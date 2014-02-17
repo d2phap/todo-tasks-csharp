@@ -8,6 +8,7 @@ using System.Globalization;
 using DTO;
 using System.IO;
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
 
 namespace DAO
 {
@@ -86,6 +87,10 @@ namespace DAO
             users = tk.ReadUsers();
 
         }
+
+        /// <summary>
+        /// Lưu thiết lập vào config.xml
+        /// </summary>
         public static void SaveAllSettings()
         {
             // Kiểm tra thư mục cài đặt
@@ -97,7 +102,46 @@ namespace DAO
 
             CaiDatHeThongDAO cd = new CaiDatHeThongDAO(ConfigFile);
             cd.SaveConfiguration(HeThong.CaiDat);
+
         }
+
+        /// <summary>
+        /// Áp dụng các cài đặt từ config.xml vào hệ thống
+        /// </summary>
+        public static void ApplyAllSettings()
+        {
+            if(HeThong.CaiDat.KhoiDongCungHeDieuHanh)
+            {
+                SetStartWinOS(true);
+            }
+            else
+            {
+                SetStartWinOS(false);
+            }
+        }
+
+
+
+        /// <summary>
+        /// Thiết đặt khoá registry để chương trình khởi động cùng hệ điều hành
+        /// </summary>
+        /// <param name="isEnabled">True nếu thiết lập, ngược lại False</param>
+        private static void SetStartWinOS(bool isEnabled)
+        {
+            string hkey = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run";
+
+            if (isEnabled)
+            {
+                Registry.SetValue(hkey, HeThong.CaiDat.ThongTinChuongTrinh.TenChuongTrinh,
+                    HeThong.CaiDat.ThongTinChuongTrinh.DuongDanExe, RegistryValueKind.String);
+            }
+            else
+            {
+                Registry.SetValue(hkey, HeThong.CaiDat.ThongTinChuongTrinh.TenChuongTrinh,
+                    "", RegistryValueKind.String);
+            }
+        }
+
 
         /// <summary>
         /// Hàm lấy đường dẫn thư mục cha của thư mục / tập tin (nhanh hơn)

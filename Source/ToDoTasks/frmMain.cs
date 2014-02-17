@@ -17,12 +17,22 @@ namespace ToDoTasks
 {
     public partial class frmMain : Form
     {
+        private bool _IS_HIDE_FORM = false;
         private Color _FONT_COLOR = Color.FromArgb(255, 86, 90, 95);
         private string _API = "http://localhost:53456/";
 
         public frmMain()
         {
             InitializeComponent();
+        }
+
+        public frmMain(bool isHideForm)
+        {
+            InitializeComponent();
+            this._IS_HIDE_FORM = isHideForm;
+
+            
+            
         }
 
         private void radTab_CheckedChanged(object sender, EventArgs e)
@@ -55,6 +65,7 @@ namespace ToDoTasks
 
                 case "radTabSettings":
                     tabs.SelectedTab = tpSettings;
+                    tabsFun.SelectedTab = tpFunSettings;
                     break;
 
                 case "radTabLogin":
@@ -75,7 +86,7 @@ namespace ToDoTasks
             {
                 case "tpSettings":
                     //Load all settings
-                    HeThong.LoadSettings();
+                    //HeThong.LoadSettings();
 
                     trbVolume.Value = HeThong.CaiDat.AmLuongThongBao;
                     lblVolumeValue.Text = trbVolume.Value.ToString();
@@ -111,8 +122,33 @@ namespace ToDoTasks
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //CaiDatHeThongDAO caidat = new CaiDatHeThongDAO("config.xml");
-            //caidat.ReadConfiguration();
+            if (HeThong.CaiDat.AnCTKhiKhoiDong)
+            {
+                this.WindowState = FormWindowState.Minimized;
+                this.ShowInTaskbar = false;
+            }
+        }
+
+        private void frmMain_Shown(object sender, EventArgs e)
+        {
+            if (HeThong.CaiDat.AnCTKhiKhoiDong)
+            {
+                btnMinimizeToSystemTray_Click(btnMinimizeToSystemTray, null);
+            }
+        }
+
+        private void frmMain_Resize(object sender, EventArgs e)
+        {
+            if (HeThong.CaiDat.AnCTKhiThuNho &&
+                this.WindowState == FormWindowState.Minimized)
+            {
+                btnMinimizeToSystemTray_Click(btnMinimizeToSystemTray, null);
+            }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            tray.Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -161,7 +197,10 @@ namespace ToDoTasks
         private void tray_DoubleClick(object sender, EventArgs e)
         {
             tray.Visible = false;
+
+            this.ShowInTaskbar = true;
             this.Show();
+            this.WindowState = FormWindowState.Normal;
         }
 
         private void btnAbout_Click(object sender, EventArgs e)
@@ -333,7 +372,7 @@ namespace ToDoTasks
             }
 
             string email = "";
-            string tasksFile = "";
+            string tasksFile = HeThong.UsersFile;
 
             using (var client = new HttpClient())
             {
@@ -419,6 +458,12 @@ namespace ToDoTasks
         {
             HeThong.CaiDat.AnCTKhiThuNho = chkHideOnMinimizing.Checked;
         }
+
+        
+
+        
+
+        
 
         
 

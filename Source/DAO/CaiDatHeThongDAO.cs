@@ -62,6 +62,10 @@ namespace DAO
             //Get <IsHideWindowMini> Attribute
             caiDatHeThong.AnCTKhiThuNho = bool.Parse(nIsHideWindowMini.GetAttribute("value"));
 
+            XmlElement nUser = (XmlElement)nConfig.SelectNodes("user")[0];
+            //Get <user> Attribute
+            caiDatHeThong.NguoiDung = nIsHideWindowMini.GetAttribute("value").Trim();
+
             return caiDatHeThong;
         }
 
