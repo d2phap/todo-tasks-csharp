@@ -83,8 +83,16 @@ namespace DAO
 
             //Đọc danh sách người dùng
             TaiKhoanDAO tk = new TaiKhoanDAO(UsersFile);
-            List<TaiKhoanDTO> users = new List<TaiKhoanDTO>();
-            users = tk.ReadUsers();
+            List<TaiKhoanDTO> users = tk.ReadUsers();
+
+            //Lay thong tin nguoi dung hien tai
+            HeThong.TaiKhoan = users.SingleOrDefault(u => u.Email.CompareTo(CaiDat.NguoiDung) == 0);
+
+            //Anomyous user
+            if(HeThong.TaiKhoan == null)
+            {
+                HeThong.TaiKhoan = new TaiKhoanDTO();
+            }
 
         }
 

@@ -63,8 +63,17 @@ namespace DAO
             caiDatHeThong.AnCTKhiThuNho = bool.Parse(nIsHideWindowMini.GetAttribute("value"));
 
             XmlElement nUser = (XmlElement)nConfig.SelectNodes("user")[0];
-            //Get <user> Attribute
-            caiDatHeThong.NguoiDung = nIsHideWindowMini.GetAttribute("value").Trim();
+
+            if(nUser != null)
+            {
+                //Get <user> Attribute
+                caiDatHeThong.NguoiDung = nUser.GetAttribute("value").Trim();
+            }
+            else
+            {
+                caiDatHeThong.NguoiDung = "anomyous";
+            }
+            
 
             return caiDatHeThong;
         }
@@ -101,6 +110,10 @@ namespace DAO
 
             n = doc.CreateElement("is_hide_window_on_minimizing");// <is_hide_window_on_minimizing>
             n.SetAttribute("value", cd.AnCTKhiThuNho.ToString());
+            nConf.AppendChild(n);
+
+            n = doc.CreateElement("user");// <user>
+            n.SetAttribute("value", cd.NguoiDung);
             nConf.AppendChild(n);
 
             root.AppendChild(nConf);

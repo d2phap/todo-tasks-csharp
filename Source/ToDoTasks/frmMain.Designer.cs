@@ -30,6 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange1 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange2 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange3 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange4 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange5 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Mùa xuân sang có hoa anh đào");
             this.panMenu = new System.Windows.Forms.Panel();
             this.radTabLogin = new System.Windows.Forms.RadioButton();
             this.radTabSettings = new System.Windows.Forms.RadioButton();
@@ -44,20 +50,14 @@
             this.tray = new System.Windows.Forms.NotifyIcon(this.components);
             this.tabs = new ToDoTasks.TabPagesControl();
             this.tpStatus = new System.Windows.Forms.TabPage();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.tpSchedule = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.calSchedule = new WindowsFormsCalendar.Calendar();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.calSchedule = new System.Windows.Forms.Calendar.Calendar();
             this.tpEditTask = new System.Windows.Forms.TabPage();
             this.tpSettings = new System.Windows.Forms.TabPage();
             this.lnkStartSync = new System.Windows.Forms.LinkLabel();
@@ -120,6 +120,8 @@
             this.btnAccountOK = new System.Windows.Forms.Button();
             this.tpFunLogout = new System.Windows.Forms.TabPage();
             this.btnLogOut = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.panControl.SuspendLayout();
@@ -128,8 +130,6 @@
             this.tpSchedule.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
             this.tpSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).BeginInit();
             this.tpSync.SuspendLayout();
@@ -334,8 +334,7 @@
             // 
             // tpStatus
             // 
-            this.tpStatus.Controls.Add(this.button5);
-            this.tpStatus.Controls.Add(this.button4);
+            this.tpStatus.Controls.Add(this.listView1);
             this.tpStatus.Location = new System.Drawing.Point(4, 24);
             this.tpStatus.Name = "tpStatus";
             this.tpStatus.Padding = new System.Windows.Forms.Padding(3);
@@ -343,34 +342,6 @@
             this.tpStatus.TabIndex = 0;
             this.tpStatus.Text = "Status";
             this.tpStatus.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(117, 164);
-            this.button5.Name = "button5";
-            this.button5.Padding = new System.Windows.Forms.Padding(10);
-            this.button5.Size = new System.Drawing.Size(108, 45);
-            this.button5.TabIndex = 19;
-            this.button5.Text = "Cancel";
-            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(23, 164);
-            this.button4.Name = "button4";
-            this.button4.Padding = new System.Windows.Forms.Padding(10);
-            this.button4.Size = new System.Drawing.Size(88, 45);
-            this.button4.TabIndex = 18;
-            this.button4.Text = "OK";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // tpSchedule
             // 
@@ -387,16 +358,42 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.calSchedule, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.calSchedule, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -404,21 +401,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(807, 254);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // calSchedule
-            // 
-            this.calSchedule.CalendarTimeFormat = WindowsFormsCalendar.CalendarTimeFormat.TwentyFourHour;
-            this.calSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.calSchedule.FirstDayOfWeek = System.DayOfWeek.Monday;
-            this.calSchedule.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.calSchedule.ItemsBackgroundColor = System.Drawing.Color.DeepSkyBlue;
-            this.calSchedule.ItemsFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.calSchedule.ItemsForeColor = System.Drawing.Color.Black;
-            this.calSchedule.Location = new System.Drawing.Point(3, 43);
-            this.calSchedule.Name = "calSchedule";
-            this.calSchedule.Size = new System.Drawing.Size(801, 168);
-            this.calSchedule.TabIndex = 9;
-            this.calSchedule.Text = "To do tasks";
             // 
             // toolStrip1
             // 
@@ -481,53 +463,39 @@
             this.toolStripButton3.Size = new System.Drawing.Size(32, 32);
             this.toolStripButton3.Text = "Add new task";
             // 
-            // panel1
+            // calSchedule
             // 
-            this.panel1.Controls.Add(this.toolStrip2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 217);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(801, 34);
-            this.panel1.TabIndex = 11;
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.toolStrip2.AutoSize = false;
-            this.toolStrip2.BackColor = System.Drawing.Color.White;
-            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton6,
-            this.toolStripButton5});
-            this.toolStrip2.Location = new System.Drawing.Point(0, -2);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(801, 39);
-            this.toolStrip2.TabIndex = 11;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.AutoSize = false;
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(32, 32);
-            this.toolStripButton6.Text = "Previous days";
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton5.AutoSize = false;
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(32, 32);
-            this.toolStripButton5.Text = "Next days";
+            this.calSchedule.AllowItemEdit = false;
+            this.calSchedule.AllowItemResize = false;
+            this.calSchedule.AllowNew = false;
+            this.calSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.calSchedule.FirstDayOfWeek = System.DayOfWeek.Monday;
+            this.calSchedule.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            calendarHighlightRange1.DayOfWeek = System.DayOfWeek.Monday;
+            calendarHighlightRange1.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange1.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange2.DayOfWeek = System.DayOfWeek.Tuesday;
+            calendarHighlightRange2.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange2.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange3.DayOfWeek = System.DayOfWeek.Wednesday;
+            calendarHighlightRange3.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange3.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange4.DayOfWeek = System.DayOfWeek.Thursday;
+            calendarHighlightRange4.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange4.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange5.DayOfWeek = System.DayOfWeek.Friday;
+            calendarHighlightRange5.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange5.StartTime = System.TimeSpan.Parse("08:00:00");
+            this.calSchedule.HighlightRanges = new System.Windows.Forms.Calendar.CalendarHighlightRange[] {
+        calendarHighlightRange1,
+        calendarHighlightRange2,
+        calendarHighlightRange3,
+        calendarHighlightRange4,
+        calendarHighlightRange5};
+            this.calSchedule.Location = new System.Drawing.Point(3, 43);
+            this.calSchedule.Name = "calSchedule";
+            this.calSchedule.Size = new System.Drawing.Size(801, 208);
+            this.calSchedule.TabIndex = 12;
             // 
             // tpEditTask
             // 
@@ -1072,6 +1040,7 @@
             this.radScheduleMonth.Text = "Month";
             this.radScheduleMonth.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radScheduleMonth.UseVisualStyleBackColor = true;
+            this.radScheduleMonth.CheckedChanged += new System.EventHandler(this.radScheduleMonth_CheckedChanged);
             // 
             // radScheduleWeek
             // 
@@ -1086,6 +1055,7 @@
             this.radScheduleWeek.Text = "Week";
             this.radScheduleWeek.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radScheduleWeek.UseVisualStyleBackColor = true;
+            this.radScheduleWeek.CheckedChanged += new System.EventHandler(this.radScheduleWeek_CheckedChanged);
             // 
             // radScheduleList
             // 
@@ -1278,6 +1248,25 @@
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
+            // listView1
+            // 
+            this.listView1.FullRowSelect = true;
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.listView1.Location = new System.Drawing.Point(46, 32);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(591, 178);
+            this.listView1.SmallImageList = this.imageList1;
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.List;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(32, 32);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1311,9 +1300,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
             this.tpSettings.ResumeLayout(false);
             this.tpSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).EndInit();
@@ -1352,8 +1338,6 @@
         private System.Windows.Forms.TabPage tpStatus;
         private System.Windows.Forms.TabPage tpSchedule;
         private System.Windows.Forms.Button btnSync;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TabPage tpEditTask;
         private System.Windows.Forms.TabPage tpSettings;
         private System.Windows.Forms.TabPage tpSync;
@@ -1416,17 +1400,15 @@
         private System.Windows.Forms.RadioButton radScheduleMonth;
         private System.Windows.Forms.RadioButton radScheduleWeek;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private WindowsFormsCalendar.Calendar calSchedule;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.TabPage tpFunSettings;
+        private System.Windows.Forms.Calendar.Calendar calSchedule;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ImageList imageList1;
 
 
 

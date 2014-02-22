@@ -12,27 +12,18 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Windows.Forms.Calendar;
 
 namespace ToDoTasks
 {
     public partial class frmMain : Form
     {
-        private bool _IS_HIDE_FORM = false;
         private Color _FONT_COLOR = Color.FromArgb(255, 86, 90, 95);
         private string _API = "http://localhost:53456/";
 
         public frmMain()
         {
             InitializeComponent();
-        }
-
-        public frmMain(bool isHideForm)
-        {
-            InitializeComponent();
-            this._IS_HIDE_FORM = isHideForm;
-
-            
-            
         }
 
         private void radTab_CheckedChanged(object sender, EventArgs e)
@@ -127,7 +118,34 @@ namespace ToDoTasks
                 this.WindowState = FormWindowState.Minimized;
                 this.ShowInTaskbar = false;
             }
+
+            radScheduleWeek_CheckedChanged(null, null);
+
+            //Load cong viec
+            LoadTasksOnCalendar(calSchedule);
+            
         }
+
+        private void LoadTasksOnCalendar(System.Windows.Forms.Calendar.Calendar cal)
+        {
+            if (HeThong.TaiKhoan.LichLamViec.Count > 0)
+            {
+                foreach (var item in HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec)
+                {
+                    CalendarItem ci = new CalendarItem(cal);
+                    ci.Text = item.Ten + "\n\n" + item.MieuTa;
+                    ci.StartDate = item.ThoiGianDienRa.ThoiGianBatDau;
+                    ci.EndDate = item.ThoiGianDienRa.ThoiGianKetThuc;
+                    ci.ApplyColor(item.MauSacLich);
+
+                    if (calSchedule.ViewIntersects(ci))
+                    {
+                        calSchedule.Items.Add(ci);
+                    }
+                }
+            }
+        }
+
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
@@ -344,6 +362,7 @@ namespace ToDoTasks
         }
         #endregion
 
+        #region Tab Settings
         private void btnSyncCancel_Click(object sender, EventArgs e)
         {
             tabs.SelectedTab = tpSettings;
@@ -458,16 +477,37 @@ namespace ToDoTasks
         {
             HeThong.CaiDat.AnCTKhiThuNho = chkHideOnMinimizing.Checked;
         }
+        #endregion
 
-        
+        private void radScheduleMonth_CheckedChanged(object sender, EventArgs e)
+        {
+            DateTime firstDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            calSchedule.SetViewRange(firstDay, firstDay.AddMonths(1).AddDays(-1));
 
-        
+            //Load cong viec
+            LoadTasksOnCalendar(calSchedule);
+        }
 
-        
+        private void radScheduleWeek_CheckedChanged(object sender, EventArgs e)
+        {
+            DateTime today = DateTime.Today;
+            DateTime firstDay = today.AddDays(1 - today.DayOfWeek.GetHashCode());
+            DateTime lastDay = today.AddDays(7 - today.DayOfWeek.GetHashCode());
 
-        
+            calSchedule.SetViewRange(firstDay, lastDay);
 
-        
+            //Load cong viec
+            LoadTasksOnCalendar(calSchedule);
+        }
+
+
+
+
+
+
+
+
+
 
 
 

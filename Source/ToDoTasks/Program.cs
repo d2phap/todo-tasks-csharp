@@ -35,12 +35,12 @@ namespace ToDoTasks
             Application.ApplicationExit += Application_ApplicationExit;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain(HeThong.CaiDat.AnCTKhiKhoiDong));
+            Application.Run(new frmMain());
             
         }
 
         /// <summary>
-        /// Lưu tất cả thiết lập của chương trình
+        /// Lưu tất cả thiết lập của chương trình trước khi thoát chương trình
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
