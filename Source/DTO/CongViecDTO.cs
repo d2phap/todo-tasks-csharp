@@ -22,6 +22,9 @@ namespace DTO
         private Color mauSacLich;
         private List<int> danhSachThoiGianNhacNho;
         private List<LoaiHinhThucNhacNho> hinhThucNhacNho;
+        private bool isDone;
+
+        
 
         #region Properties
         public string Ten
@@ -59,6 +62,11 @@ namespace DTO
             get { return hinhThucNhacNho; }
             set { hinhThucNhacNho = value; }
         }
+        public bool IsDone
+        {
+            get { return isDone; }
+            set { isDone = value; }
+        }
         #endregion
 
         public CongViecDTO()
@@ -70,6 +78,7 @@ namespace DTO
             this.mauSacLich = Color.Blue;
             this.HinhThucNhacNho = new List<LoaiHinhThucNhacNho>();
             this.ThoiGianDienRa = new ThoiGianDienRaDTO();
+            this.isDone = false;
         }
 
     }

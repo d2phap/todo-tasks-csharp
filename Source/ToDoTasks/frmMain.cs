@@ -61,7 +61,6 @@ namespace ToDoTasks
 
                 case "radTabLogin":
 
-
                     tabs.SelectedTab = tpLogin;
                     tabsFun.SelectedTab = tpFunLogin;
                     break;
@@ -123,6 +122,7 @@ namespace ToDoTasks
 
             //Load cong viec
             LoadTasksOnCalendar(calSchedule);
+            radScheduleWeek_CheckedChanged(null, null);
             
         }
 
@@ -130,18 +130,60 @@ namespace ToDoTasks
         {
             if (HeThong.TaiKhoan.LichLamViec.Count > 0)
             {
+                int index = 0;
                 foreach (var item in HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec)
                 {
-                    CalendarItem ci = new CalendarItem(cal);
-                    ci.Text = item.Ten + "\n\n" + item.MieuTa;
-                    ci.StartDate = item.ThoiGianDienRa.ThoiGianBatDau;
-                    ci.EndDate = item.ThoiGianDienRa.ThoiGianKetThuc;
-                    ci.ApplyColor(item.MauSacLich);
-
-                    if (calSchedule.ViewIntersects(ci))
+                    if (item.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Repeated)
                     {
-                        calSchedule.Items.Add(ci);
+                        for (int i = 0; i < item.ThoiGianDienRa.SoLanLap; i++)
+                        {
+                            CalendarItem ci = new CalendarItem(cal);
+                            ci.Text = item.Ten + "\n\n" + item.MieuTa;
+
+                            int songay = i * item.ThoiGianDienRa.DonViLap;
+
+                            ci.StartDate = item.ThoiGianDienRa.ThoiGianBatDau.AddDays(songay);
+                            ci.EndDate = item.ThoiGianDienRa.ThoiGianKetThuc.AddDays(songay);
+
+                            if (!item.IsDone)
+                            {
+                                ci.ApplyColor(item.MauSacLich);
+                            }
+                            else
+                            {
+                                ci.ApplyColor(Color.White);
+                            }
+                            ci.Tag = index; //Save task index
+
+                            if (calSchedule.ViewIntersects(ci))
+                            {
+                                calSchedule.Items.Add(ci);
+                            }
+                        }
                     }
+                    else
+                    {
+                        CalendarItem ci = new CalendarItem(cal);
+                        ci.Text = item.Ten + "\n\n" + item.MieuTa;
+                        ci.StartDate = item.ThoiGianDienRa.ThoiGianBatDau;
+                        ci.EndDate = item.ThoiGianDienRa.ThoiGianKetThuc;
+                        if (!item.IsDone)
+                        {
+                            ci.ApplyColor(item.MauSacLich);
+                        }
+                        else
+                        {
+                            ci.ApplyColor(Color.White);
+                        }
+                        ci.Tag = index; //Save task index
+
+                        if (calSchedule.ViewIntersects(ci))
+                        {
+                            calSchedule.Items.Add(ci);
+                        }
+                    }
+                    
+                    index++;
                 }
             }
         }
@@ -498,6 +540,134 @@ namespace ToDoTasks
 
             //Load cong viec
             LoadTasksOnCalendar(calSchedule);
+        }
+
+        //private void button1_Click_1(object sender, EventArgs e)
+        //{
+        //    OpenFileDialog o = new OpenFileDialog();
+        //    o.InitialDirectory = "c:\\";
+        //    if (o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        //    {
+        //        using (var client = new HttpClient())
+        //        {
+        //            client.BaseAddress = new Uri(_API);
+        //            using (var content = new MultipartFormDataContent())
+        //            {
+        //                var fileContent = new ByteArrayContent(System.IO.File.ReadAllBytes(o.FileName));
+        //                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+        //                {
+        //                    Name = "d2phap@gmail.com",
+        //                    FileName = Path.GetFileName(o.FileName)
+        //                };
+        //                content.Add(fileContent);
+
+        //                var requestUri = "api/account/sync";
+        //                var result = client.PostAsync(requestUri, content).Result;
+
+        //                if (result.IsSuccessStatusCode)
+        //                {
+        //                    MessageBox.Show(result.Headers.GetValues("Filename").ToList()[0]);
+        //                }
+        //                else
+        //                {
+        //                    MessageBox.Show(result.StatusCode.ToString());
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+
+        private void calSchedule_ItemClick(object sender, CalendarItemEventArgs e)
+        {
+            var ds = calSchedule.GetSelectedItems();
+            if (ds.Count() > 0)
+            {
+                var item = ds.ToList()[0];
+                var sysItem = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec[
+                    int.Parse(item.Tag.ToString())];
+
+                if (sysItem.IsDone)
+                {
+                    sbtnFinishTask.Visible = false;
+                    sbtnAddTask.Visible = true;
+                    sbtnEditTask.Visible = false;
+                    sbtnDeleteTask.Visible = true;
+                }
+                else
+                {
+                    sbtnFinishTask.Visible = true;
+                    sbtnAddTask.Visible = true;
+                    sbtnEditTask.Visible = true;
+                    sbtnDeleteTask.Visible = true;
+                }
+            }
+        }
+
+        private void sbtnFinishTask_Click(object sender, EventArgs e)
+        {
+            var ds = calSchedule.GetSelectedItems();
+            if (ds.Count() > 0)
+            {
+                var item = ds.ToList()[0];
+
+                item.ApplyColor(Color.White);
+                var sysItem = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec[
+                    int.Parse(item.Tag.ToString())];
+
+                sysItem.MauSacLich = Color.White;
+                sysItem.IsDone = true;
+
+                if(radScheduleWeek.Checked)
+                {
+                    radScheduleWeek_CheckedChanged(null, null);
+                }
+                else if(radScheduleMonth.Checked)
+                {
+                    radScheduleMonth_CheckedChanged(null, null);
+                }
+                else
+                {
+
+                }
+            }
+        }
+
+        private void sbtnAddTask_Click(object sender, EventArgs e)
+        {
+            tabs.SelectedTab = tpEditTask;
+            tabsFun.SelectedTab = tpFunScheduleNewTask;
+        }
+
+        private void sbtnEditTask_Click(object sender, EventArgs e)
+        {
+            tabs.SelectedTab = tpEditTask;
+            tabsFun.SelectedTab = tpFunScheduleEditTask;
+        }
+
+        private void sbtnDeleteTask_Click(object sender, EventArgs e)
+        {
+            var ds = calSchedule.GetSelectedItems();
+            if (ds.Count() > 0)
+            {
+                var item = ds.ToList()[0];
+
+                item.ApplyColor(Color.White);
+                HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec.RemoveAt(
+                    int.Parse(item.Tag.ToString()));
+
+                if (radScheduleWeek.Checked)
+                {
+                    radScheduleWeek_CheckedChanged(null, null);
+                }
+                else if (radScheduleMonth.Checked)
+                {
+                    radScheduleMonth_CheckedChanged(null, null);
+                }
+                else
+                {
+
+                }
+            }
         }
 
 

@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Mùa xuân sang có hoa anh đào");
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange1 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange2 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange3 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange4 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange5 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Mùa xuân sang có hoa anh đào");
             this.panMenu = new System.Windows.Forms.Panel();
             this.radTabLogin = new System.Windows.Forms.RadioButton();
             this.radTabSettings = new System.Windows.Forms.RadioButton();
@@ -48,17 +48,45 @@
             this.lblTime = new System.Windows.Forms.Label();
             this.timSys = new System.Windows.Forms.Timer(this.components);
             this.tray = new System.Windows.Forms.NotifyIcon(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabs = new ToDoTasks.TabPagesControl();
             this.tpStatus = new System.Windows.Forms.TabPage();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.tpSchedule = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.sbtnFinishTask = new System.Windows.Forms.ToolStripButton();
+            this.sbtnDeleteTask = new System.Windows.Forms.ToolStripButton();
+            this.sbtnEditTask = new System.Windows.Forms.ToolStripButton();
+            this.sbtnAddTask = new System.Windows.Forms.ToolStripButton();
             this.calSchedule = new System.Windows.Forms.Calendar.Calendar();
             this.tpEditTask = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnTAskAddRemindTime = new System.Windows.Forms.Button();
+            this.label26 = new System.Windows.Forms.Label();
+            this.numTaskAddRemindTime = new System.Windows.Forms.NumericUpDown();
+            this.lstTaskRemindTime = new System.Windows.Forms.ListBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.chkTaskRemindType_Email = new System.Windows.Forms.CheckBox();
+            this.chkTaskRemindType_Sound = new System.Windows.Forms.CheckBox();
+            this.chkTaskRemindType_Notification = new System.Windows.Forms.CheckBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.numTaskRepeatUnit = new System.Windows.Forms.NumericUpDown();
+            this.cmbTaskRepeatType = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.dtpTaskEndTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpTaskStartTime = new System.Windows.Forms.DateTimePicker();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.picTaskColor = new System.Windows.Forms.PictureBox();
+            this.txtTaskDescription = new System.Windows.Forms.TextBox();
+            this.txtTaskPlace = new System.Windows.Forms.TextBox();
+            this.txtTaskTitle = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.tpSettings = new System.Windows.Forms.TabPage();
             this.lnkStartSync = new System.Windows.Forms.LinkLabel();
             this.lblLastSync = new System.Windows.Forms.Label();
@@ -120,8 +148,6 @@
             this.btnAccountOK = new System.Windows.Forms.Button();
             this.tpFunLogout = new System.Windows.Forms.TabPage();
             this.btnLogOut = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.panControl.SuspendLayout();
@@ -130,6 +156,10 @@
             this.tpSchedule.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.tpEditTask.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTaskAddRemindTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTaskRepeatUnit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTaskColor)).BeginInit();
             this.tpSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).BeginInit();
             this.tpSync.SuspendLayout();
@@ -310,6 +340,12 @@
             this.tray.Text = "To do tasks";
             this.tray.DoubleClick += new System.EventHandler(this.tray_DoubleClick);
             // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(32, 32);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // tabs
             // 
             this.tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -342,6 +378,19 @@
             this.tpStatus.TabIndex = 0;
             this.tpStatus.Text = "Status";
             this.tpStatus.UseVisualStyleBackColor = true;
+            // 
+            // listView1
+            // 
+            this.listView1.FullRowSelect = true;
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.listView1.Location = new System.Drawing.Point(46, 32);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(591, 178);
+            this.listView1.SmallImageList = this.imageList1;
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.List;
             // 
             // tpSchedule
             // 
@@ -409,10 +458,10 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton4,
-            this.toolStripButton3});
+            this.sbtnFinishTask,
+            this.sbtnDeleteTask,
+            this.sbtnEditTask,
+            this.sbtnAddTask});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -420,48 +469,52 @@
             this.toolStrip1.TabIndex = 10;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // sbtnFinishTask
             // 
-            this.toolStripButton1.AutoSize = false;
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(32, 32);
-            this.toolStripButton1.Text = "Finish task";
+            this.sbtnFinishTask.AutoSize = false;
+            this.sbtnFinishTask.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.sbtnFinishTask.Image = ((System.Drawing.Image)(resources.GetObject("sbtnFinishTask.Image")));
+            this.sbtnFinishTask.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.sbtnFinishTask.Name = "sbtnFinishTask";
+            this.sbtnFinishTask.Size = new System.Drawing.Size(32, 32);
+            this.sbtnFinishTask.Text = "Finish task";
+            this.sbtnFinishTask.Click += new System.EventHandler(this.sbtnFinishTask_Click);
             // 
-            // toolStripButton2
+            // sbtnDeleteTask
             // 
-            this.toolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton2.AutoSize = false;
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(32, 32);
-            this.toolStripButton2.Text = "Delete selected task";
+            this.sbtnDeleteTask.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.sbtnDeleteTask.AutoSize = false;
+            this.sbtnDeleteTask.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.sbtnDeleteTask.Image = ((System.Drawing.Image)(resources.GetObject("sbtnDeleteTask.Image")));
+            this.sbtnDeleteTask.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.sbtnDeleteTask.Name = "sbtnDeleteTask";
+            this.sbtnDeleteTask.Size = new System.Drawing.Size(32, 32);
+            this.sbtnDeleteTask.Text = "Delete selected task";
+            this.sbtnDeleteTask.Click += new System.EventHandler(this.sbtnDeleteTask_Click);
             // 
-            // toolStripButton4
+            // sbtnEditTask
             // 
-            this.toolStripButton4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton4.AutoSize = false;
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(32, 32);
-            this.toolStripButton4.Text = "Edit selected task";
+            this.sbtnEditTask.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.sbtnEditTask.AutoSize = false;
+            this.sbtnEditTask.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.sbtnEditTask.Image = ((System.Drawing.Image)(resources.GetObject("sbtnEditTask.Image")));
+            this.sbtnEditTask.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.sbtnEditTask.Name = "sbtnEditTask";
+            this.sbtnEditTask.Size = new System.Drawing.Size(32, 32);
+            this.sbtnEditTask.Text = "Edit selected task";
+            this.sbtnEditTask.Click += new System.EventHandler(this.sbtnEditTask_Click);
             // 
-            // toolStripButton3
+            // sbtnAddTask
             // 
-            this.toolStripButton3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton3.AutoSize = false;
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(32, 32);
-            this.toolStripButton3.Text = "Add new task";
+            this.sbtnAddTask.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.sbtnAddTask.AutoSize = false;
+            this.sbtnAddTask.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.sbtnAddTask.Image = ((System.Drawing.Image)(resources.GetObject("sbtnAddTask.Image")));
+            this.sbtnAddTask.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.sbtnAddTask.Name = "sbtnAddTask";
+            this.sbtnAddTask.Size = new System.Drawing.Size(32, 32);
+            this.sbtnAddTask.Text = "Add new task";
+            this.sbtnAddTask.Click += new System.EventHandler(this.sbtnAddTask_Click);
             // 
             // calSchedule
             // 
@@ -496,9 +549,37 @@
             this.calSchedule.Name = "calSchedule";
             this.calSchedule.Size = new System.Drawing.Size(801, 208);
             this.calSchedule.TabIndex = 12;
+            this.calSchedule.ItemClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calSchedule_ItemClick);
             // 
             // tpEditTask
             // 
+            this.tpEditTask.AutoScroll = true;
+            this.tpEditTask.Controls.Add(this.panel1);
+            this.tpEditTask.Controls.Add(this.btnTAskAddRemindTime);
+            this.tpEditTask.Controls.Add(this.label26);
+            this.tpEditTask.Controls.Add(this.numTaskAddRemindTime);
+            this.tpEditTask.Controls.Add(this.lstTaskRemindTime);
+            this.tpEditTask.Controls.Add(this.label25);
+            this.tpEditTask.Controls.Add(this.chkTaskRemindType_Email);
+            this.tpEditTask.Controls.Add(this.chkTaskRemindType_Sound);
+            this.tpEditTask.Controls.Add(this.chkTaskRemindType_Notification);
+            this.tpEditTask.Controls.Add(this.label24);
+            this.tpEditTask.Controls.Add(this.numTaskRepeatUnit);
+            this.tpEditTask.Controls.Add(this.cmbTaskRepeatType);
+            this.tpEditTask.Controls.Add(this.label23);
+            this.tpEditTask.Controls.Add(this.label22);
+            this.tpEditTask.Controls.Add(this.dtpTaskEndTime);
+            this.tpEditTask.Controls.Add(this.dtpTaskStartTime);
+            this.tpEditTask.Controls.Add(this.label21);
+            this.tpEditTask.Controls.Add(this.label20);
+            this.tpEditTask.Controls.Add(this.picTaskColor);
+            this.tpEditTask.Controls.Add(this.txtTaskDescription);
+            this.tpEditTask.Controls.Add(this.txtTaskPlace);
+            this.tpEditTask.Controls.Add(this.txtTaskTitle);
+            this.tpEditTask.Controls.Add(this.label19);
+            this.tpEditTask.Controls.Add(this.label18);
+            this.tpEditTask.Controls.Add(this.label17);
+            this.tpEditTask.Controls.Add(this.label16);
             this.tpEditTask.Location = new System.Drawing.Point(4, 24);
             this.tpEditTask.Name = "tpEditTask";
             this.tpEditTask.Padding = new System.Windows.Forms.Padding(3);
@@ -506,6 +587,248 @@
             this.tpEditTask.TabIndex = 2;
             this.tpEditTask.Text = "Edit task";
             this.tpEditTask.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(770, 356);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(20, 90);
+            this.panel1.TabIndex = 26;
+            // 
+            // btnTAskAddRemindTime
+            // 
+            this.btnTAskAddRemindTime.Location = new System.Drawing.Point(285, 392);
+            this.btnTAskAddRemindTime.Name = "btnTAskAddRemindTime";
+            this.btnTAskAddRemindTime.Size = new System.Drawing.Size(75, 23);
+            this.btnTAskAddRemindTime.TabIndex = 25;
+            this.btnTAskAddRemindTime.Text = "Add";
+            this.btnTAskAddRemindTime.UseVisualStyleBackColor = true;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(211, 396);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(58, 15);
+            this.label26.TabIndex = 24;
+            this.label26.Text = "minute(s)";
+            // 
+            // numTaskAddRemindTime
+            // 
+            this.numTaskAddRemindTime.Location = new System.Drawing.Point(144, 394);
+            this.numTaskAddRemindTime.Maximum = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            this.numTaskAddRemindTime.Name = "numTaskAddRemindTime";
+            this.numTaskAddRemindTime.Size = new System.Drawing.Size(61, 23);
+            this.numTaskAddRemindTime.TabIndex = 23;
+            this.numTaskAddRemindTime.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // lstTaskRemindTime
+            // 
+            this.lstTaskRemindTime.FormattingEnabled = true;
+            this.lstTaskRemindTime.ItemHeight = 15;
+            this.lstTaskRemindTime.Location = new System.Drawing.Point(144, 324);
+            this.lstTaskRemindTime.Name = "lstTaskRemindTime";
+            this.lstTaskRemindTime.Size = new System.Drawing.Size(216, 64);
+            this.lstTaskRemindTime.TabIndex = 22;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(38, 324);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(78, 15);
+            this.label25.TabIndex = 21;
+            this.label25.Text = "Remind time:";
+            // 
+            // chkTaskRemindType_Email
+            // 
+            this.chkTaskRemindType_Email.AutoSize = true;
+            this.chkTaskRemindType_Email.Location = new System.Drawing.Point(305, 299);
+            this.chkTaskRemindType_Email.Name = "chkTaskRemindType_Email";
+            this.chkTaskRemindType_Email.Size = new System.Drawing.Size(55, 19);
+            this.chkTaskRemindType_Email.TabIndex = 20;
+            this.chkTaskRemindType_Email.Text = "Email";
+            this.chkTaskRemindType_Email.UseVisualStyleBackColor = true;
+            // 
+            // chkTaskRemindType_Sound
+            // 
+            this.chkTaskRemindType_Sound.AutoSize = true;
+            this.chkTaskRemindType_Sound.Checked = true;
+            this.chkTaskRemindType_Sound.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTaskRemindType_Sound.Location = new System.Drawing.Point(239, 299);
+            this.chkTaskRemindType_Sound.Name = "chkTaskRemindType_Sound";
+            this.chkTaskRemindType_Sound.Size = new System.Drawing.Size(60, 19);
+            this.chkTaskRemindType_Sound.TabIndex = 19;
+            this.chkTaskRemindType_Sound.Text = "Sound";
+            this.chkTaskRemindType_Sound.UseVisualStyleBackColor = true;
+            // 
+            // chkTaskRemindType_Notification
+            // 
+            this.chkTaskRemindType_Notification.AutoSize = true;
+            this.chkTaskRemindType_Notification.Checked = true;
+            this.chkTaskRemindType_Notification.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTaskRemindType_Notification.Location = new System.Drawing.Point(144, 299);
+            this.chkTaskRemindType_Notification.Name = "chkTaskRemindType_Notification";
+            this.chkTaskRemindType_Notification.Size = new System.Drawing.Size(89, 19);
+            this.chkTaskRemindType_Notification.TabIndex = 18;
+            this.chkTaskRemindType_Notification.Text = "Notification";
+            this.chkTaskRemindType_Notification.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(38, 300);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(82, 15);
+            this.label24.TabIndex = 17;
+            this.label24.Text = "Remind types:";
+            // 
+            // numTaskRepeatUnit
+            // 
+            this.numTaskRepeatUnit.Location = new System.Drawing.Point(144, 270);
+            this.numTaskRepeatUnit.Name = "numTaskRepeatUnit";
+            this.numTaskRepeatUnit.Size = new System.Drawing.Size(159, 23);
+            this.numTaskRepeatUnit.TabIndex = 16;
+            // 
+            // cmbTaskRepeatType
+            // 
+            this.cmbTaskRepeatType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTaskRepeatType.FormattingEnabled = true;
+            this.cmbTaskRepeatType.Items.AddRange(new object[] {
+            "Unique",
+            "Repeated"});
+            this.cmbTaskRepeatType.Location = new System.Drawing.Point(144, 241);
+            this.cmbTaskRepeatType.Name = "cmbTaskRepeatType";
+            this.cmbTaskRepeatType.Size = new System.Drawing.Size(159, 23);
+            this.cmbTaskRepeatType.TabIndex = 15;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(38, 272);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(100, 15);
+            this.label23.TabIndex = 14;
+            this.label23.Text = "Repeat unit (day):";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(38, 244);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(72, 15);
+            this.label22.TabIndex = 12;
+            this.label22.Text = "Repeat type:";
+            // 
+            // dtpTaskEndTime
+            // 
+            this.dtpTaskEndTime.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            this.dtpTaskEndTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpTaskEndTime.Location = new System.Drawing.Point(144, 212);
+            this.dtpTaskEndTime.Name = "dtpTaskEndTime";
+            this.dtpTaskEndTime.Size = new System.Drawing.Size(159, 23);
+            this.dtpTaskEndTime.TabIndex = 11;
+            // 
+            // dtpTaskStartTime
+            // 
+            this.dtpTaskStartTime.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            this.dtpTaskStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpTaskStartTime.Location = new System.Drawing.Point(144, 183);
+            this.dtpTaskStartTime.Name = "dtpTaskStartTime";
+            this.dtpTaskStartTime.Size = new System.Drawing.Size(159, 23);
+            this.dtpTaskStartTime.TabIndex = 10;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(38, 218);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(57, 15);
+            this.label21.TabIndex = 9;
+            this.label21.Text = "End time:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(38, 189);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(61, 15);
+            this.label20.TabIndex = 8;
+            this.label20.Text = "Start time:";
+            // 
+            // picTaskColor
+            // 
+            this.picTaskColor.Location = new System.Drawing.Point(144, 154);
+            this.picTaskColor.Name = "picTaskColor";
+            this.picTaskColor.Size = new System.Drawing.Size(61, 23);
+            this.picTaskColor.TabIndex = 7;
+            this.picTaskColor.TabStop = false;
+            // 
+            // txtTaskDescription
+            // 
+            this.txtTaskDescription.Location = new System.Drawing.Point(144, 84);
+            this.txtTaskDescription.Multiline = true;
+            this.txtTaskDescription.Name = "txtTaskDescription";
+            this.txtTaskDescription.Size = new System.Drawing.Size(339, 64);
+            this.txtTaskDescription.TabIndex = 6;
+            // 
+            // txtTaskPlace
+            // 
+            this.txtTaskPlace.Location = new System.Drawing.Point(144, 56);
+            this.txtTaskPlace.Name = "txtTaskPlace";
+            this.txtTaskPlace.Size = new System.Drawing.Size(339, 23);
+            this.txtTaskPlace.TabIndex = 5;
+            // 
+            // txtTaskTitle
+            // 
+            this.txtTaskTitle.Location = new System.Drawing.Point(144, 27);
+            this.txtTaskTitle.Name = "txtTaskTitle";
+            this.txtTaskTitle.Size = new System.Drawing.Size(339, 23);
+            this.txtTaskTitle.TabIndex = 4;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(38, 154);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(39, 15);
+            this.label19.TabIndex = 3;
+            this.label19.Text = "Color:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(38, 87);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(70, 15);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Description:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(38, 59);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(38, 15);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "Place:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(38, 30);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(33, 15);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "Title:";
             // 
             // tpSettings
             // 
@@ -1045,6 +1368,7 @@
             // radScheduleWeek
             // 
             this.radScheduleWeek.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radScheduleWeek.Checked = true;
             this.radScheduleWeek.Image = ((System.Drawing.Image)(resources.GetObject("radScheduleWeek.Image")));
             this.radScheduleWeek.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.radScheduleWeek.Location = new System.Drawing.Point(277, 11);
@@ -1052,6 +1376,7 @@
             this.radScheduleWeek.Padding = new System.Windows.Forms.Padding(10);
             this.radScheduleWeek.Size = new System.Drawing.Size(99, 45);
             this.radScheduleWeek.TabIndex = 24;
+            this.radScheduleWeek.TabStop = true;
             this.radScheduleWeek.Text = "Week";
             this.radScheduleWeek.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radScheduleWeek.UseVisualStyleBackColor = true;
@@ -1248,25 +1573,6 @@
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
-            // listView1
-            // 
-            this.listView1.FullRowSelect = true;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.listView1.Location = new System.Drawing.Point(46, 32);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(591, 178);
-            this.listView1.SmallImageList = this.imageList1;
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.List;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(32, 32);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1300,6 +1606,11 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.tpEditTask.ResumeLayout(false);
+            this.tpEditTask.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTaskAddRemindTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTaskRepeatUnit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTaskColor)).EndInit();
             this.tpSettings.ResumeLayout(false);
             this.tpSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).EndInit();
@@ -1401,14 +1712,40 @@
         private System.Windows.Forms.RadioButton radScheduleWeek;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton sbtnFinishTask;
+        private System.Windows.Forms.ToolStripButton sbtnDeleteTask;
+        private System.Windows.Forms.ToolStripButton sbtnEditTask;
+        private System.Windows.Forms.ToolStripButton sbtnAddTask;
         private System.Windows.Forms.TabPage tpFunSettings;
         private System.Windows.Forms.Calendar.Calendar calSchedule;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.PictureBox picTaskColor;
+        private System.Windows.Forms.TextBox txtTaskDescription;
+        private System.Windows.Forms.TextBox txtTaskPlace;
+        private System.Windows.Forms.TextBox txtTaskTitle;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.DateTimePicker dtpTaskStartTime;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.DateTimePicker dtpTaskEndTime;
+        private System.Windows.Forms.NumericUpDown numTaskRepeatUnit;
+        private System.Windows.Forms.ComboBox cmbTaskRepeatType;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.CheckBox chkTaskRemindType_Email;
+        private System.Windows.Forms.CheckBox chkTaskRemindType_Sound;
+        private System.Windows.Forms.CheckBox chkTaskRemindType_Notification;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Button btnTAskAddRemindTime;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.NumericUpDown numTaskAddRemindTime;
+        private System.Windows.Forms.ListBox lstTaskRemindTime;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Panel panel1;
 
 
 

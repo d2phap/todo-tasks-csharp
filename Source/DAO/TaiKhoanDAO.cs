@@ -183,6 +183,10 @@ namespace DAO
 
                         }// END Duyet danh sach thoi gian nhac nho
 
+                        // <done>
+                        nn = (XmlElement)nTask.SelectNodes("done")[0];
+                        task.IsDone = bool.Parse(nn.InnerText);
+
                         //Them cong viec vao danh sach
                         tasks.Add(task);
 
