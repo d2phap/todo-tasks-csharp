@@ -146,9 +146,9 @@ namespace DAO
                             else if(item.InnerText.ToLower().CompareTo("msgbox") == 0)
                             {
                                 //Kiem tra chua ton tai thi moi them vao
-                                if (task.HinhThucNhacNho.IndexOf(LoaiHinhThucNhacNho.MessageBox) == -1)
+                                if (task.HinhThucNhacNho.IndexOf(LoaiHinhThucNhacNho.Notification) == -1)
                                 {
-                                    task.HinhThucNhacNho.Add(LoaiHinhThucNhacNho.MessageBox);
+                                    task.HinhThucNhacNho.Add(LoaiHinhThucNhacNho.Notification);
                                 }
                             }
                             else if (item.InnerText.ToLower().CompareTo("sound") == 0)

@@ -8,7 +8,7 @@ namespace DTO
 {
     public enum LoaiHinhThucNhacNho
     {
-        MessageBox,
+        Notification,
         Email,
         Sound
     }
