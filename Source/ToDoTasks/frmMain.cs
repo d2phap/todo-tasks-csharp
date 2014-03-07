@@ -652,12 +652,19 @@ namespace ToDoTasks
             tabs.SelectedTab = tpEditTask;
             tabsFun.SelectedTab = tpFunScheduleNewTask;
             cmbTaskRepeatType.SelectedIndex = 0;
+
+            ResetFormNewTask();
         }
 
         private void sbtnEditTask_Click(object sender, EventArgs e)
         {
-            tabs.SelectedTab = tpEditTask;
-            tabsFun.SelectedTab = tpFunScheduleEditTask;
+            if (calSchedule.GetSelectedItems().Count() > 0)
+            {
+                tabs.SelectedTab = tpEditTask;
+                tabsFun.SelectedTab = tpFunScheduleEditTask;
+
+                LoadTaskToEditForm(int.Parse(calSchedule.GetSelectedItems().ToList()[0].Tag.ToString()));
+            }
         }
 
         private void sbtnDeleteTask_Click(object sender, EventArgs e)
@@ -797,9 +804,67 @@ namespace ToDoTasks
         {
             tabs.SelectedTab = tpSchedule;
             tabsFun.SelectedTab = tpFunSchedule;
+            ResetFormNewTask();
         }
 
-        
+        private void ResetFormNewTask()
+        {
+            txtTaskTitle.Text = 
+                txtTaskPlace.Text = 
+                txtTaskDescription.Text = string.Empty;
+
+            picTaskColor.BackColor = Color.FromArgb(39, 189, 239);
+            dtpTaskStartTime.Value = 
+                dtpTaskEndTime.Value = DateTime.Now;
+
+            cmbTaskRepeatType.SelectedIndex = 0;
+            numTaskAddRemindTime.Value =
+                numTaskRepeatTimes.Value =
+                numTaskRepeatUnit.Value = 0;
+
+            chkTaskRemindType_Notification.Checked =
+                chkTaskRemindType_Sound.Checked = !
+                (chkTaskRemindType_Email.Checked = false);
+
+            lstTaskRemindTime.Items.Clear();
+        }
+
+        private void LoadTaskToEditForm(int index)
+        {
+            var cv = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec[index];
+
+            txtTaskTitle.Text = cv.Ten;
+            txtTaskPlace.Text = cv.DiaDiem;
+            txtTaskDescription.Text = cv.MieuTa;
+
+            picTaskColor.BackColor = cv.MauSacLich;
+            dtpTaskStartTime.Value = cv.ThoiGianDienRa.ThoiGianBatDau;
+            dtpTaskEndTime.Value = cv.ThoiGianDienRa.ThoiGianKetThuc;
+
+            cmbTaskRepeatType.SelectedIndex = (cv.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Repeated) ? 1 : 0;
+            numTaskAddRemindTime.Value = 0;
+            numTaskRepeatTimes.Value = cv.ThoiGianDienRa.SoLanLap;
+            numTaskRepeatUnit.Value = cv.ThoiGianDienRa.DonViLap;
+
+            if (cv.HinhThucNhacNho.IndexOf(DTO.LoaiHinhThucNhacNho.Notification) != -1)
+            {
+                chkTaskRemindType_Notification.Checked = true;
+            }
+            if (cv.HinhThucNhacNho.IndexOf(DTO.LoaiHinhThucNhacNho.Sound) != -1)
+            {
+                chkTaskRemindType_Sound.Checked = true;
+            }
+            if (cv.HinhThucNhacNho.IndexOf(DTO.LoaiHinhThucNhacNho.Email) != -1)
+            {
+                chkTaskRemindType_Email.Checked = true;
+            }
+
+            lstTaskRemindTime.Items.Clear();
+            foreach(var v in cv.DanhSachThoiGianNhacNho)
+            {
+                lstTaskRemindTime.Items.Add(v);
+            }
+        }
 
         
 
