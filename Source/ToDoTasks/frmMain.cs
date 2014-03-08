@@ -132,6 +132,7 @@ namespace ToDoTasks
         {
             if (HeThong.TaiKhoan.LichLamViec.Count > 0)
             {
+                calSchedule.Items.Clear();
                 int index = 0;
                 foreach (var item in HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec)
                 {
@@ -727,8 +728,8 @@ namespace ToDoTasks
                 cv.ThoiGianDienRa.Loai = 
                     (cmbTaskRepeatType.SelectedIndex == 1) ? DTO.LoaiThoiGianDienRa.Repeated : 
                     DTO.LoaiThoiGianDienRa.Unique;
-                cv.ThoiGianDienRa.SoLanLap = (int)numTaskRepeatUnit.Value;
-                cv.ThoiGianDienRa.DonViLap = (int)numTaskRepeatTimes.Value;
+                cv.ThoiGianDienRa.SoLanLap = (int)numTaskRepeatTimes.Value;
+                cv.ThoiGianDienRa.DonViLap = (int)numTaskRepeatUnit.Value;
                 cv.HinhThucNhacNho = new List<DTO.LoaiHinhThucNhacNho>();
                 if(chkTaskRemindType_Email.Checked)
                 {
@@ -813,7 +814,9 @@ namespace ToDoTasks
                 txtTaskPlace.Text = 
                 txtTaskDescription.Text = string.Empty;
 
+            txtIndexTaskEdit.Text = "";
             picTaskColor.BackColor = Color.FromArgb(39, 189, 239);
+
             dtpTaskStartTime.Value = 
                 dtpTaskEndTime.Value = DateTime.Now;
 
@@ -836,8 +839,9 @@ namespace ToDoTasks
             txtTaskTitle.Text = cv.Ten;
             txtTaskPlace.Text = cv.DiaDiem;
             txtTaskDescription.Text = cv.MieuTa;
-
-            picTaskColor.BackColor = cv.MauSacLich;
+            txtIndexTaskEdit.Text = index.ToString();
+            
+            picTaskColor.BackColor = Color.FromArgb(cv.MauSacLich.R, cv.MauSacLich.G, cv.MauSacLich.B);
             dtpTaskStartTime.Value = cv.ThoiGianDienRa.ThoiGianBatDau;
             dtpTaskEndTime.Value = cv.ThoiGianDienRa.ThoiGianKetThuc;
 
@@ -866,6 +870,90 @@ namespace ToDoTasks
             }
         }
 
+        private void btnCancelEditTask_Click(object sender, EventArgs e)
+        {
+            tabs.SelectedTab = tpSchedule;
+            tabsFun.SelectedTab = tpFunSchedule;
+            ResetFormNewTask();
+        }
+
+        private void btnOKEditTask_Click(object sender, EventArgs e)
+        {
+            bool isValid = true;
+            txtTaskTitle.Text = txtTaskTitle.Text.Trim();
+            err.Clear();
+
+            if(txtTaskTitle.Text.Length==0)
+            {
+                isValid = false;
+                err.SetError(txtTaskTitle, "Task title must not be empty.");
+            }
+
+            if (cmbTaskRepeatType.SelectedIndex == 0)
+            {
+                if ((dtpTaskStartTime.Value - DateTime.Now).TotalMinutes <= 0)
+                {
+                    isValid = false;
+                    err.SetError(dtpTaskStartTime, "Start time must be greater than the current time.");
+                }
+                if ((dtpTaskEndTime.Value - dtpTaskStartTime.Value).TotalMinutes <= 0)
+                {
+                    isValid = false;
+                    err.SetError(dtpTaskEndTime, "End time must be greater than Start time.");
+                }
+            }
+
+            if (isValid)
+            {
+
+                int maCV = int.Parse(txtIndexTaskEdit.Text);
+
+                DTO.CongViecDTO cv = new DTO.CongViecDTO();
+
+                cv.Ten = txtTaskTitle.Text;
+                cv.DiaDiem = txtTaskPlace.Text.Trim();
+                cv.MieuTa = txtTaskDescription.Text.Trim();
+                cv.MauSacLich = picTaskColor.BackColor;
+                cv.ThoiGianDienRa.ThoiGianBatDau = dtpTaskStartTime.Value;
+                cv.ThoiGianDienRa.ThoiGianKetThuc = dtpTaskEndTime.Value;
+                cv.ThoiGianDienRa.Loai =
+                    (cmbTaskRepeatType.SelectedIndex == 1) ? DTO.LoaiThoiGianDienRa.Repeated :
+                    DTO.LoaiThoiGianDienRa.Unique;
+                cv.ThoiGianDienRa.SoLanLap = (int)numTaskRepeatTimes.Value;
+                cv.ThoiGianDienRa.DonViLap = (int)numTaskRepeatUnit.Value;
+                cv.HinhThucNhacNho = new List<DTO.LoaiHinhThucNhacNho>();
+                if (chkTaskRemindType_Email.Checked)
+                {
+                    cv.HinhThucNhacNho.Add(DTO.LoaiHinhThucNhacNho.Email);
+                }
+                if (chkTaskRemindType_Sound.Checked)
+                {
+                    cv.HinhThucNhacNho.Add(DTO.LoaiHinhThucNhacNho.Sound);
+                }
+                if (chkTaskRemindType_Notification.Checked)
+                {
+                    cv.HinhThucNhacNho.Add(DTO.LoaiHinhThucNhacNho.Notification);
+                }
+                cv.DanhSachThoiGianNhacNho = new List<int>();
+                for (int i = 0; i < lstTaskRemindTime.Items.Count; i++)
+                {
+                    cv.DanhSachThoiGianNhacNho.Add((int)lstTaskRemindTime.Items[i]);
+                }
+
+                //Update
+                HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec[maCV] = cv;
+                LoadTasksOnCalendar(calSchedule); //refresh
+                btnCancelEditTask.PerformClick(); //close new task form
+            }
+        }
+
+        private void calSchedule_ItemDoubleClick(object sender, CalendarItemEventArgs e)
+        {
+            tabs.SelectedTab = tpEditTask;
+            tabsFun.SelectedTab = tpFunScheduleEditTask;
+
+            LoadTaskToEditForm(int.Parse(e.Item.Tag.ToString()));
+        }
         
 
 
