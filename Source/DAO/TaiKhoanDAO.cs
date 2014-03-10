@@ -143,7 +143,7 @@ namespace DAO
                                     task.HinhThucNhacNho.Add(LoaiHinhThucNhacNho.Email);
                                 }
                             }
-                            else if(item.InnerText.ToLower().CompareTo("msgbox") == 0)
+                            else if(item.InnerText.ToLower().CompareTo("notìication") == 0)
                             {
                                 //Kiem tra chua ton tai thi moi them vao
                                 if (task.HinhThucNhacNho.IndexOf(LoaiHinhThucNhacNho.Notification) == -1)
@@ -210,6 +210,132 @@ namespace DAO
 
             return users;
         }
+
+
+        /// <summary>
+        /// Lưu dữ liệu người dùng xuống file xml
+        /// </summary>
+        public void SaveUsers()
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlElement root = doc.CreateElement("to_do_tasks");//<to_do_tasks>
+
+            XmlElement nDesc = doc.CreateElement("description");//<description>
+            nDesc.InnerText = "Lịch làm việc của người dùng";
+            root.AppendChild(nDesc);
+
+            XmlElement nNode = doc.CreateElement("user");//<user>
+            XmlElement n = doc.CreateElement("email");// <email>
+            n.InnerText = HeThong.TaiKhoan.Email;
+            nNode.AppendChild(n);
+
+            n = doc.CreateElement("name");// <name>
+            n.InnerText=HeThong.TaiKhoan.HoTen;
+            nNode.AppendChild(n);
+
+            n = doc.CreateElement("type");// <type>
+            n.InnerText = HeThong.TaiKhoan.LoaiTaiKhoan.ToString();
+            nNode.AppendChild(n);
+
+            XmlElement nSchedules = doc.CreateElement("schedules");// <schedules>            
+            //duyet danh sach lich lam viec
+            foreach (var sc in HeThong.TaiKhoan.LichLamViec)
+            {
+                nSchedules.SetAttribute("lastsync", sc.ThoiGianDongBoMoiNhat.ToString("MM/dd/yyyy hh:mm:ss"));
+
+                XmlElement nSchedule_Item = doc.CreateElement("item"); // <item>
+                nSchedule_Item.SetAttribute("name", sc.Ten);
+
+                foreach(var cv in sc.DanhSachCongViec)
+                {
+                    XmlElement nTask = doc.CreateElement("task");// <task>
+                    n = doc.CreateElement("title"); // <title>
+                    n.InnerText = cv.Ten;
+                    nTask.AppendChild(n);
+
+                    n = doc.CreateElement("place"); // <place>
+                    n.InnerText = cv.DiaDiem;
+                    nTask.AppendChild(n);
+
+                    n = doc.CreateElement("description"); // <description>
+                    n.InnerText = cv.MieuTa;
+                    nTask.AppendChild(n);
+
+                    n = doc.CreateElement("color"); // <color>
+                    n.InnerText = cv.MauSacLich.ToArgb().ToString();
+                    nTask.AppendChild(n);
+
+                    n = doc.CreateElement("time"); // <time>
+                    {
+                        XmlElement nTime_child = doc.CreateElement("type");// <type>
+                        nTime_child.InnerText = cv.ThoiGianDienRa.Loai.ToString();
+                        n.AppendChild(nTime_child);
+
+                        nTime_child = doc.CreateElement("start");// <start>
+                        nTime_child.InnerText = cv.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy hh:mm:ss");
+                        n.AppendChild(nTime_child);
+
+                        nTime_child = doc.CreateElement("end");// <end>
+                        nTime_child.InnerText = cv.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy hh:mm:ss");
+                        n.AppendChild(nTime_child);
+
+                        nTime_child = doc.CreateElement("repeat");// <repeat>
+                        nTime_child.InnerText = cv.ThoiGianDienRa.SoLanLap.ToString();
+                        n.AppendChild(nTime_child);
+
+                        nTime_child = doc.CreateElement("repeated_unit");// <repeated_unit>
+                        nTime_child.InnerText = cv.ThoiGianDienRa.DonViLap.ToString();
+                        n.AppendChild(nTime_child);
+                    }
+                    nTask.AppendChild(n);// </time>
+
+                    n = doc.CreateElement("remind"); // <remind>
+                    {
+                        var nRemind_type = doc.CreateElement("type");// <type>
+                        {
+                            foreach (LoaiHinhThucNhacNho _item in cv.HinhThucNhacNho)
+                            {
+                                var nn = doc.CreateElement("item"); // <item>
+                                nn.InnerText = _item.ToString();
+                                nRemind_type.AppendChild(nn);// </item>
+                            }
+                        }
+                        n.AppendChild(nRemind_type);// </type>
+
+                        var nRemind_time = doc.CreateElement("time");// <time>
+                        {
+                            foreach (var _item in cv.DanhSachThoiGianNhacNho)
+                            {
+                                var nn = doc.CreateElement("item"); // <item>
+                                nn.InnerText = _item.ToString();
+                                nRemind_time.AppendChild(nn);// </item>
+                            }
+                        }
+                        n.AppendChild(nRemind_time);// </time>
+                    }
+                    nTask.AppendChild(n);// </remind>
+
+                    n = doc.CreateElement("done"); // <done>
+                    n.InnerText = cv.IsDone.ToString();
+                    nTask.AppendChild(n);
+
+                    nSchedule_Item.AppendChild(nTask); // </task>
+                }
+
+                nSchedules.AppendChild(nSchedule_Item); // </item>
+            }
+            nNode.AppendChild(nSchedules);// </schedules>
+
+
+            root.AppendChild(nNode);
+            doc.AppendChild(root);
+
+            doc.Save(this._xmlPath); //save file
+        }
+
+
+
+
 
     }
 }

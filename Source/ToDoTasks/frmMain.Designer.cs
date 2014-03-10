@@ -33,6 +33,7 @@
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Today", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Tomorrow", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("The day after tomorrow", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Upcoming...", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange1 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange2 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange3 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
@@ -92,7 +93,6 @@
             this.tabs = new ToDoTasks.TabPagesControl();
             this.tpStatus = new System.Windows.Forms.TabPage();
             this.lvStatus = new System.Windows.Forms.ListView();
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -918,7 +918,6 @@
             // 
             this.lvStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvStatus.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader6,
             this.columnHeader7,
             this.columnHeader8,
             this.columnHeader9,
@@ -931,22 +930,21 @@
             listViewGroup2.Name = "Tomorrow";
             listViewGroup3.Header = "The day after tomorrow";
             listViewGroup3.Name = "The day after tomorrow";
+            listViewGroup4.Header = "Upcoming...";
+            listViewGroup4.Name = "Upcoming...";
             this.lvStatus.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
             listViewGroup1,
             listViewGroup2,
-            listViewGroup3});
+            listViewGroup3,
+            listViewGroup4});
             this.lvStatus.Location = new System.Drawing.Point(3, 3);
             this.lvStatus.MultiSelect = false;
             this.lvStatus.Name = "lvStatus";
+            this.lvStatus.ShowItemToolTips = true;
             this.lvStatus.Size = new System.Drawing.Size(807, 254);
             this.lvStatus.TabIndex = 13;
             this.lvStatus.UseCompatibleStateImageBehavior = false;
             this.lvStatus.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "No.";
-            this.columnHeader6.Width = 50;
             // 
             // columnHeader7
             // 
@@ -2239,7 +2237,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ListView lvStatus;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;

@@ -120,6 +120,11 @@ namespace DAO
             doc.AppendChild(root);
 
             doc.Save(this._xmlPath); //save file
+
+            //Save user data
+            TaiKhoanDAO tk = new TaiKhoanDAO(HeThong.UsersFile);
+            tk.SaveUsers();
+
         }
 
     }

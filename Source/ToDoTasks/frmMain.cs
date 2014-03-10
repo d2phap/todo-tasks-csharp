@@ -207,7 +207,7 @@ namespace ToDoTasks
                             var g = lvStatus.Groups[0];
                             li = new ListViewItem
                             {
-                                Text = (i+1).ToString(),
+                                Text = item.Ten,
                                 Tag = i,
                                 Group = g
                             };
@@ -217,7 +217,7 @@ namespace ToDoTasks
                             var g = lvStatus.Groups[1];
                             li = new ListViewItem
                             {
-                                Text = (i + 1).ToString(),
+                                Text = item.Ten,
                                 Tag = i,
                                 Group = g
                             };
@@ -227,14 +227,23 @@ namespace ToDoTasks
                             var g = lvStatus.Groups[2];
                             li = new ListViewItem
                             {
-                                Text = (i + 1).ToString(),
+                                Text = item.Ten,
+                                Tag = i,
+                                Group = g
+                            };
+                        }
+                        else
+                        {
+                            var g = lvStatus.Groups[3];
+                            li = new ListViewItem
+                            {
+                                Text = item.Ten,
                                 Tag = i,
                                 Group = g
                             };
                         }
 
 
-                        li.SubItems.Add(item.Ten);
                         li.SubItems.Add(item.ThoiGianDienRa.Loai.ToString());
                         li.SubItems.Add(item.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy HH:mm"));
                         li.SubItems.Add(item.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy HH:mm"));
@@ -676,7 +685,7 @@ namespace ToDoTasks
         }
         #endregion
 
-
+        #region Tab Schedule
         private void radScheduleMonth_CheckedChanged(object sender, EventArgs e)
         {
             DateTime firstDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -708,41 +717,6 @@ namespace ToDoTasks
             tabs.SelectedTab = tpSchedule_List;
             tabsFun.SelectedTab = tpFunSchedule;
         }
-
-        //private void button1_Click_1(object sender, EventArgs e)
-        //{
-        //    OpenFileDialog o = new OpenFileDialog();
-        //    o.InitialDirectory = "c:\\";
-        //    if (o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        //    {
-        //        using (var client = new HttpClient())
-        //        {
-        //            client.BaseAddress = new Uri(_API);
-        //            using (var content = new MultipartFormDataContent())
-        //            {
-        //                var fileContent = new ByteArrayContent(System.IO.File.ReadAllBytes(o.FileName));
-        //                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-        //                {
-        //                    Name = "d2phap@gmail.com",
-        //                    FileName = Path.GetFileName(o.FileName)
-        //                };
-        //                content.Add(fileContent);
-
-        //                var requestUri = "api/account/sync";
-        //                var result = client.PostAsync(requestUri, content).Result;
-
-        //                if (result.IsSuccessStatusCode)
-        //                {
-        //                    MessageBox.Show(result.Headers.GetValues("Filename").ToList()[0]);
-        //                }
-        //                else
-        //                {
-        //                    MessageBox.Show(result.StatusCode.ToString());
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
 
         private void calSchedule_ItemClick(object sender, CalendarItemEventArgs e)
         {
@@ -892,7 +866,7 @@ namespace ToDoTasks
                 cv.DanhSachThoiGianNhacNho = new List<int>();
                 for (int i = 0; i < lstTaskRemindTime.Items.Count; i++)
                 {
-                    cv.DanhSachThoiGianNhacNho.Add((int)lstTaskRemindTime.Items[i]);
+                    cv.DanhSachThoiGianNhacNho.Add(int.Parse(lstTaskRemindTime.Items[i].ToString()));
                 }
                 cv.IsDone = false;
 
@@ -1183,6 +1157,8 @@ namespace ToDoTasks
                 LoadTasksOnList();
             }
         }
+        #endregion
+
 
         private void lvScheduleList_DoubleClick(object sender, EventArgs e)
         {
@@ -1191,15 +1167,6 @@ namespace ToDoTasks
                 btnScheduleList_Edit_Click(null, null);
             }
         }
-
-        
-        
-
-
-
-
-
-
 
 
 

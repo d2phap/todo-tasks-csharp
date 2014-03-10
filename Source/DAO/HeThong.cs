@@ -94,6 +94,10 @@ namespace DAO
                 HeThong.TaiKhoan = new TaiKhoanDTO();
             }
 
+            //HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec = HeThong.TaiKhoan.LichLamViec[0]
+            //    .DanhSachCongViec.OrderBy(l => l.ThoiGianDienRa.ThoiGianBatDau)
+            //    .ToList();
+
         }
 
         /// <summary>
@@ -110,7 +114,6 @@ namespace DAO
 
             CaiDatHeThongDAO cd = new CaiDatHeThongDAO(ConfigFile);
             cd.SaveConfiguration(HeThong.CaiDat);
-
         }
 
         /// <summary>
