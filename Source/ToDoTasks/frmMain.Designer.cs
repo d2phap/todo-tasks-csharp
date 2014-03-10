@@ -30,7 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Mùa xuân sang có hoa anh đào");
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Today", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Tomorrow", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("The day after tomorrow", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange1 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange2 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange3 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
@@ -89,7 +91,12 @@
             this.btnLogOut = new System.Windows.Forms.Button();
             this.tabs = new ToDoTasks.TabPagesControl();
             this.tpStatus = new System.Windows.Forms.TabPage();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lvStatus = new System.Windows.Forms.ListView();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpSchedule = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -898,7 +905,7 @@
             // 
             // tpStatus
             // 
-            this.tpStatus.Controls.Add(this.listView1);
+            this.tpStatus.Controls.Add(this.lvStatus);
             this.tpStatus.Location = new System.Drawing.Point(4, 24);
             this.tpStatus.Name = "tpStatus";
             this.tpStatus.Padding = new System.Windows.Forms.Padding(3);
@@ -907,18 +914,59 @@
             this.tpStatus.Text = "Status";
             this.tpStatus.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // lvStatus
             // 
-            this.listView1.FullRowSelect = true;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.listView1.Location = new System.Drawing.Point(46, 32);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(591, 178);
-            this.listView1.SmallImageList = this.imageList1;
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.List;
+            this.lvStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvStatus.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader9,
+            this.columnHeader10});
+            this.lvStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvStatus.FullRowSelect = true;
+            listViewGroup1.Header = "Today";
+            listViewGroup1.Name = "Today";
+            listViewGroup2.Header = "Tomorrow";
+            listViewGroup2.Name = "Tomorrow";
+            listViewGroup3.Header = "The day after tomorrow";
+            listViewGroup3.Name = "The day after tomorrow";
+            this.lvStatus.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup1,
+            listViewGroup2,
+            listViewGroup3});
+            this.lvStatus.Location = new System.Drawing.Point(3, 3);
+            this.lvStatus.MultiSelect = false;
+            this.lvStatus.Name = "lvStatus";
+            this.lvStatus.Size = new System.Drawing.Size(807, 254);
+            this.lvStatus.TabIndex = 13;
+            this.lvStatus.UseCompatibleStateImageBehavior = false;
+            this.lvStatus.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "No.";
+            this.columnHeader6.Width = 50;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Title";
+            this.columnHeader7.Width = 340;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Type";
+            this.columnHeader8.Width = 100;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Start time";
+            this.columnHeader9.Width = 150;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "End time";
+            this.columnHeader10.Width = 150;
             // 
             // tpSchedule
             // 
@@ -2131,7 +2179,6 @@
         private System.Windows.Forms.ToolStripButton sbtnAddTask;
         private System.Windows.Forms.TabPage tpFunSettings;
         private System.Windows.Forms.Calendar.Calendar calSchedule;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox picTaskColor;
         private System.Windows.Forms.TextBox txtTaskDescription;
@@ -2191,6 +2238,12 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ListView lvStatus;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
 
 
 

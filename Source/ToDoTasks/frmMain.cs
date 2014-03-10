@@ -47,11 +47,22 @@ namespace ToDoTasks
                 case "rabTabStatus":
                     tabs.SelectedTab = tpStatus;
                     tabsFun.SelectedTab = tpFunStatus;
+                    LoadTasksOnListStatus();
                     break;
 
                 case "radTabSchedule":
-                    tabs.SelectedTab = tpSchedule;
-                    tabsFun.SelectedTab = tpFunSchedule;
+                    if (radScheduleList.Checked)
+                    {
+                        radScheduleList_CheckedChanged(null, null);
+                    }
+                    else if (radScheduleWeek.Checked)
+                    {
+                        radScheduleWeek_CheckedChanged(null, null);
+                    }
+                    else
+                    {
+                        radScheduleMonth_CheckedChanged(null, null);
+                    }
 
                     break;
 
@@ -129,6 +140,9 @@ namespace ToDoTasks
             //Load cong viec
             LoadTasksOnCalendar();
 
+            //Load Tasks On ListStatus
+            LoadTasksOnListStatus();
+
             lblVersion.Text = "Version:    " + Application.ProductVersion;
         }
 
@@ -158,6 +172,75 @@ namespace ToDoTasks
                         li.ToolTipText = item.MieuTa;
 
                         li.Tag = i;
+                    }
+
+                    i++;
+                }
+            }
+        }
+
+        private void LoadTasksOnListStatus()
+        {
+            if (HeThong.TaiKhoan.LichLamViec.Count > 0)
+            {
+                lvStatus.Items.Clear();
+
+                var list = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec
+                    .Where(l=>l.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique)
+                    .OrderBy(l => l.ThoiGianDienRa.ThoiGianBatDau)
+                    .ToList();
+                int i = 0;
+
+                foreach (var item in list)
+                {
+                    if (item.IsDone ||
+                        ((item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalMinutes < 0 &&
+                        item.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique))
+                    { }
+                    else
+                    {
+                        double day = (item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalDays;
+                        ListViewItem li = new ListViewItem();
+
+                        if (0 <= day && day <= 1)
+                        {
+                            var g = lvStatus.Groups[0];
+                            li = new ListViewItem
+                            {
+                                Text = (i+1).ToString(),
+                                Tag = i,
+                                Group = g
+                            };
+                        }
+                        else if (1 < day && day <= 2)
+                        {
+                            var g = lvStatus.Groups[1];
+                            li = new ListViewItem
+                            {
+                                Text = (i + 1).ToString(),
+                                Tag = i,
+                                Group = g
+                            };
+                        }
+                        else if (2 < day && day <= 3)
+                        {
+                            var g = lvStatus.Groups[2];
+                            li = new ListViewItem
+                            {
+                                Text = (i + 1).ToString(),
+                                Tag = i,
+                                Group = g
+                            };
+                        }
+
+
+                        li.SubItems.Add(item.Ten);
+                        li.SubItems.Add(item.ThoiGianDienRa.Loai.ToString());
+                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy HH:mm"));
+                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy HH:mm"));
+                        li.ToolTipText = item.MieuTa;
+
+                        lvStatus.Items.Add(li);
                     }
 
                     i++;
@@ -203,6 +286,7 @@ namespace ToDoTasks
                             {
                                 ci.ApplyColor(Color.White);
                             }
+
                             ci.Tag = index; //Save task index
 
                             if (calSchedule.ViewIntersects(ci))
@@ -211,20 +295,29 @@ namespace ToDoTasks
                             }
                         }
                     }
-                    else
+                    else //DTO.LoaiThoiGianDienRa.Unique
                     {
                         CalendarItem ci = new CalendarItem(calSchedule);
                         ci.Text = item.Ten + "\n\n" + item.MieuTa;
                         ci.StartDate = item.ThoiGianDienRa.ThoiGianBatDau;
                         ci.EndDate = item.ThoiGianDienRa.ThoiGianKetThuc;
+
                         if (!item.IsDone)
                         {
-                            ci.ApplyColor(item.MauSacLich);
+                            if ((item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalDays >= 0)
+                            {
+                                ci.ApplyColor(item.MauSacLich);
+                            }
+                            else
+                            {
+                                ci.ApplyColor(Color.White);
+                            }
                         }
                         else
                         {
                             ci.ApplyColor(Color.White);
                         }
+
                         ci.Tag = index; //Save task index
 
                         if (calSchedule.ViewIntersects(ci))
@@ -660,7 +753,10 @@ namespace ToDoTasks
                 var sysItem = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec[
                     int.Parse(item.Tag.ToString())];
 
-                if (sysItem.IsDone)
+                if (sysItem.IsDone ||
+                    (sysItem.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique &&
+                        (DateTime.Now - sysItem.ThoiGianDienRa.ThoiGianKetThuc).TotalDays > 0)
+                    )
                 {
                     sbtnFinishTask.Visible = false;
                     sbtnAddTask.Visible = true;
@@ -1020,18 +1116,29 @@ namespace ToDoTasks
 
         private void calSchedule_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
-            tabs.SelectedTab = tpEditTask;
-            tabsFun.SelectedTab = tpFunScheduleEditTask;
-
             int index = 0;
 
-            if (e.Item.Tag == null || int.TryParse(e.Item.Tag.ToString(), out index))
+            if (e.Item.Tag == null ||
+                !int.TryParse(e.Item.Tag.ToString(), out index))
             {
-                sbtnAddTask_Click(null, null);
+                //nothing 
             }
             else
             {
-                LoadTaskToEditForm(index);
+                var sysItem = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec[index];
+                if (sysItem.IsDone ||
+                    (sysItem.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique &&
+                        (DateTime.Now - sysItem.ThoiGianDienRa.ThoiGianKetThuc).TotalDays > 0)
+                    )
+                {
+                    //nothing 
+                }
+                else
+                {
+                    tabs.SelectedTab = tpEditTask;
+                    tabsFun.SelectedTab = tpFunScheduleEditTask;
+                    LoadTaskToEditForm(index);
+                }
             }
             
         }
