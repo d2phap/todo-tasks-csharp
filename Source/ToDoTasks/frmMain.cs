@@ -119,17 +119,64 @@ namespace ToDoTasks
                 this.ShowInTaskbar = false;
             }
 
-            radScheduleWeek_CheckedChanged(null, null);
+            //Load cong viec
+            DateTime today = DateTime.Today;
+            DateTime firstDay = today.AddDays(1 - today.DayOfWeek.GetHashCode());
+            DateTime lastDay = today.AddDays(7 - today.DayOfWeek.GetHashCode());
+
+            calSchedule.SetViewRange(firstDay, lastDay);
 
             //Load cong viec
-            LoadTasksOnCalendar(calSchedule);
-            radScheduleWeek_CheckedChanged(null, null);
+            LoadTasksOnCalendar();
 
             lblVersion.Text = "Version:    " + Application.ProductVersion;
         }
 
-        private void LoadTasksOnCalendar(System.Windows.Forms.Calendar.Calendar cal)
+        private void LoadTasksOnList()
         {
+            if (HeThong.TaiKhoan.LichLamViec.Count > 0)
+            {
+                lvScheduleList.Items.Clear();
+                var list = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec
+                    .OrderBy(l => l.ThoiGianDienRa.ThoiGianBatDau)
+                    .ToList();
+                int i = 0;
+
+                foreach(var item in list)
+                {
+                    if(item.IsDone ||
+                        ((item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalMinutes < 0 &&
+                        item.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique))
+                    { }
+                    else
+                    {
+                        ListViewItem li = lvScheduleList.Items.Add((i + 1).ToString());
+                        li.SubItems.Add(item.Ten);
+                        li.SubItems.Add(item.ThoiGianDienRa.Loai.ToString());
+                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy HH:mm"));
+                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy HH:mm"));
+                        li.ToolTipText = item.MieuTa;
+
+                        li.Tag = i;
+                    }
+
+                    i++;
+                }
+            }
+        }
+
+        private void LoadTasksOnCalendar()
+        {
+            calSchedule.AllowNew = false;
+            calSchedule.AllowItemResize = false;
+            calSchedule.AllowItemEdit = false;
+
+            if(radScheduleList.Checked)
+            {
+                LoadTasksOnList();
+                return;
+            }
+            
             if (HeThong.TaiKhoan.LichLamViec.Count > 0)
             {
                 calSchedule.Items.Clear();
@@ -140,7 +187,7 @@ namespace ToDoTasks
                     {
                         for (int i = 0; i < item.ThoiGianDienRa.SoLanLap; i++)
                         {
-                            CalendarItem ci = new CalendarItem(cal);
+                            CalendarItem ci = new CalendarItem(calSchedule);
                             ci.Text = item.Ten + "\n\n" + item.MieuTa;
 
                             int songay = i * item.ThoiGianDienRa.DonViLap;
@@ -166,7 +213,7 @@ namespace ToDoTasks
                     }
                     else
                     {
-                        CalendarItem ci = new CalendarItem(cal);
+                        CalendarItem ci = new CalendarItem(calSchedule);
                         ci.Text = item.Ten + "\n\n" + item.MieuTa;
                         ci.StartDate = item.ThoiGianDienRa.ThoiGianBatDau;
                         ci.EndDate = item.ThoiGianDienRa.ThoiGianKetThuc;
@@ -543,7 +590,9 @@ namespace ToDoTasks
             calSchedule.SetViewRange(firstDay, firstDay.AddMonths(1).AddDays(-1));
 
             //Load cong viec
-            LoadTasksOnCalendar(calSchedule);
+            LoadTasksOnCalendar();
+            tabs.SelectedTab = tpSchedule;
+            tabsFun.SelectedTab = tpFunSchedule;
         }
 
         private void radScheduleWeek_CheckedChanged(object sender, EventArgs e)
@@ -555,7 +604,16 @@ namespace ToDoTasks
             calSchedule.SetViewRange(firstDay, lastDay);
 
             //Load cong viec
-            LoadTasksOnCalendar(calSchedule);
+            LoadTasksOnCalendar();
+            tabs.SelectedTab = tpSchedule;
+            tabsFun.SelectedTab = tpFunSchedule;
+        }
+
+        private void radScheduleList_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadTasksOnCalendar();
+            tabs.SelectedTab = tpSchedule_List;
+            tabsFun.SelectedTab = tpFunSchedule;
         }
 
         //private void button1_Click_1(object sender, EventArgs e)
@@ -641,10 +699,6 @@ namespace ToDoTasks
                 {
                     radScheduleMonth_CheckedChanged(null, null);
                 }
-                else
-                {
-
-                }
             }
         }
 
@@ -686,10 +740,6 @@ namespace ToDoTasks
                 else if (radScheduleMonth.Checked)
                 {
                     radScheduleMonth_CheckedChanged(null, null);
-                }
-                else
-                {
-
                 }
             }
         }
@@ -752,7 +802,7 @@ namespace ToDoTasks
 
                 //add new task
                 HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec.Add(cv);
-                LoadTasksOnCalendar(calSchedule); //refresh
+                LoadTasksOnCalendar(); //refresh
                 btnCancelAddNewTask.PerformClick(); //close new task form
             }
         }
@@ -803,8 +853,18 @@ namespace ToDoTasks
 
         private void btnCancelAddNewTask_Click(object sender, EventArgs e)
         {
-            tabs.SelectedTab = tpSchedule;
-            tabsFun.SelectedTab = tpFunSchedule;
+            if (radScheduleList.Checked)
+            {
+                radScheduleList_CheckedChanged(null, null);
+            }
+            else if (radScheduleWeek.Checked)
+            {
+                radScheduleWeek_CheckedChanged(null, null);
+            }
+            else
+            {
+                radScheduleMonth_CheckedChanged(null, null);
+            }
             ResetFormNewTask();
         }
 
@@ -872,8 +932,19 @@ namespace ToDoTasks
 
         private void btnCancelEditTask_Click(object sender, EventArgs e)
         {
-            tabs.SelectedTab = tpSchedule;
-            tabsFun.SelectedTab = tpFunSchedule;
+            if(radScheduleList.Checked)
+            {
+                radScheduleList_CheckedChanged(null, null);
+            }
+            else if(radScheduleWeek.Checked)
+            {
+                radScheduleWeek_CheckedChanged(null, null);
+            }
+            else
+            {
+                radScheduleMonth_CheckedChanged(null, null);
+            }
+
             ResetFormNewTask();
         }
 
@@ -942,7 +1013,7 @@ namespace ToDoTasks
 
                 //Update
                 HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec[maCV] = cv;
-                LoadTasksOnCalendar(calSchedule); //refresh
+                LoadTasksOnCalendar(); //refresh
                 btnCancelEditTask.PerformClick(); //close new task form
             }
         }
@@ -952,8 +1023,69 @@ namespace ToDoTasks
             tabs.SelectedTab = tpEditTask;
             tabsFun.SelectedTab = tpFunScheduleEditTask;
 
-            LoadTaskToEditForm(int.Parse(e.Item.Tag.ToString()));
+            int index = 0;
+
+            if (e.Item.Tag == null || int.TryParse(e.Item.Tag.ToString(), out index))
+            {
+                sbtnAddTask_Click(null, null);
+            }
+            else
+            {
+                LoadTaskToEditForm(index);
+            }
+            
         }
+
+        private void btnScheduleList_Finish_Click(object sender, EventArgs e)
+        {
+            if (lvScheduleList.SelectedIndices.Count > 0)
+            {
+                var sysItem = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec[
+                    int.Parse(lvScheduleList.SelectedItems[0].Tag.ToString())];
+
+                sysItem.MauSacLich = Color.White;
+                sysItem.IsDone = true;
+
+                LoadTasksOnList();
+            }
+        }
+
+        private void btnScheduleList_Add_Click(object sender, EventArgs e)
+        {
+            sbtnAddTask_Click(null, null);
+        }
+
+        private void btnScheduleList_Edit_Click(object sender, EventArgs e)
+        {
+            if (lvScheduleList.SelectedIndices.Count > 0)
+            {
+                tabs.SelectedTab = tpEditTask;
+                tabsFun.SelectedTab = tpFunScheduleEditTask;
+
+                LoadTaskToEditForm(int.Parse(lvScheduleList.SelectedItems[0].Tag.ToString()));
+            }
+        }
+
+        private void btnScheduleList_Delete_Click(object sender, EventArgs e)
+        {
+            if (lvScheduleList.SelectedIndices.Count > 0)
+            {
+                HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec.RemoveAt(
+                    int.Parse(lvScheduleList.SelectedItems[0].Tag.ToString()));
+
+                LoadTasksOnList();
+            }
+        }
+
+        private void lvScheduleList_DoubleClick(object sender, EventArgs e)
+        {
+            if (lvScheduleList.SelectedItems.Count > 0)
+            {
+                btnScheduleList_Edit_Click(null, null);
+            }
+        }
+
+        
         
 
 

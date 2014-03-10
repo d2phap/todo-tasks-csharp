@@ -98,6 +98,18 @@
             this.sbtnEditTask = new System.Windows.Forms.ToolStripButton();
             this.sbtnAddTask = new System.Windows.Forms.ToolStripButton();
             this.calSchedule = new System.Windows.Forms.Calendar.Calendar();
+            this.tpSchedule_List = new System.Windows.Forms.TabPage();
+            this.lvScheduleList = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.btnScheduleList_Finish = new System.Windows.Forms.ToolStripButton();
+            this.btnScheduleList_Delete = new System.Windows.Forms.ToolStripButton();
+            this.btnScheduleList_Edit = new System.Windows.Forms.ToolStripButton();
+            this.btnScheduleList_Add = new System.Windows.Forms.ToolStripButton();
             this.tpEditTask = new System.Windows.Forms.TabPage();
             this.txtIndexTaskEdit = new System.Windows.Forms.TextBox();
             this.numTaskRepeatTimes = new System.Windows.Forms.NumericUpDown();
@@ -187,6 +199,8 @@
             this.tpSchedule.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.tpSchedule_List.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.tpEditTask.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTaskRepeatTimes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTaskAddRemindTime)).BeginInit();
@@ -616,6 +630,7 @@
             this.radScheduleList.Text = "List";
             this.radScheduleList.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radScheduleList.UseVisualStyleBackColor = true;
+            this.radScheduleList.CheckedChanged += new System.EventHandler(this.radScheduleList_CheckedChanged);
             // 
             // tpFunScheduleNewTask
             // 
@@ -653,7 +668,7 @@
             this.btnOKAddNewTask.Padding = new System.Windows.Forms.Padding(10);
             this.btnOKAddNewTask.Size = new System.Drawing.Size(88, 45);
             this.btnOKAddNewTask.TabIndex = 22;
-            this.btnOKAddNewTask.Text = "OK";
+            this.btnOKAddNewTask.Text = "Add";
             this.btnOKAddNewTask.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOKAddNewTask.UseVisualStyleBackColor = true;
             this.btnOKAddNewTask.Click += new System.EventHandler(this.btnOKAddNewTask_Click);
@@ -694,7 +709,7 @@
             this.btnOKEditTask.Padding = new System.Windows.Forms.Padding(10);
             this.btnOKEditTask.Size = new System.Drawing.Size(88, 45);
             this.btnOKEditTask.TabIndex = 24;
-            this.btnOKEditTask.Text = "OK";
+            this.btnOKEditTask.Text = "Edit";
             this.btnOKEditTask.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOKEditTask.UseVisualStyleBackColor = true;
             this.btnOKEditTask.Click += new System.EventHandler(this.btnOKEditTask_Click);
@@ -865,6 +880,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabs.Controls.Add(this.tpStatus);
             this.tabs.Controls.Add(this.tpSchedule);
+            this.tabs.Controls.Add(this.tpSchedule_List);
             this.tabs.Controls.Add(this.tpEditTask);
             this.tabs.Controls.Add(this.tpSettings);
             this.tabs.Controls.Add(this.tpSync);
@@ -1063,6 +1079,127 @@
             this.calSchedule.TabIndex = 12;
             this.calSchedule.ItemClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calSchedule_ItemClick);
             this.calSchedule.ItemDoubleClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calSchedule_ItemDoubleClick);
+            // 
+            // tpSchedule_List
+            // 
+            this.tpSchedule_List.Controls.Add(this.lvScheduleList);
+            this.tpSchedule_List.Controls.Add(this.toolStrip2);
+            this.tpSchedule_List.Location = new System.Drawing.Point(4, 24);
+            this.tpSchedule_List.Name = "tpSchedule_List";
+            this.tpSchedule_List.Padding = new System.Windows.Forms.Padding(3);
+            this.tpSchedule_List.Size = new System.Drawing.Size(813, 260);
+            this.tpSchedule_List.TabIndex = 8;
+            this.tpSchedule_List.Text = "Schedule_List";
+            this.tpSchedule_List.UseVisualStyleBackColor = true;
+            // 
+            // lvScheduleList
+            // 
+            this.lvScheduleList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvScheduleList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.lvScheduleList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvScheduleList.FullRowSelect = true;
+            this.lvScheduleList.Location = new System.Drawing.Point(3, 43);
+            this.lvScheduleList.MultiSelect = false;
+            this.lvScheduleList.Name = "lvScheduleList";
+            this.lvScheduleList.Size = new System.Drawing.Size(807, 214);
+            this.lvScheduleList.TabIndex = 12;
+            this.lvScheduleList.UseCompatibleStateImageBehavior = false;
+            this.lvScheduleList.View = System.Windows.Forms.View.Details;
+            this.lvScheduleList.DoubleClick += new System.EventHandler(this.lvScheduleList_DoubleClick);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "No.";
+            this.columnHeader1.Width = 50;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Title";
+            this.columnHeader2.Width = 340;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Type";
+            this.columnHeader3.Width = 100;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Start time";
+            this.columnHeader4.Width = 150;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "End time";
+            this.columnHeader5.Width = 150;
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.AutoSize = false;
+            this.toolStrip2.BackColor = System.Drawing.Color.White;
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnScheduleList_Finish,
+            this.btnScheduleList_Delete,
+            this.btnScheduleList_Edit,
+            this.btnScheduleList_Add});
+            this.toolStrip2.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip2.Size = new System.Drawing.Size(807, 40);
+            this.toolStrip2.TabIndex = 11;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // btnScheduleList_Finish
+            // 
+            this.btnScheduleList_Finish.AutoSize = false;
+            this.btnScheduleList_Finish.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnScheduleList_Finish.Image = ((System.Drawing.Image)(resources.GetObject("btnScheduleList_Finish.Image")));
+            this.btnScheduleList_Finish.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnScheduleList_Finish.Name = "btnScheduleList_Finish";
+            this.btnScheduleList_Finish.Size = new System.Drawing.Size(32, 32);
+            this.btnScheduleList_Finish.Text = "Finish task";
+            this.btnScheduleList_Finish.Click += new System.EventHandler(this.btnScheduleList_Finish_Click);
+            // 
+            // btnScheduleList_Delete
+            // 
+            this.btnScheduleList_Delete.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnScheduleList_Delete.AutoSize = false;
+            this.btnScheduleList_Delete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnScheduleList_Delete.Image = ((System.Drawing.Image)(resources.GetObject("btnScheduleList_Delete.Image")));
+            this.btnScheduleList_Delete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnScheduleList_Delete.Name = "btnScheduleList_Delete";
+            this.btnScheduleList_Delete.Size = new System.Drawing.Size(32, 32);
+            this.btnScheduleList_Delete.Text = "Delete selected task";
+            this.btnScheduleList_Delete.Click += new System.EventHandler(this.btnScheduleList_Delete_Click);
+            // 
+            // btnScheduleList_Edit
+            // 
+            this.btnScheduleList_Edit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnScheduleList_Edit.AutoSize = false;
+            this.btnScheduleList_Edit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnScheduleList_Edit.Image = ((System.Drawing.Image)(resources.GetObject("btnScheduleList_Edit.Image")));
+            this.btnScheduleList_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnScheduleList_Edit.Name = "btnScheduleList_Edit";
+            this.btnScheduleList_Edit.Size = new System.Drawing.Size(32, 32);
+            this.btnScheduleList_Edit.Text = "Edit selected task";
+            this.btnScheduleList_Edit.Click += new System.EventHandler(this.btnScheduleList_Edit_Click);
+            // 
+            // btnScheduleList_Add
+            // 
+            this.btnScheduleList_Add.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnScheduleList_Add.AutoSize = false;
+            this.btnScheduleList_Add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnScheduleList_Add.Image = ((System.Drawing.Image)(resources.GetObject("btnScheduleList_Add.Image")));
+            this.btnScheduleList_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnScheduleList_Add.Name = "btnScheduleList_Add";
+            this.btnScheduleList_Add.Size = new System.Drawing.Size(32, 32);
+            this.btnScheduleList_Add.Text = "Add new task";
+            this.btnScheduleList_Add.Click += new System.EventHandler(this.btnScheduleList_Add_Click);
             // 
             // tpEditTask
             // 
@@ -1884,6 +2021,9 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.tpSchedule_List.ResumeLayout(false);
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.tpEditTask.ResumeLayout(false);
             this.tpEditTask.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTaskRepeatTimes)).EndInit();
@@ -2039,6 +2179,18 @@
         private System.Windows.Forms.Button btnCancelEditTask;
         private System.Windows.Forms.Button btnOKEditTask;
         private System.Windows.Forms.TextBox txtIndexTaskEdit;
+        private System.Windows.Forms.TabPage tpSchedule_List;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton btnScheduleList_Finish;
+        private System.Windows.Forms.ToolStripButton btnScheduleList_Delete;
+        private System.Windows.Forms.ToolStripButton btnScheduleList_Edit;
+        private System.Windows.Forms.ToolStripButton btnScheduleList_Add;
+        private System.Windows.Forms.ListView lvScheduleList;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
 
 
 
