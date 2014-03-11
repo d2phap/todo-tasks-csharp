@@ -143,7 +143,7 @@ namespace DAO
                                     task.HinhThucNhacNho.Add(LoaiHinhThucNhacNho.Email);
                                 }
                             }
-                            else if(item.InnerText.ToLower().CompareTo("notìication") == 0)
+                            else if (item.InnerText.ToLower().CompareTo("notification") == 0)
                             {
                                 //Kiem tra chua ton tai thi moi them vao
                                 if (task.HinhThucNhacNho.IndexOf(LoaiHinhThucNhacNho.Notification) == -1)

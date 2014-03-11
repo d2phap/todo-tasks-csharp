@@ -27,6 +27,294 @@ namespace ToDoTasks
             InitializeComponent();
         }
 
+        #region Private Method
+        private void LoadTasksOnList()
+        {
+            if (HeThong.TaiKhoan.LichLamViec.Count > 0)
+            {
+                lvScheduleList.Items.Clear();
+                var list = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec
+                    .OrderBy(l => l.ThoiGianDienRa.ThoiGianBatDau)
+                    .ToList();
+                int i = 0;
+
+                foreach (var item in list)
+                {
+                    if (item.IsDone ||
+                        ((item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalMinutes < 0 &&
+                        item.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique))
+                    {
+                        HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec[i].IsDone = true;
+                    }
+                    else
+                    {
+                        ListViewItem li = lvScheduleList.Items.Add((i + 1).ToString());
+                        li.SubItems.Add(item.Ten);
+                        li.SubItems.Add(item.ThoiGianDienRa.Loai.ToString());
+                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy HH:mm"));
+                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy HH:mm"));
+                        li.ToolTipText = item.MieuTa;
+
+                        li.Tag = i;
+                    }
+
+                    i++;
+                }
+            }
+        }
+
+        private void LoadTasksOnListStatus()
+        {
+            if (HeThong.TaiKhoan.LichLamViec.Count > 0)
+            {
+                lvStatus.Items.Clear();
+
+                var list = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec
+                    .Where(l => l.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique)
+                    .OrderBy(l => l.ThoiGianDienRa.ThoiGianBatDau)
+                    .ToList();
+                int i = 0;
+
+                foreach (var item in list)
+                {
+                    if (item.IsDone ||
+                        ((item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalMinutes < 0 &&
+                        item.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique))
+                    {
+                        
+                    }
+                    else
+                    {
+                        double day = (item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalDays;
+                        ListViewItem li = new ListViewItem();
+
+                        if (0 <= day && day <= 1)
+                        {
+                            var g = lvStatus.Groups[0];
+                            li = new ListViewItem
+                            {
+                                Text = item.Ten,
+                                Tag = i,
+                                Group = g
+                            };
+                        }
+                        else if (1 < day && day <= 2)
+                        {
+                            var g = lvStatus.Groups[1];
+                            li = new ListViewItem
+                            {
+                                Text = item.Ten,
+                                Tag = i,
+                                Group = g
+                            };
+                        }
+                        else if (2 < day && day <= 3)
+                        {
+                            var g = lvStatus.Groups[2];
+                            li = new ListViewItem
+                            {
+                                Text = item.Ten,
+                                Tag = i,
+                                Group = g
+                            };
+                        }
+                        else
+                        {
+                            var g = lvStatus.Groups[3];
+                            li = new ListViewItem
+                            {
+                                Text = item.Ten,
+                                Tag = i,
+                                Group = g
+                            };
+                        }
+
+
+                        li.SubItems.Add(item.ThoiGianDienRa.Loai.ToString());
+                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy HH:mm"));
+                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy HH:mm"));
+                        li.ToolTipText = item.MieuTa;
+
+                        lvStatus.Items.Add(li);
+                    }
+
+                    i++;
+                }
+            }
+        }
+
+        private void LoadTasksOnCalendar()
+        {
+            calSchedule.AllowNew = false;
+            calSchedule.AllowItemResize = false;
+            calSchedule.AllowItemEdit = false;
+
+            if (radScheduleList.Checked)
+            {
+                LoadTasksOnList();
+                return;
+            }
+
+            if (HeThong.TaiKhoan.LichLamViec.Count > 0)
+            {
+                calSchedule.Items.Clear();
+                int index = 0;
+                foreach (var item in HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec)
+                {
+                    if (item.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Repeated)
+                    {
+                        for (int i = 0; i < item.ThoiGianDienRa.SoLanLap; i++)
+                        {
+                            CalendarItem ci = new CalendarItem(calSchedule);
+                            ci.Text = item.Ten + "\n\n" + item.MieuTa;
+
+                            int songay = i * item.ThoiGianDienRa.DonViLap;
+
+                            ci.StartDate = item.ThoiGianDienRa.ThoiGianBatDau.AddDays(songay);
+                            ci.EndDate = item.ThoiGianDienRa.ThoiGianKetThuc.AddDays(songay);
+
+                            if (item.IsDone ||
+                                (DateTime.Now - ci.StartDate).TotalMinutes > 0)
+                            {
+                                ci.ApplyColor(Color.White);
+                            }
+                            else
+                            {
+                                if (!item.IsDone)
+                                {
+                                    ci.ApplyColor(item.MauSacLich);
+                                }
+                            }
+
+                            ci.Tag = index; //Save task index
+
+                            if (calSchedule.ViewIntersects(ci))
+                            {
+                                calSchedule.Items.Add(ci);
+                            }
+                        }
+                    }
+                    else //DTO.LoaiThoiGianDienRa.Unique
+                    {
+                        if ((item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalMinutes < 0 &&
+                            item.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique)
+                        {
+                            HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec[index].IsDone = true;
+                        }
+
+                        CalendarItem ci = new CalendarItem(calSchedule);
+                        ci.Text = item.Ten + "\n\n" + item.MieuTa;
+                        ci.StartDate = item.ThoiGianDienRa.ThoiGianBatDau;
+                        ci.EndDate = item.ThoiGianDienRa.ThoiGianKetThuc;
+
+                        if (item.IsDone)
+                        {
+                            ci.ApplyColor(Color.White);
+                        }
+                        else
+                        {
+                            if ((item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalDays >= 0)
+                            {
+                                ci.ApplyColor(item.MauSacLich);
+                            }
+                            else
+                            {
+                                ci.ApplyColor(Color.White);
+                            }
+                        }
+
+                        ci.Tag = index; //Save task index
+
+                        if (calSchedule.ViewIntersects(ci))
+                        {
+                            calSchedule.Items.Add(ci);
+                        }
+                    }
+
+                    index++;
+                }
+                calSchedule.Font = new System.Drawing.Font(this.Font.FontFamily, 9, FontStyle.Regular);
+            }
+        }
+
+        private void StartReminder()
+        {
+            var dscv = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec
+                .Where(l => l.IsDone == false)
+                .ToList();
+
+            foreach(var cv in dscv)
+            {
+                if(cv.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique)
+                {
+                    //Dung thoi gian nhac viec
+                    //if (-1 < (cv.ThoiGianDienRa.ThoiGianBatDau - DateTime.Now).TotalMinutes &&
+                    //    (cv.ThoiGianDienRa.ThoiGianBatDau - DateTime.Now).TotalMinutes < 0)
+                    if (cv.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy hh:mm:ss")
+                        .CompareTo(DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss")) == 0)
+                    {
+                        if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Notification))
+                        {
+                            //Notification
+                            MessageBox.Show(cv.Ten);
+                        }
+                        if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Sound))
+                        {
+                            //Play sound
+
+                        }
+                        if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Email))
+                        {
+                            //Send email
+
+                        }
+
+                        cv.IsDone = true;
+                    }
+                }
+                else //DTO.LoaiThoiGianDienRa.Repeated
+                {
+                    for (int i = 0; i < cv.ThoiGianDienRa.SoLanLap; i++)
+                    {
+                        int songay = i * cv.ThoiGianDienRa.DonViLap;
+                        DateTime dt = cv.ThoiGianDienRa.ThoiGianBatDau.AddDays(songay);
+
+                        //Console.WriteLine(cv.Ten + "____" + DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss") +
+                        //    "_____" + dt.ToString("MM/dd/yyyy hh:mm:ss").CompareTo(DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss")).ToString());
+
+                        if (dt.ToString("MM/dd/yyyy hh:mm:ss").CompareTo(DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss")) == 0)
+                        {
+                            if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Notification))
+                            {
+                                //Notification
+                                MessageBox.Show(cv.Ten);
+                            }
+                            if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Sound))
+                            {
+                                //Play sound
+
+                            }
+                            if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Email))
+                            {
+                                //Send email
+
+                            }
+
+                            //Danh dau Done neu la lan lap cuoi cung
+                            if (i == cv.ThoiGianDienRa.SoLanLap - 1)
+                            {
+                                cv.IsDone = true;
+                            }
+
+                            break; //exit for
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Form Events
         private void radTab_CheckedChanged(object sender, EventArgs e)
         {
             RadioButton rad = (RadioButton)sender;
@@ -120,6 +408,8 @@ namespace ToDoTasks
         {
             lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
             lblDate.Text = DateTime.Now.ToLongDateString();
+
+            StartReminder();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -138,209 +428,14 @@ namespace ToDoTasks
             calSchedule.SetViewRange(firstDay, lastDay);
 
             //Load cong viec
-            LoadTasksOnCalendar();
+            //LoadTasksOnCalendar();
 
             //Load Tasks On ListStatus
             LoadTasksOnListStatus();
 
             lblVersion.Text = "Version:    " + Application.ProductVersion;
-        }
-
-        private void LoadTasksOnList()
-        {
-            if (HeThong.TaiKhoan.LichLamViec.Count > 0)
-            {
-                lvScheduleList.Items.Clear();
-                var list = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec
-                    .OrderBy(l => l.ThoiGianDienRa.ThoiGianBatDau)
-                    .ToList();
-                int i = 0;
-
-                foreach(var item in list)
-                {
-                    if(item.IsDone ||
-                        ((item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalMinutes < 0 &&
-                        item.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique))
-                    { }
-                    else
-                    {
-                        ListViewItem li = lvScheduleList.Items.Add((i + 1).ToString());
-                        li.SubItems.Add(item.Ten);
-                        li.SubItems.Add(item.ThoiGianDienRa.Loai.ToString());
-                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy HH:mm"));
-                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy HH:mm"));
-                        li.ToolTipText = item.MieuTa;
-
-                        li.Tag = i;
-                    }
-
-                    i++;
-                }
-            }
-        }
-
-        private void LoadTasksOnListStatus()
-        {
-            if (HeThong.TaiKhoan.LichLamViec.Count > 0)
-            {
-                lvStatus.Items.Clear();
-
-                var list = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec
-                    .Where(l=>l.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique)
-                    .OrderBy(l => l.ThoiGianDienRa.ThoiGianBatDau)
-                    .ToList();
-                int i = 0;
-
-                foreach (var item in list)
-                {
-                    if (item.IsDone ||
-                        ((item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalMinutes < 0 &&
-                        item.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique))
-                    { }
-                    else
-                    {
-                        double day = (item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalDays;
-                        ListViewItem li = new ListViewItem();
-
-                        if (0 <= day && day <= 1)
-                        {
-                            var g = lvStatus.Groups[0];
-                            li = new ListViewItem
-                            {
-                                Text = item.Ten,
-                                Tag = i,
-                                Group = g
-                            };
-                        }
-                        else if (1 < day && day <= 2)
-                        {
-                            var g = lvStatus.Groups[1];
-                            li = new ListViewItem
-                            {
-                                Text = item.Ten,
-                                Tag = i,
-                                Group = g
-                            };
-                        }
-                        else if (2 < day && day <= 3)
-                        {
-                            var g = lvStatus.Groups[2];
-                            li = new ListViewItem
-                            {
-                                Text = item.Ten,
-                                Tag = i,
-                                Group = g
-                            };
-                        }
-                        else
-                        {
-                            var g = lvStatus.Groups[3];
-                            li = new ListViewItem
-                            {
-                                Text = item.Ten,
-                                Tag = i,
-                                Group = g
-                            };
-                        }
-
-
-                        li.SubItems.Add(item.ThoiGianDienRa.Loai.ToString());
-                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy HH:mm"));
-                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy HH:mm"));
-                        li.ToolTipText = item.MieuTa;
-
-                        lvStatus.Items.Add(li);
-                    }
-
-                    i++;
-                }
-            }
-        }
-
-        private void LoadTasksOnCalendar()
-        {
-            calSchedule.AllowNew = false;
-            calSchedule.AllowItemResize = false;
-            calSchedule.AllowItemEdit = false;
-
-            if(radScheduleList.Checked)
-            {
-                LoadTasksOnList();
-                return;
-            }
             
-            if (HeThong.TaiKhoan.LichLamViec.Count > 0)
-            {
-                calSchedule.Items.Clear();
-                int index = 0;
-                foreach (var item in HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec)
-                {
-                    if (item.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Repeated)
-                    {
-                        for (int i = 0; i < item.ThoiGianDienRa.SoLanLap; i++)
-                        {
-                            CalendarItem ci = new CalendarItem(calSchedule);
-                            ci.Text = item.Ten + "\n\n" + item.MieuTa;
-
-                            int songay = i * item.ThoiGianDienRa.DonViLap;
-
-                            ci.StartDate = item.ThoiGianDienRa.ThoiGianBatDau.AddDays(songay);
-                            ci.EndDate = item.ThoiGianDienRa.ThoiGianKetThuc.AddDays(songay);
-
-                            if (!item.IsDone)
-                            {
-                                ci.ApplyColor(item.MauSacLich);
-                            }
-                            else
-                            {
-                                ci.ApplyColor(Color.White);
-                            }
-
-                            ci.Tag = index; //Save task index
-
-                            if (calSchedule.ViewIntersects(ci))
-                            {
-                                calSchedule.Items.Add(ci);
-                            }
-                        }
-                    }
-                    else //DTO.LoaiThoiGianDienRa.Unique
-                    {
-                        CalendarItem ci = new CalendarItem(calSchedule);
-                        ci.Text = item.Ten + "\n\n" + item.MieuTa;
-                        ci.StartDate = item.ThoiGianDienRa.ThoiGianBatDau;
-                        ci.EndDate = item.ThoiGianDienRa.ThoiGianKetThuc;
-
-                        if (!item.IsDone)
-                        {
-                            if ((item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalDays >= 0)
-                            {
-                                ci.ApplyColor(item.MauSacLich);
-                            }
-                            else
-                            {
-                                ci.ApplyColor(Color.White);
-                            }
-                        }
-                        else
-                        {
-                            ci.ApplyColor(Color.White);
-                        }
-
-                        ci.Tag = index; //Save task index
-
-                        if (calSchedule.ViewIntersects(ci))
-                        {
-                            calSchedule.Items.Add(ci);
-                        }
-                    }
-                    
-                    index++;
-                }
-                calSchedule.Font = new System.Drawing.Font(this.Font.FontFamily, 9, FontStyle.Regular);
-            }
         }
-
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
@@ -398,6 +493,7 @@ namespace ToDoTasks
             }
 
         }
+        #endregion
 
         #region Tab Status
         private void btnMinimizeToSystemTray_Click(object sender, EventArgs e)
@@ -980,6 +1076,10 @@ namespace ToDoTasks
             numTaskRepeatTimes.Value = cv.ThoiGianDienRa.SoLanLap;
             numTaskRepeatUnit.Value = cv.ThoiGianDienRa.DonViLap;
 
+            chkTaskRemindType_Notification.Checked = false;
+            chkTaskRemindType_Sound.Checked = false;
+            chkTaskRemindType_Email.Checked = false;
+
             if (cv.HinhThucNhacNho.IndexOf(DTO.LoaiHinhThucNhacNho.Notification) != -1)
             {
                 chkTaskRemindType_Notification.Checked = true;
@@ -998,6 +1098,11 @@ namespace ToDoTasks
             {
                 lstTaskRemindTime.Items.Add(v);
             }
+        }
+
+        private void calSchedule_Paint(object sender, PaintEventArgs e)
+        {
+            calSchedule.Font = new System.Drawing.Font(this.Font.FontFamily, 9, FontStyle.Regular);
         }
 
         private void btnCancelEditTask_Click(object sender, EventArgs e)
@@ -1157,8 +1262,6 @@ namespace ToDoTasks
                 LoadTasksOnList();
             }
         }
-        #endregion
-
 
         private void lvScheduleList_DoubleClick(object sender, EventArgs e)
         {
@@ -1167,7 +1270,7 @@ namespace ToDoTasks
                 btnScheduleList_Edit_Click(null, null);
             }
         }
-
+        #endregion
 
 
 

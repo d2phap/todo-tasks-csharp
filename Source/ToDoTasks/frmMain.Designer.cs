@@ -1125,6 +1125,7 @@
             this.calSchedule.TabIndex = 12;
             this.calSchedule.ItemClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calSchedule_ItemClick);
             this.calSchedule.ItemDoubleClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calSchedule_ItemDoubleClick);
+            this.calSchedule.Paint += new System.Windows.Forms.PaintEventHandler(this.calSchedule_Paint);
             // 
             // tpSchedule_List
             // 
