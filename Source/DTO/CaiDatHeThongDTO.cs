@@ -13,6 +13,8 @@ namespace DTO
         private bool khoiDongCungHeDieuHanh;
         private bool anCTKhiThuNho;
         private string nguoiDung;
+        private string maXacThuc;
+        private List<string> danhSachNguoiDung;
         private ThongTinChuongTrinhDTO thongTinChuongTrinh;
 
         public int AmLuongThongBao
@@ -45,6 +47,16 @@ namespace DTO
             get { return nguoiDung; }
             set { nguoiDung = value; }
         }
+        public string MaXacThuc
+        {
+            get { return maXacThuc; }
+            set { maXacThuc = value; }
+        }
+        public List<string> DanhSachNguoiDung
+        {
+            get { return danhSachNguoiDung; }
+            set { danhSachNguoiDung = value; }
+        }
         public ThongTinChuongTrinhDTO ThongTinChuongTrinh
         {
             get { return thongTinChuongTrinh; }
@@ -60,6 +72,8 @@ namespace DTO
             this.khoiDongCungHeDieuHanh = true;
             this.anCTKhiThuNho = false;
             this.nguoiDung = "anomyous";
+            this.maXacThuc = "";
+            this.danhSachNguoiDung = new List<string>();
             this.thongTinChuongTrinh = new ThongTinChuongTrinhDTO("To Do Tasks", 
                 "Dương Diệu Pháp, Bùi Bá Lộc", "1.0", "d2phap@gmail.com", "");
         }

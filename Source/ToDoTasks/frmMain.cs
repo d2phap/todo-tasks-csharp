@@ -265,8 +265,19 @@ namespace ToDoTasks
                         }
                         if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Email))
                         {
-                            //Send email
+                            string body = "";
+                            body += "Task name: " + cv.Ten + "\n";
+                            body += "Place: " + cv.DiaDiem + "\n";
+                            body += "Begin at: " + cv.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy hh:mm:ss") + "\n";
+                            body += "End at: " + cv.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy hh:mm:ss") + "\n\n";
+                            body += "Description: " + cv.MieuTa + "\n\n";
 
+                            body += "--------------------\nSent from To Do Tasks app.";
+
+                            //Send email
+                            HeThong.SendEmail(HeThong.TaiKhoan.Email, "ddphap@gmail.com",
+                                "ddphap@gmail.com", "b20|ph2p?", "smtp.gmail.com",
+                                "[To Do Tasks] Reminder: " + cv.Ten, body);
                         }
 
                         cv.IsDone = true;
@@ -311,6 +322,16 @@ namespace ToDoTasks
                     }
                 }
             }
+        }
+
+        private bool IsLogged()
+        {
+            if(HeThong.CaiDat.NguoiDung.ToLower().CompareTo("anomyous") != 0 &&
+                HeThong.CaiDat.MaXacThuc.Trim().Length > 0)
+            {
+                return true;
+            }
+            return false;
         }
         #endregion
 
@@ -360,9 +381,18 @@ namespace ToDoTasks
                     break;
 
                 case "radTabLogin":
+                    if (IsLogged())
+                    {
+                        tabs.SelectedTab = tpAccount;
+                        tabsFun.SelectedTab = tpFunLogout;
 
-                    tabs.SelectedTab = tpLogin;
-                    tabsFun.SelectedTab = tpFunLogin;
+                        lblAccountName.Text = "Welcome " + HeThong.TaiKhoan.HoTen;
+                    }
+                    else
+                    {
+                        tabs.SelectedTab = tpLogin;
+                        tabsFun.SelectedTab = tpFunLogin;
+                    }
                     break;
 
                 default:
@@ -420,6 +450,15 @@ namespace ToDoTasks
                 this.ShowInTaskbar = false;
             }
 
+            if (IsLogged())
+            {
+                radTabLogin.Text = "Account";
+            }
+            else
+            {
+                radTabLogin.Text = "Log in";
+            }
+
             //Load cong viec
             DateTime today = DateTime.Today;
             DateTime firstDay = today.AddDays(1 - today.DayOfWeek.GetHashCode());
@@ -434,7 +473,6 @@ namespace ToDoTasks
             LoadTasksOnListStatus();
 
             lblVersion.Text = "Version:    " + Application.ProductVersion;
-            
         }
 
         private void frmMain_Shown(object sender, EventArgs e)
@@ -541,7 +579,6 @@ namespace ToDoTasks
             tabsFun.SelectedTab = tpFunLoginNewAccount;
         }
         
-
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             if(!HeThong.IsValidEmail(txtLogInEmail.Text) || txtLogInPassword.Text.Length == 0)
@@ -573,9 +610,25 @@ namespace ToDoTasks
                         }
                         else //Dang nhap thanh cong
                         {
+                            //Save all current user settings
+                            HeThong.SaveAllSettings(SaveSettingOption.All);
+
+                            //Reset registered user
+                            HeThong.CaiDat.NguoiDung = email;
+                            HeThong.CaiDat.MaXacThuc = password;
+                            if(HeThong.CaiDat.DanhSachNguoiDung.IndexOf(email) == -1)
+                            {
+                                HeThong.CaiDat.DanhSachNguoiDung.Add(email);
+                            }
+
+                            //Save all current user settings
+                            HeThong.SaveAllSettings(SaveSettingOption.SettingsOnly);
+
+                            //Reload new user settings
+                            HeThong.LoadSettings();
+
                             radTabLogin.Text = "Account";
                             lblAccountName.Text = "Welcome " + name + "!";
-                            lblAccountName.Tag = name;
                             tabs.SelectedTab = tpAccount;
                             tabsFun.SelectedTab = tpFunLogout;
                         }
@@ -595,9 +648,21 @@ namespace ToDoTasks
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
+            //Save all current user settings
+            HeThong.SaveAllSettings(SaveSettingOption.All);
+
+            //Reset default user
+            HeThong.CaiDat.NguoiDung = "Anomyous";
+            HeThong.CaiDat.MaXacThuc = "";
+
+            //Save all current user settings
+            HeThong.SaveAllSettings(SaveSettingOption.SettingsOnly);
+
+            //Reload new user settings
+            HeThong.LoadSettings();
+
             radTabLogin.Text = "Log in";
             lblAccountName.Text = "Welcome #";
-            lblAccountName.Tag = string.Empty;
             tabs.SelectedTab = tpLogin;
             tabsFun.SelectedTab = tpFunLogin;
         }
@@ -693,7 +758,7 @@ namespace ToDoTasks
             }
 
             string email = "";
-            string tasksFile = HeThong.UsersFile;
+            string tasksFile = HeThong.UsersPath;
 
             using (var client = new HttpClient())
             {
@@ -754,15 +819,16 @@ namespace ToDoTasks
 
         private void lnkStartSync_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (lblAccountName.Tag == null || lblAccountName.Tag.ToString() == "")
+            if (IsLogged())
+            {
+                tabs.SelectedTab = tpSync;
+                tabsFun.SelectedTab = tpFunSettingsSync;
+            }
+            else
             {
                 radTabLogin.Checked = true;
                 radTab_CheckedChanged(radTabLogin, null);
-                return;
             }
-            
-            tabs.SelectedTab = tpSync;
-            tabsFun.SelectedTab = tpFunSettingsSync;
         }
 
         private void chkStartWithOS_CheckedChanged(object sender, EventArgs e)

@@ -8,6 +8,14 @@ using System.Xml;
 
 namespace DAO
 {
+    public enum SaveSettingOption
+    {
+        All,
+        SettingsOnly,
+        UserDataOnly
+    }
+
+
     public class CaiDatHeThongDAO
     {
         private string _xmlPath = string.Empty;
@@ -62,12 +70,20 @@ namespace DAO
             //Get <IsHideWindowMini> Attribute
             caiDatHeThong.AnCTKhiThuNho = bool.Parse(nIsHideWindowMini.GetAttribute("value"));
 
-            XmlElement nUser = (XmlElement)nConfig.SelectNodes("user")[0];
+            XmlElement nUsers = (XmlElement)nConfig.SelectNodes("users")[0];
 
-            if(nUser != null)
+            if(nUsers != null)
             {
-                //Get <user> Attribute
-                caiDatHeThong.NguoiDung = nUser.GetAttribute("value").Trim();
+                //Get <users> Attribute
+                caiDatHeThong.NguoiDung = nUsers.GetAttribute("name").Trim();
+                caiDatHeThong.MaXacThuc = nUsers.GetAttribute("auth").Trim();
+
+                //Get user list
+                XmlNodeList nUserList = nUsers.SelectNodes("user");
+                foreach (XmlElement item in nUserList)
+                {
+                    caiDatHeThong.DanhSachNguoiDung.Add(item.GetAttribute("value"));
+                }
             }
             else
             {
@@ -82,49 +98,66 @@ namespace DAO
         /// Lưu thiết lập xuống file config.xml
         /// </summary>
         /// <param name="cd"></param>
-        public void SaveConfiguration(CaiDatHeThongDTO cd)
+        public void SaveConfiguration(CaiDatHeThongDTO cd, SaveSettingOption op = SaveSettingOption.All)
         {
-            XmlDocument doc = new XmlDocument();
-            XmlElement root = doc.CreateElement("to_do_tasks");//<to_do_tasks>
+            if (op == SaveSettingOption.All ||
+                op == SaveSettingOption.SettingsOnly)
+            {
+                XmlDocument doc = new XmlDocument();
+                XmlElement root = doc.CreateElement("to_do_tasks");//<to_do_tasks>
 
-            XmlElement nDesc = doc.CreateElement("description");//<description>
-            nDesc.InnerText = "Tập tin cấu hình chương trình";
-            root.AppendChild(nDesc);
+                XmlElement nDesc = doc.CreateElement("description");//<description>
+                nDesc.InnerText = "Tập tin cấu hình chương trình";
+                root.AppendChild(nDesc);
 
-            XmlElement nConf = doc.CreateElement("configurations");//<configurations>
-            XmlElement n = doc.CreateElement("volume");// <volume>
-            n.SetAttribute("value", cd.AmLuongThongBao.ToString());
-            nConf.AppendChild(n);
+                XmlElement nConf = doc.CreateElement("configurations");//<configurations>
+                XmlElement n = doc.CreateElement("volume");// <volume>
+                n.SetAttribute("value", cd.AmLuongThongBao.ToString());
+                nConf.AppendChild(n);
 
-            n = doc.CreateElement("notice_sound");// <notice_sound>
-            n.SetAttribute("value", cd.TapTinAmThanh);
-            nConf.AppendChild(n);
+                n = doc.CreateElement("notice_sound");// <notice_sound>
+                n.SetAttribute("value", cd.TapTinAmThanh);
+                nConf.AppendChild(n);
 
-            n = doc.CreateElement("is_hide_on_starting");// <is_hide_on_starting>
-            n.SetAttribute("value", cd.AnCTKhiKhoiDong.ToString());
-            nConf.AppendChild(n);
+                n = doc.CreateElement("is_hide_on_starting");// <is_hide_on_starting>
+                n.SetAttribute("value", cd.AnCTKhiKhoiDong.ToString());
+                nConf.AppendChild(n);
 
-            n = doc.CreateElement("is_start_with_os");// <is_start_with_os>
-            n.SetAttribute("value", cd.KhoiDongCungHeDieuHanh.ToString());
-            nConf.AppendChild(n);
+                n = doc.CreateElement("is_start_with_os");// <is_start_with_os>
+                n.SetAttribute("value", cd.KhoiDongCungHeDieuHanh.ToString());
+                nConf.AppendChild(n);
 
-            n = doc.CreateElement("is_hide_window_on_minimizing");// <is_hide_window_on_minimizing>
-            n.SetAttribute("value", cd.AnCTKhiThuNho.ToString());
-            nConf.AppendChild(n);
+                n = doc.CreateElement("is_hide_window_on_minimizing");// <is_hide_window_on_minimizing>
+                n.SetAttribute("value", cd.AnCTKhiThuNho.ToString());
+                nConf.AppendChild(n);
 
-            n = doc.CreateElement("user");// <user>
-            n.SetAttribute("value", cd.NguoiDung);
-            nConf.AppendChild(n);
+                n = doc.CreateElement("users");// <users>
+                n.SetAttribute("name", cd.NguoiDung);
+                n.SetAttribute("auth", cd.MaXacThuc);
 
-            root.AppendChild(nConf);
-            doc.AppendChild(root);
+                foreach (string item in HeThong.CaiDat.DanhSachNguoiDung)
+                {
+                    XmlElement nn = doc.CreateElement("user");// <user>
+                    nn.SetAttribute("value", item);
 
-            doc.Save(this._xmlPath); //save file
+                    n.AppendChild(nn);
+                }
 
-            //Save user data
-            TaiKhoanDAO tk = new TaiKhoanDAO(HeThong.UsersFile);
-            tk.SaveUsers();
+                nConf.AppendChild(n);
 
+                root.AppendChild(nConf);
+                doc.AppendChild(root);
+
+                doc.Save(this._xmlPath); //save file
+            }
+
+            if (op == SaveSettingOption.All ||
+                op == SaveSettingOption.UserDataOnly)
+            {
+                //Save user data
+                TaiKhoanDAO tk = new TaiKhoanDAO(HeThong.UsersPath + HeThong.CaiDat.NguoiDung + ".xml");
+                tk.SaveUsers();
+            }
         }
 
     }

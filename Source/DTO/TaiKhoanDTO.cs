@@ -54,6 +54,7 @@ namespace DTO
             this.MatKhau = "";
             this.LoaiTaiKhoan = LoaiTaiKhoan.Anomyous;
             this.LichLamViec = new List<LichLamViecDTO>();
+            this.LichLamViec.Add(new LichLamViecDTO());//add default empty schedule
         }
     }
 }

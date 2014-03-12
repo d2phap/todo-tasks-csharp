@@ -9,6 +9,7 @@ using DTO;
 using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
+using System.Net.Mail;
 
 namespace DAO
 {
@@ -40,7 +41,7 @@ namespace DAO
         /// <summary>
         /// Lấy, gán đường dẫn tập tin users.xml
         /// </summary>
-        public static string UsersFile
+        public static string UsersPath
         {
             get { return HeThong._usersFile; }
             set { HeThong._usersFile = value; }
@@ -81,29 +82,41 @@ namespace DAO
             CaiDatHeThongDAO cd = new CaiDatHeThongDAO(ConfigFile);
             CaiDat = cd.ReadConfiguration();
 
+            //Anomyous user
+            string userFile = HeThong.UsersPath + "anomyous.xml";
+
+            if(File.Exists(HeThong.UsersPath + HeThong.CaiDat.NguoiDung + ".xml"))
+            {
+                userFile = HeThong.UsersPath + HeThong.CaiDat.NguoiDung + ".xml";
+            }
+
             //Đọc danh sách người dùng
-            TaiKhoanDAO tk = new TaiKhoanDAO(UsersFile);
+            TaiKhoanDAO tk = new TaiKhoanDAO(userFile);
             List<TaiKhoanDTO> users = tk.ReadUsers();
 
             //Lay thong tin nguoi dung hien tai
-            HeThong.TaiKhoan = users.SingleOrDefault(u => u.Email.CompareTo(CaiDat.NguoiDung) == 0);
+            HeThong.TaiKhoan = users.SingleOrDefault(u => u.Email.ToLower().CompareTo(CaiDat.NguoiDung.ToLower()) == 0);
 
             //Anomyous user
             if(HeThong.TaiKhoan == null)
             {
-                HeThong.TaiKhoan = new TaiKhoanDTO();
-            }
+                CaiDat.NguoiDung = "Anomyous";
+                CaiDat.MaXacThuc = "";
 
-            //HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec = HeThong.TaiKhoan.LichLamViec[0]
-            //    .DanhSachCongViec.OrderBy(l => l.ThoiGianDienRa.ThoiGianBatDau)
-            //    .ToList();
+                userFile = HeThong.UsersPath + "anomyous.xml";
+                tk = new TaiKhoanDAO(userFile);
+                users = tk.ReadUsers();
+                //Lay thong tin nguoi dung anomyous
+                HeThong.TaiKhoan = users.SingleOrDefault(u => u.Email.ToLower()
+                    .CompareTo(CaiDat.NguoiDung.ToLower()) == 0);
+            }
 
         }
 
         /// <summary>
         /// Lưu thiết lập vào config.xml
         /// </summary>
-        public static void SaveAllSettings()
+        public static void SaveAllSettings(SaveSettingOption op = SaveSettingOption.All)
         {
             // Kiểm tra thư mục cài đặt
             // ~\AppData\Roaming\To to tasks\
@@ -113,7 +126,7 @@ namespace DAO
             }
 
             CaiDatHeThongDAO cd = new CaiDatHeThongDAO(ConfigFile);
-            cd.SaveConfiguration(HeThong.CaiDat);
+            cd.SaveConfiguration(HeThong.CaiDat, op);
         }
 
         /// <summary>
@@ -131,6 +144,51 @@ namespace DAO
             }
         }
 
+        /// <summary>
+        /// Send email
+        /// </summary>
+        /// <param name="to"></param>
+        /// <param name="from"></param>
+        /// <param name="account"></param>
+        /// <param name="password"></param>
+        /// <param name="smtp"></param>
+        /// <param name="subject"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        public static bool SendEmail(string to, string from, string account, string password, string smtp,
+            string subject, string body)
+        {
+            MailMessage MyMailMessage = new MailMessage();
+
+            //From
+            MyMailMessage.From = new MailAddress(from);
+
+            //To
+            MyMailMessage.To.Add(to);
+
+            //Subject
+            MyMailMessage.Subject = subject;
+
+            //Body
+            MyMailMessage.Body = body;
+
+            //Create the SMTPClient object and specify the SMTP GMail server
+            SmtpClient SMTPServer = new SmtpClient(smtp);
+            SMTPServer.Port = 587;
+            SMTPServer.Credentials = new System.Net.NetworkCredential(account, password);
+            SMTPServer.EnableSsl = true;
+
+            try
+            {
+                SMTPServer.Send(MyMailMessage);
+            }
+            catch (SmtpException ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
 
 
         /// <summary>
