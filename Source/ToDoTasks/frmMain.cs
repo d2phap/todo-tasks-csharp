@@ -13,6 +13,7 @@ using System.Net.Http.Headers;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms.Calendar;
+using System.Threading;
 
 namespace ToDoTasks
 {
@@ -70,7 +71,7 @@ namespace ToDoTasks
                 lvStatus.Items.Clear();
 
                 var list = HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec
-                    .Where(l => l.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique)
+                    .Where(l => l.IsDone == false)
                     .OrderBy(l => l.ThoiGianDienRa.ThoiGianBatDau)
                     .ToList();
                 int i = 0;
@@ -86,56 +87,138 @@ namespace ToDoTasks
                     else
                     {
                         double day = (item.ThoiGianDienRa.ThoiGianKetThuc - DateTime.Now).TotalDays;
-                        ListViewItem li = new ListViewItem();
 
-                        if (0 <= day && day <= 1)
+                        string today = DateTime.Now.ToString("MM/dd/yyyy");
+                        string tomorrow = DateTime.Now.AddDays(1).ToString("MM/dd/yyyy");
+                        string theDayAfter = DateTime.Now.AddDays(2).ToString("MM/dd/yyyy");
+
+                        //Unique task
+                        if (item.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique)
                         {
-                            var g = lvStatus.Groups[0];
-                            li = new ListViewItem
+                            ListViewItem li = new ListViewItem();
+                            string itemDay = item.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy");
+
+                            //today
+                            if (itemDay.CompareTo(today) == 0)
                             {
-                                Text = item.Ten,
-                                Tag = i,
-                                Group = g
-                            };
-                        }
-                        else if (1 < day && day <= 2)
-                        {
-                            var g = lvStatus.Groups[1];
-                            li = new ListViewItem
+                                var g = lvStatus.Groups[0];
+                                li = new ListViewItem
+                                {
+                                    Text = item.Ten,
+                                    Tag = i,
+                                    Group = g
+                                };
+                            }
+                            //tomorrow
+                            else if (itemDay.CompareTo(tomorrow) == 0)
                             {
-                                Text = item.Ten,
-                                Tag = i,
-                                Group = g
-                            };
-                        }
-                        else if (2 < day && day <= 3)
-                        {
-                            var g = lvStatus.Groups[2];
-                            li = new ListViewItem
+                                var g = lvStatus.Groups[1];
+                                li = new ListViewItem
+                                {
+                                    Text = item.Ten,
+                                    Tag = i,
+                                    Group = g
+                                };
+                            }
+                            //the day after tomorrow
+                            else if (itemDay.CompareTo(theDayAfter) == 0)
                             {
-                                Text = item.Ten,
-                                Tag = i,
-                                Group = g
-                            };
+                                var g = lvStatus.Groups[2];
+                                li = new ListViewItem
+                                {
+                                    Text = item.Ten,
+                                    Tag = i,
+                                    Group = g
+                                };
+                            }
+                            //upcoming
+                            else
+                            {
+                                var g = lvStatus.Groups[3];
+                                li = new ListViewItem
+                                {
+                                    Text = item.Ten,
+                                    Tag = i,
+                                    Group = g
+                                };
+                            }
+
+                            li.SubItems.Add(item.ThoiGianDienRa.Loai.ToString());
+                            li.SubItems.Add(item.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy HH:mm"));
+                            li.SubItems.Add(item.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy HH:mm"));
+                            li.ToolTipText = item.MieuTa;
+
+                            lvStatus.Items.Add(li);
                         }
+                        //Repeated task
                         else
                         {
-                            var g = lvStatus.Groups[3];
-                            li = new ListViewItem
+                            for (int j = 0; j < item.ThoiGianDienRa.SoLanLap; j++)
                             {
-                                Text = item.Ten,
-                                Tag = i,
-                                Group = g
-                            };
+                                ListViewItem li = new ListViewItem();
+
+                                int songay = j * item.ThoiGianDienRa.DonViLap;
+                                DateTime itemDateTime = item.ThoiGianDienRa.ThoiGianBatDau.AddDays(songay);
+                                string itemDay = itemDateTime.ToString("MM/dd/yyyy");
+                                bool isAdd = true;
+
+                                if ((DateTime.Now - itemDateTime).TotalMinutes <= 0)
+                                {
+
+                                    //today
+                                    if (itemDay.CompareTo(today) == 0)
+                                    {
+                                        var g = lvStatus.Groups[0];
+                                        li = new ListViewItem
+                                        {
+                                            Text = item.Ten,
+                                            Tag = i,
+                                            Group = g
+                                        };
+                                    }
+                                    //tomorrow
+                                    else if (itemDay.CompareTo(tomorrow) == 0)
+                                    {
+                                        var g = lvStatus.Groups[1];
+                                        li = new ListViewItem
+                                        {
+                                            Text = item.Ten,
+                                            Tag = i,
+                                            Group = g
+                                        };
+                                    }
+                                    //the day after tomorrow
+                                    else if (itemDay.CompareTo(theDayAfter) == 0)
+                                    {
+                                        var g = lvStatus.Groups[2];
+                                        li = new ListViewItem
+                                        {
+                                            Text = item.Ten,
+                                            Tag = i,
+                                            Group = g
+                                        };
+                                    }
+                                    else
+                                    {
+                                        isAdd = false;
+                                    }
+
+                                    if (isAdd)
+                                    {
+                                        li.SubItems.Add(item.ThoiGianDienRa.Loai.ToString());
+                                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy HH:mm"));
+                                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy HH:mm"));
+                                        li.ToolTipText = item.MieuTa;
+
+                                        lvStatus.Items.Add(li);
+                                    }
+                                }
+                            }//end for
+
                         }
 
-
-                        li.SubItems.Add(item.ThoiGianDienRa.Loai.ToString());
-                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy HH:mm"));
-                        li.SubItems.Add(item.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy HH:mm"));
-                        li.ToolTipText = item.MieuTa;
-
-                        lvStatus.Items.Add(li);
+                        
+                        
                     }
 
                     i++;
@@ -248,20 +331,25 @@ namespace ToDoTasks
                 if(cv.ThoiGianDienRa.Loai == DTO.LoaiThoiGianDienRa.Unique)
                 {
                     //Dung thoi gian nhac viec
-                    //if (-1 < (cv.ThoiGianDienRa.ThoiGianBatDau - DateTime.Now).TotalMinutes &&
-                    //    (cv.ThoiGianDienRa.ThoiGianBatDau - DateTime.Now).TotalMinutes < 0)
                     if (cv.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy hh:mm:ss")
                         .CompareTo(DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss")) == 0)
                     {
                         if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Notification))
                         {
+                            string body = "";
+                            body += "Task name: " + cv.Ten + "\n";
+                            body += "Place: " + cv.DiaDiem + "\n";
+                            body += "Begin at: " + cv.ThoiGianDienRa.ThoiGianBatDau.ToString("MM/dd/yyyy hh:mm:ss") + "\n";
+                            body += "End at: " + cv.ThoiGianDienRa.ThoiGianKetThuc.ToString("MM/dd/yyyy hh:mm:ss") + "\n\n";
+                            body += "Description: " + cv.MieuTa + "\n\n";
+
                             //Notification
-                            MessageBox.Show(cv.Ten);
+                            HeThong.ShowNotification(body);
                         }
                         if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Sound))
                         {
                             //Play sound
-
+                            HeThong.PlayAudio(HeThong.CaiDat.TapTinAmThanh);
                         }
                         if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Email))
                         {
@@ -275,9 +363,18 @@ namespace ToDoTasks
                             body += "--------------------\nSent from To Do Tasks app.";
 
                             //Send email
-                            HeThong.SendEmail(HeThong.TaiKhoan.Email, "ddphap@gmail.com",
-                                "ddphap@gmail.com", "b20|ph2p?", "smtp.gmail.com",
-                                "[To Do Tasks] Reminder: " + cv.Ten, body);
+                            //HeThong.SendEmail(HeThong.TaiKhoan.Email, "ddphap@gmail.com",
+                            //    "ddphap@gmail.com", "b20|ph2p?", "smtp.gmail.com",
+                            //    "[To Do Tasks] Reminder: " + cv.Ten, body);
+
+                            
+                            
+
+                            _emailBody = body;
+                            Thread th = new Thread(new ThreadStart(StartThreadSafeSendEmail));
+                            th.IsBackground = true;
+                            th.Start();
+
                         }
 
                         cv.IsDone = true;
@@ -290,25 +387,38 @@ namespace ToDoTasks
                         int songay = i * cv.ThoiGianDienRa.DonViLap;
                         DateTime dt = cv.ThoiGianDienRa.ThoiGianBatDau.AddDays(songay);
 
-                        //Console.WriteLine(cv.Ten + "____" + DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss") +
-                        //    "_____" + dt.ToString("MM/dd/yyyy hh:mm:ss").CompareTo(DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss")).ToString());
-
                         if (dt.ToString("MM/dd/yyyy hh:mm:ss").CompareTo(DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss")) == 0)
                         {
                             if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Notification))
                             {
+                                string body = "";
+                                body += "Task name: " + cv.Ten + "\n";
+                                body += "Place: " + cv.DiaDiem + "\n";
+                                body += "Begin at: " + dt.ToString("MM/dd/yyyy hh:mm:ss") + "\n\n";
+                                body += "Description: " + cv.MieuTa + "\n\n";
+
                                 //Notification
-                                MessageBox.Show(cv.Ten);
+                                HeThong.ShowNotification(body);
                             }
                             if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Sound))
                             {
                                 //Play sound
-
+                                HeThong.PlayAudio(HeThong.CaiDat.TapTinAmThanh);
                             }
                             if (cv.HinhThucNhacNho.Contains(DTO.LoaiHinhThucNhacNho.Email))
                             {
-                                //Send email
+                                string body = "";
+                                body += "Task name: " + cv.Ten + "\n";
+                                body += "Place: " + cv.DiaDiem + "\n";
+                                body += "Begin at: " + dt.ToString("MM/dd/yyyy hh:mm:ss") + "\n\n";
+                                body += "Description: " + cv.MieuTa + "\n\n";
 
+                                body += "--------------------\nSent from To Do Tasks app.";
+
+                                //Send email
+                                HeThong.SendEmail(HeThong.TaiKhoan.Email, "ddphap@gmail.com",
+                                    "ddphap@gmail.com", "b20|ph2p?", "smtp.gmail.com",
+                                    "[To Do Tasks] Reminder: " + cv.Ten, body);
                             }
 
                             //Danh dau Done neu la lan lap cuoi cung
@@ -323,6 +433,33 @@ namespace ToDoTasks
                 }
             }
         }
+
+        private delegate void DelegateSendEmail(string body);
+        private DelegateSendEmail _delegateSendEmail;
+        private string _emailBody = "";
+
+        private void StartThreadSafeSendEmail()
+        {
+            ThreadSendEmail(_emailBody);
+        }
+
+        private void ThreadSendEmail(string body)
+        {
+            //safe thread
+            if (this.InvokeRequired)
+            {
+                this.Invoke(_delegateSendEmail, new object[] { body });
+            }
+            else
+            {
+                //Send email
+                HeThong.SendEmail(HeThong.TaiKhoan.Email, "ddphap@gmail.com",
+                    "ddphap@gmail.com", "b20|ph2p?", "smtp.gmail.com",
+                    "[To Do Tasks] Reminder: " + "xxxxxx", body);
+            }
+        }
+
+
 
         private bool IsLogged()
         {
@@ -473,6 +610,7 @@ namespace ToDoTasks
             LoadTasksOnListStatus();
 
             lblVersion.Text = "Version:    " + Application.ProductVersion;
+            _delegateSendEmail = new DelegateSendEmail(ThreadSendEmail);
         }
 
         private void frmMain_Shown(object sender, EventArgs e)

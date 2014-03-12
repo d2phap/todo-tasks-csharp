@@ -10,6 +10,8 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using System.Net.Mail;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace DAO
 {
@@ -188,6 +190,25 @@ namespace DAO
             }
 
             return true;
+        }
+
+
+        public static void ShowNotification(string message)
+        {
+            NotificationForm f = new NotificationForm(message);
+            Rectangle rec = Screen.FromControl(f).Bounds;
+
+            //Xác định lại chiều cao vừa khít với form main
+            f.Width = rec.Width - rec.Width / 5 - rec.Width / 9;
+            f.Height = rec.Height - rec.Height / 2 - rec.Height / 9;
+
+            //Hiện form ngay giữa form Main
+            f.Show();
+            f.SetDesktopLocation(rec.X + ((rec.Width / 2) - f.Width / 2),
+                                rec.Y + ((rec.Height / 2) - f.Height / 2) + 20);
+
+            //Kích hoạt form
+            f.Activate();
         }
 
 
