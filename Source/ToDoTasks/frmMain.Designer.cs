@@ -47,23 +47,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.panControl = new System.Windows.Forms.Panel();
-            this.lblDate = new System.Windows.Forms.Label();
-            this.lblTime = new System.Windows.Forms.Label();
-            this.timSys = new System.Windows.Forms.Timer(this.components);
-            this.tray = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuShowToDoTasks = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuQuit = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.label27 = new System.Windows.Forms.Label();
-            this.lblVersionTop = new System.Windows.Forms.Label();
-            this.lblVersion = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.err = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabsFun = new ToDoTasks.TabPagesControl();
             this.tpFunStatus = new System.Windows.Forms.TabPage();
             this.btnAbout = new System.Windows.Forms.Button();
@@ -90,6 +73,23 @@
             this.btnAccountOK = new System.Windows.Forms.Button();
             this.tpFunLogout = new System.Windows.Forms.TabPage();
             this.btnLogOut = new System.Windows.Forms.Button();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.timSys = new System.Windows.Forms.Timer(this.components);
+            this.tray = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuShowToDoTasks = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuQuit = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.label27 = new System.Windows.Forms.Label();
+            this.lblVersionTop = new System.Windows.Forms.Label();
+            this.lblVersion = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.err = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabs = new ToDoTasks.TabPagesControl();
             this.tpStatus = new System.Windows.Forms.TabPage();
             this.lvStatus = new System.Windows.Forms.ListView();
@@ -190,8 +190,6 @@
             this.panMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.panControl.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
             this.tabsFun.SuspendLayout();
             this.tpFunStatus.SuspendLayout();
             this.tpFunSchedule.SuspendLayout();
@@ -201,6 +199,8 @@
             this.tpFunLogin.SuspendLayout();
             this.tpFunLoginNewAccount.SuspendLayout();
             this.tpFunLogout.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
             this.tabs.SuspendLayout();
             this.tpStatus.SuspendLayout();
             this.tpSchedule.SuspendLayout();
@@ -353,170 +353,6 @@
             this.panControl.Name = "panControl";
             this.panControl.Size = new System.Drawing.Size(903, 80);
             this.panControl.TabIndex = 1;
-            // 
-            // lblDate
-            // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.lblDate.Location = new System.Drawing.Point(12, 41);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(121, 25);
-            this.lblDate.TabIndex = 1;
-            this.lblDate.Text = "Jan 8th, 2014";
-            // 
-            // lblTime
-            // 
-            this.lblTime.AutoSize = true;
-            this.lblTime.Font = new System.Drawing.Font("Segoe UI", 18F);
-            this.lblTime.Location = new System.Drawing.Point(12, 9);
-            this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(103, 32);
-            this.lblTime.TabIndex = 0;
-            this.lblTime.Text = "20:21:03";
-            // 
-            // timSys
-            // 
-            this.timSys.Enabled = true;
-            this.timSys.Interval = 1000;
-            this.timSys.Tick += new System.EventHandler(this.timSys_Tick);
-            // 
-            // tray
-            // 
-            this.tray.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.tray.BalloonTipTitle = "To Do Tasks";
-            this.tray.ContextMenuStrip = this.contextMenuStrip1;
-            this.tray.Icon = ((System.Drawing.Icon)(resources.GetObject("tray.Icon")));
-            this.tray.Text = "To do tasks";
-            this.tray.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tray_MouseDoubleClick);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuShowToDoTasks,
-            this.toolStripMenuItem1,
-            this.mnuQuit});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 54);
-            // 
-            // mnuShowToDoTasks
-            // 
-            this.mnuShowToDoTasks.Name = "mnuShowToDoTasks";
-            this.mnuShowToDoTasks.Size = new System.Drawing.Size(170, 22);
-            this.mnuShowToDoTasks.Text = "Show To Do Tasks";
-            this.mnuShowToDoTasks.Click += new System.EventHandler(this.mnuShowToDoTasks_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(167, 6);
-            // 
-            // mnuQuit
-            // 
-            this.mnuQuit.Name = "mnuQuit";
-            this.mnuQuit.Size = new System.Drawing.Size(170, 22);
-            this.mnuQuit.Text = "Quit";
-            this.mnuQuit.Click += new System.EventHandler(this.mnuQuit_Click);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(32, 32);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // label27
-            // 
-            this.label27.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label27.AutoSize = true;
-            this.label27.BackColor = System.Drawing.Color.Transparent;
-            this.label27.Font = new System.Drawing.Font("Segoe UI Light", 28F);
-            this.label27.ForeColor = System.Drawing.Color.White;
-            this.label27.Location = new System.Drawing.Point(352, 116);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(202, 51);
-            this.label27.TabIndex = 4;
-            this.label27.Text = "To Do Tasks";
-            // 
-            // lblVersionTop
-            // 
-            this.lblVersionTop.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblVersionTop.AutoSize = true;
-            this.lblVersionTop.BackColor = System.Drawing.Color.Transparent;
-            this.lblVersionTop.Font = new System.Drawing.Font("Segoe UI Light", 18F);
-            this.lblVersionTop.ForeColor = System.Drawing.Color.White;
-            this.lblVersionTop.Location = new System.Drawing.Point(545, 116);
-            this.lblVersionTop.Name = "lblVersionTop";
-            this.lblVersionTop.Size = new System.Drawing.Size(41, 32);
-            this.lblVersionTop.TabIndex = 5;
-            this.lblVersionTop.Text = "1.0";
-            // 
-            // lblVersion
-            // 
-            this.lblVersion.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.BackColor = System.Drawing.Color.Transparent;
-            this.lblVersion.Font = new System.Drawing.Font("Segoe UI Light", 14F);
-            this.lblVersion.ForeColor = System.Drawing.Color.White;
-            this.lblVersion.Location = new System.Drawing.Point(312, 196);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(142, 25);
-            this.lblVersion.TabIndex = 6;
-            this.lblVersion.Text = "Version:    1.2.3.4";
-            // 
-            // label30
-            // 
-            this.label30.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label30.AutoSize = true;
-            this.label30.BackColor = System.Drawing.Color.Transparent;
-            this.label30.Font = new System.Drawing.Font("Segoe UI Light", 12F);
-            this.label30.ForeColor = System.Drawing.Color.White;
-            this.label30.Location = new System.Drawing.Point(312, 236);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(67, 21);
-            this.label30.TabIndex = 7;
-            this.label30.Text = "Authors:";
-            // 
-            // label31
-            // 
-            this.label31.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label31.AutoSize = true;
-            this.label31.BackColor = System.Drawing.Color.Transparent;
-            this.label31.Font = new System.Drawing.Font("Segoe UI Light", 12F);
-            this.label31.ForeColor = System.Drawing.Color.White;
-            this.label31.Location = new System.Drawing.Point(396, 236);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(131, 42);
-            this.label31.TabIndex = 8;
-            this.label31.Text = "Dương Diệu Pháp\r\nBùi Bá Lộc";
-            // 
-            // label32
-            // 
-            this.label32.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label32.AutoSize = true;
-            this.label32.BackColor = System.Drawing.Color.Transparent;
-            this.label32.Font = new System.Drawing.Font("Segoe UI Light", 12F);
-            this.label32.ForeColor = System.Drawing.Color.White;
-            this.label32.Location = new System.Drawing.Point(313, 325);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(227, 21);
-            this.label32.TabIndex = 9;
-            this.label32.Text = "Contact:      d2phap@gmail.com";
-            // 
-            // label33
-            // 
-            this.label33.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label33.AutoSize = true;
-            this.label33.BackColor = System.Drawing.Color.Transparent;
-            this.label33.Font = new System.Drawing.Font("Segoe UI Light", 12F);
-            this.label33.ForeColor = System.Drawing.Color.White;
-            this.label33.Location = new System.Drawing.Point(396, 289);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(258, 21);
-            this.label33.TabIndex = 10;
-            this.label33.Text = "Copyright © 2014. All rights reserved.";
-            // 
-            // err
-            // 
-            this.err.ContainerControl = this;
             // 
             // tabsFun
             // 
@@ -879,6 +715,170 @@
             this.btnLogOut.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.lblDate.Location = new System.Drawing.Point(12, 41);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(121, 25);
+            this.lblDate.TabIndex = 1;
+            this.lblDate.Text = "Jan 8th, 2014";
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Segoe UI", 18F);
+            this.lblTime.Location = new System.Drawing.Point(12, 9);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(103, 32);
+            this.lblTime.TabIndex = 0;
+            this.lblTime.Text = "20:21:03";
+            // 
+            // timSys
+            // 
+            this.timSys.Enabled = true;
+            this.timSys.Interval = 1000;
+            this.timSys.Tick += new System.EventHandler(this.timSys_Tick);
+            // 
+            // tray
+            // 
+            this.tray.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.tray.BalloonTipTitle = "To Do Tasks";
+            this.tray.ContextMenuStrip = this.contextMenuStrip1;
+            this.tray.Icon = ((System.Drawing.Icon)(resources.GetObject("tray.Icon")));
+            this.tray.Text = "To do tasks";
+            this.tray.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tray_MouseDoubleClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuShowToDoTasks,
+            this.toolStripMenuItem1,
+            this.mnuQuit});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 54);
+            // 
+            // mnuShowToDoTasks
+            // 
+            this.mnuShowToDoTasks.Name = "mnuShowToDoTasks";
+            this.mnuShowToDoTasks.Size = new System.Drawing.Size(170, 22);
+            this.mnuShowToDoTasks.Text = "Show To Do Tasks";
+            this.mnuShowToDoTasks.Click += new System.EventHandler(this.mnuShowToDoTasks_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(167, 6);
+            // 
+            // mnuQuit
+            // 
+            this.mnuQuit.Name = "mnuQuit";
+            this.mnuQuit.Size = new System.Drawing.Size(170, 22);
+            this.mnuQuit.Text = "Quit";
+            this.mnuQuit.Click += new System.EventHandler(this.mnuQuit_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(32, 32);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // label27
+            // 
+            this.label27.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.Color.Transparent;
+            this.label27.Font = new System.Drawing.Font("Segoe UI Light", 28F);
+            this.label27.ForeColor = System.Drawing.Color.White;
+            this.label27.Location = new System.Drawing.Point(352, 116);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(202, 51);
+            this.label27.TabIndex = 4;
+            this.label27.Text = "To Do Tasks";
+            // 
+            // lblVersionTop
+            // 
+            this.lblVersionTop.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblVersionTop.AutoSize = true;
+            this.lblVersionTop.BackColor = System.Drawing.Color.Transparent;
+            this.lblVersionTop.Font = new System.Drawing.Font("Segoe UI Light", 18F);
+            this.lblVersionTop.ForeColor = System.Drawing.Color.White;
+            this.lblVersionTop.Location = new System.Drawing.Point(545, 116);
+            this.lblVersionTop.Name = "lblVersionTop";
+            this.lblVersionTop.Size = new System.Drawing.Size(41, 32);
+            this.lblVersionTop.TabIndex = 5;
+            this.lblVersionTop.Text = "1.0";
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.BackColor = System.Drawing.Color.Transparent;
+            this.lblVersion.Font = new System.Drawing.Font("Segoe UI Light", 14F);
+            this.lblVersion.ForeColor = System.Drawing.Color.White;
+            this.lblVersion.Location = new System.Drawing.Point(312, 196);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(142, 25);
+            this.lblVersion.TabIndex = 6;
+            this.lblVersion.Text = "Version:    1.2.3.4";
+            // 
+            // label30
+            // 
+            this.label30.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label30.AutoSize = true;
+            this.label30.BackColor = System.Drawing.Color.Transparent;
+            this.label30.Font = new System.Drawing.Font("Segoe UI Light", 12F);
+            this.label30.ForeColor = System.Drawing.Color.White;
+            this.label30.Location = new System.Drawing.Point(312, 236);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(67, 21);
+            this.label30.TabIndex = 7;
+            this.label30.Text = "Authors:";
+            // 
+            // label31
+            // 
+            this.label31.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label31.AutoSize = true;
+            this.label31.BackColor = System.Drawing.Color.Transparent;
+            this.label31.Font = new System.Drawing.Font("Segoe UI Light", 12F);
+            this.label31.ForeColor = System.Drawing.Color.White;
+            this.label31.Location = new System.Drawing.Point(396, 236);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(131, 42);
+            this.label31.TabIndex = 8;
+            this.label31.Text = "Dương Diệu Pháp\r\nBùi Bá Lộc";
+            // 
+            // label32
+            // 
+            this.label32.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label32.AutoSize = true;
+            this.label32.BackColor = System.Drawing.Color.Transparent;
+            this.label32.Font = new System.Drawing.Font("Segoe UI Light", 12F);
+            this.label32.ForeColor = System.Drawing.Color.White;
+            this.label32.Location = new System.Drawing.Point(313, 325);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(227, 21);
+            this.label32.TabIndex = 9;
+            this.label32.Text = "Contact:      d2phap@gmail.com";
+            // 
+            // label33
+            // 
+            this.label33.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label33.AutoSize = true;
+            this.label33.BackColor = System.Drawing.Color.Transparent;
+            this.label33.Font = new System.Drawing.Font("Segoe UI Light", 12F);
+            this.label33.ForeColor = System.Drawing.Color.White;
+            this.label33.Location = new System.Drawing.Point(396, 289);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(258, 21);
+            this.label33.TabIndex = 10;
+            this.label33.Text = "Copyright © 2014. All rights reserved.";
+            // 
+            // err
+            // 
+            this.err.ContainerControl = this;
             // 
             // tabs
             // 
@@ -1614,9 +1614,9 @@
             this.lblLastSync.AutoSize = true;
             this.lblLastSync.Location = new System.Drawing.Point(281, 205);
             this.lblLastSync.Name = "lblLastSync";
-            this.lblLastSync.Size = new System.Drawing.Size(90, 15);
+            this.lblLastSync.Size = new System.Drawing.Size(58, 15);
             this.lblLastSync.TabIndex = 19;
-            this.lblLastSync.Text = "Last sync: never";
+            this.lblLastSync.Text = "Last sync:";
             // 
             // lblVolumeValue
             // 
@@ -2051,8 +2051,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.panControl.ResumeLayout(false);
             this.panControl.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.tabsFun.ResumeLayout(false);
             this.tpFunStatus.ResumeLayout(false);
             this.tpFunSchedule.ResumeLayout(false);
@@ -2062,6 +2060,8 @@
             this.tpFunLogin.ResumeLayout(false);
             this.tpFunLoginNewAccount.ResumeLayout(false);
             this.tpFunLogout.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.tabs.ResumeLayout(false);
             this.tpStatus.ResumeLayout(false);
             this.tpSchedule.ResumeLayout(false);

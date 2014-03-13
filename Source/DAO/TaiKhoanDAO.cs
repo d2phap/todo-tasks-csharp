@@ -226,7 +226,7 @@ namespace DAO
 
             XmlElement nNode = doc.CreateElement("user");//<user>
             XmlElement n = doc.CreateElement("email");// <email>
-            n.InnerText = HeThong.TaiKhoan.Email;
+            n.InnerText = HeThong.CaiDat.NguoiDung;
             nNode.AppendChild(n);
 
             n = doc.CreateElement("name");// <name>

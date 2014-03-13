@@ -37,7 +37,7 @@ namespace DTO
         public LichLamViecDTO()
         {
             this.DanhSachCongViec = new List<CongViecDTO>();
-            this.ThoiGianDongBoMoiNhat = DateTime.Parse("7/26/1991");
+            this.ThoiGianDongBoMoiNhat = DateTime.Now;
             this.Ten = "Default";
         }
     }

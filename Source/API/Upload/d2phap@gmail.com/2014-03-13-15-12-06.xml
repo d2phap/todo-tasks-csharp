@@ -1,0 +1,132 @@
+<to_do_tasks>
+  <description>Lịch làm việc của người dùng</description>
+  <user>
+    <email>d2phap@gmail.com</email>
+    <name>Dương Diệu Pháp</name>
+    <type>Registered</type>
+    <schedules lastsync="01/04/2013 09:04:30">
+      <item name="Default">
+        <task>
+          <title>Phỏng vấn xin việc</title>
+          <place>New World hotel</place>
+          <description>
+						Phỏng vấn cho công ty Poste, đến sớm trước 20 phút để chuẩn bị
+					</description>
+          <color>16711680</color>
+          <time>
+            <type>Unique</type>
+            <start>03/07/2014 10:00:00</start>
+            <end>03/07/2014 11:00:00</end>
+            <repeat>0</repeat>
+            <repeated_unit>0</repeated_unit>
+          </time>
+          <remind>
+            <type>
+              <item>Email</item>
+              <item>Sound</item>
+            </type>
+            <time>
+              <item>5</item>
+              <item>10</item>
+              <item>30</item>
+            </time>
+          </remind>
+          <done>True</done>
+        </task>
+        <task>
+          <title>Tập gym</title>
+          <place>California center</place>
+          <description>
+          </description>
+          <color>255</color>
+          <time>
+            <type>Repeated</type>
+            <start>03/08/2014 06:00:00</start>
+            <end>03/08/2014 06:00:01</end>
+            <repeat>12</repeat>
+            <repeated_unit>2</repeated_unit>
+          </time>
+          <remind>
+            <type />
+            <time>
+              <item>10</item>
+            </time>
+          </remind>
+          <done>False</done>
+        </task>
+        <task>
+          <title>Chạy show</title>
+          <place>Planet Hollywood</place>
+          <description>Duet với Như Quỳnh</description>
+          <color>-8355712</color>
+          <time>
+            <type>Unique</type>
+            <start>03/13/2014 04:37:44</start>
+            <end>03/13/2014 05:37:44</end>
+            <repeat>0</repeat>
+            <repeated_unit>0</repeated_unit>
+          </time>
+          <remind>
+            <type>
+              <item>Email</item>
+              <item>Sound</item>
+              <item>Notification</item>
+            </type>
+            <time />
+          </remind>
+          <done>True</done>
+        </task>
+        <task>
+          <title>Đi ngủ</title>
+          <place>Nhà</place>
+          <description>Chúc bé ngủ ngon</description>
+          <color>-14172689</color>
+          <time>
+            <type>Unique</type>
+            <start>03/12/2014 11:57:49</start>
+            <end>03/13/2014 07:59:49</end>
+            <repeat>0</repeat>
+            <repeated_unit>0</repeated_unit>
+          </time>
+          <remind>
+            <type>
+              <item>Email</item>
+              <item>Sound</item>
+              <item>Notification</item>
+            </type>
+            <time />
+          </remind>
+          <done>True</done>
+        </task>
+        <task>
+          <title>Nghe nhạc</title>
+          <place>jskdg</place>
+          <description>gd sqdg ưg ư
+e
+ ư
+e 
+ư
+e ưẹti ưeiọt</description>
+          <color>-32768</color>
+          <time>
+            <type>Unique</type>
+            <start>03/13/2014 12:33:00</start>
+            <end>03/13/2014 01:29:00</end>
+            <repeat>0</repeat>
+            <repeated_unit>0</repeated_unit>
+          </time>
+          <remind>
+            <type>
+              <item>Email</item>
+              <item>Sound</item>
+              <item>Notification</item>
+            </type>
+            <time />
+          </remind>
+          <done>False</done>
+        </task>
+      </item>
+      <item name="Riêng tư" />
+    </schedules>
+  </user>
+</to_do_tasks>

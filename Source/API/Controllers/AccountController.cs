@@ -17,33 +17,6 @@ namespace API.Controllers
 {
     public class AccountController : ApiController
     {
-        // GET api/account
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/account/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/account
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/account/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/account/5
-        public void Delete(int id)
-        {
-        }
-
 
         private string SHA1(string inputString)
         {
@@ -136,6 +109,28 @@ namespace API.Controllers
             return false;
         }
 
+        [HttpGet, ActionName("getschedulexml")]
+        [AcceptVerbs("GET")]
+        public string GetScheduleXML(string email, string password)
+        {
+            dbToDoTasksDataContext db = new dbToDoTasksDataContext();
+            password = SHA1(password);
+
+            var items = db.Syncs
+                .Where(i => i.email == email && i.Account.password == password)
+                .OrderByDescending(i => i.datesync)
+                .Take(1)
+                .ToList();
+
+            if(items.Count > 0)
+            {
+                return "http://" + Request.RequestUri.Authority + "/Upload/" + 
+                    email + "/" + items[0].filesync;
+            }
+
+            return "";
+        }
+
         /// <summary>
         /// Đồng bộ hoá dữ liệu (upload tập tin xml)
         /// </summary>
@@ -150,7 +145,7 @@ namespace API.Controllers
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            string root = HttpContext.Current.Server.MapPath("~/App_Data");
+            string root = HttpContext.Current.Server.MapPath("~/Upload");
             var provider = new MultipartFormDataStreamProvider(root);
             string uploadedFilename = string.Empty;
             string user_dir = string.Empty;
@@ -164,15 +159,14 @@ namespace API.Controllers
                 // This illustrates how to get the file names.
                 foreach (MultipartFileData file in provider.FileData)
                 {
-                    uploadedFilename = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-");                    
-                    uploadedFilename += file.Headers.ContentDisposition.FileName;
+                    uploadedFilename = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xml";
 
                     Models.Sync sy = new Sync();
                     sy.email = file.Headers.ContentDisposition.Name.Replace('\"', ' ').Trim(); //email
                     sy.filesync = uploadedFilename;
                     sy.datesync = DateTime.Now;
 
-                    user_dir = root + "//" + sy.email + "//";
+                    user_dir = root + "/" + sy.email + "/";
                     if(!Directory.Exists(user_dir))
                     {
                         Directory.CreateDirectory(user_dir);

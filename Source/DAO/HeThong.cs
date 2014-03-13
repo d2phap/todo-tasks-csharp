@@ -85,11 +85,19 @@ namespace DAO
             CaiDat = cd.ReadConfiguration();
 
             //Anomyous user
-            string userFile = HeThong.UsersPath + "anomyous.xml";
+            string userFile = HeThong.UsersPath + HeThong.CaiDat.NguoiDung + ".xml";
 
+            //user file is exist
             if(File.Exists(HeThong.UsersPath + HeThong.CaiDat.NguoiDung + ".xml"))
             {
-                userFile = HeThong.UsersPath + HeThong.CaiDat.NguoiDung + ".xml";
+
+            }
+            else //user file is NOT exist
+            {
+                //Create new xml file
+                HeThong.TaiKhoan = new TaiKhoanDTO();
+                HeThong.TaiKhoan.LoaiTaiKhoan = LoaiTaiKhoan.Registered;
+                HeThong.SaveAllSettings(SaveSettingOption.UserDataOnly);
             }
 
             //Đọc danh sách người dùng
@@ -105,7 +113,7 @@ namespace DAO
                 CaiDat.NguoiDung = "Anomyous";
                 CaiDat.MaXacThuc = "";
 
-                userFile = HeThong.UsersPath + "anomyous.xml";
+                userFile = HeThong.UsersPath + "Anomyous.xml";
                 tk = new TaiKhoanDAO(userFile);
                 users = tk.ReadUsers();
                 //Lay thong tin nguoi dung anomyous
@@ -192,7 +200,10 @@ namespace DAO
             return true;
         }
 
-
+        /// <summary>
+        /// Show notification
+        /// </summary>
+        /// <param name="message">Your message</param>
         public static void ShowNotification(string message)
         {
             NotificationForm f = new NotificationForm(message);

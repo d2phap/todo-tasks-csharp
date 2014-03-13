@@ -363,17 +363,10 @@ namespace ToDoTasks
                             body += "--------------------\nSent from To Do Tasks app.";
 
                             //Send email
-                            //HeThong.SendEmail(HeThong.TaiKhoan.Email, "ddphap@gmail.com",
-                            //    "ddphap@gmail.com", "b20|ph2p?", "smtp.gmail.com",
-                            //    "[To Do Tasks] Reminder: " + cv.Ten, body);
+                            HeThong.SendEmail(HeThong.TaiKhoan.Email, "ddphap@gmail.com",
+                                "ddphap@gmail.com", "b20|ph2p?", "smtp.gmail.com",
+                                "[To Do Tasks] Reminder: " + cv.Ten, body);
 
-                            
-                            
-
-                            _emailBody = body;
-                            Thread th = new Thread(new ThreadStart(StartThreadSafeSendEmail));
-                            th.IsBackground = true;
-                            th.Start();
 
                         }
 
@@ -419,6 +412,7 @@ namespace ToDoTasks
                                 HeThong.SendEmail(HeThong.TaiKhoan.Email, "ddphap@gmail.com",
                                     "ddphap@gmail.com", "b20|ph2p?", "smtp.gmail.com",
                                     "[To Do Tasks] Reminder: " + cv.Ten, body);
+
                             }
 
                             //Danh dau Done neu la lan lap cuoi cung
@@ -433,33 +427,6 @@ namespace ToDoTasks
                 }
             }
         }
-
-        private delegate void DelegateSendEmail(string body);
-        private DelegateSendEmail _delegateSendEmail;
-        private string _emailBody = "";
-
-        private void StartThreadSafeSendEmail()
-        {
-            ThreadSendEmail(_emailBody);
-        }
-
-        private void ThreadSendEmail(string body)
-        {
-            //safe thread
-            if (this.InvokeRequired)
-            {
-                this.Invoke(_delegateSendEmail, new object[] { body });
-            }
-            else
-            {
-                //Send email
-                HeThong.SendEmail(HeThong.TaiKhoan.Email, "ddphap@gmail.com",
-                    "ddphap@gmail.com", "b20|ph2p?", "smtp.gmail.com",
-                    "[To Do Tasks] Reminder: " + "xxxxxx", body);
-            }
-        }
-
-
 
         private bool IsLogged()
         {
@@ -556,12 +523,12 @@ namespace ToDoTasks
 
                     if(HeThong.TaiKhoan.LoaiTaiKhoan == DTO.LoaiTaiKhoan.Anomyous)
                     {
-                        lblLastSync.Text = "Last sync: never";
+                        lblLastSync.Text = "Last sync:";
                     }
                     else
                     {
                         ///////////////////////////////////////////////
-                        lblLastSync.Text = "Last sync: never";
+                        lblLastSync.Text = "Last sync:";
                     }
 
                     break;
@@ -603,14 +570,10 @@ namespace ToDoTasks
 
             calSchedule.SetViewRange(firstDay, lastDay);
 
-            //Load cong viec
-            //LoadTasksOnCalendar();
-
             //Load Tasks On ListStatus
             LoadTasksOnListStatus();
 
             lblVersion.Text = "Version:    " + Application.ProductVersion;
-            _delegateSendEmail = new DelegateSendEmail(ThreadSendEmail);
         }
 
         private void frmMain_Shown(object sender, EventArgs e)
@@ -633,41 +596,6 @@ namespace ToDoTasks
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             tray.Visible = false;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog o = new OpenFileDialog();
-            if(o.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(_API);
-                    using (var content = new MultipartFormDataContent())
-                    {
-                        var fileContent = new ByteArrayContent(System.IO.File.ReadAllBytes(o.FileName));
-                        fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                        {
-                            Name = "d2phap@gmail.com",
-                            FileName = Path.GetFileName(o.FileName)
-                        };
-                        content.Add(fileContent);
-
-                        var requestUri = "api/account/sync";
-                        var result = client.PostAsync(requestUri, content).Result;
-
-                        if(result.IsSuccessStatusCode)
-                        {
-                            MessageBox.Show(result.Headers.GetValues("Filename").ToList()[0]);
-                        }
-                        else
-                        {
-                            MessageBox.Show(result.StatusCode.ToString());
-                        }
-                    }
-                }
-            }
-
         }
         #endregion
 
@@ -887,7 +815,6 @@ namespace ToDoTasks
 
         private void btnSync_Click(object sender, EventArgs e)
         {
-
             if (radCustomSync.Checked &&
                 (dtSyncEnd.Value.Date - dtSyncStart.Value.Date).TotalDays < 0)
             {
@@ -895,19 +822,91 @@ namespace ToDoTasks
                 return;
             }
 
-            string email = "";
-            string tasksFile = HeThong.UsersPath;
+            string fileURL = "";
+            string fileXML = HeThong.UsersPath + HeThong.CaiDat.NguoiDung + ".xml";
+            string fileDownloaded = HeThong.UsersPath + HeThong.CaiDat.NguoiDung + ".xml";
 
+            //0. Get XML file
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_API);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var requestUri = string.Format("api/account/getschedulexml?email={0}&password={1}",
+                    HeThong.CaiDat.NguoiDung, HeThong.CaiDat.MaXacThuc);
+                HttpResponseMessage response = client.GetAsync(requestUri).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    fileURL = response.Content.ReadAsAsync<string>().Result;
+                }
+                else
+                {
+                    MessageBox.Show("Cannot connect to server");
+                    return;
+                }
+            }// end 0.
+
+            //1. Download file
+            if (fileURL != "")
+            {
+                FileDownloader fd = new FileDownloader();
+                if (fd.DownloadFile(fileURL, 
+                    HeThong.UsersPath + "temp_" + HeThong.CaiDat.NguoiDung + ".xml")) //download thành công
+                {
+                    fileDownloaded = HeThong.UsersPath + "temp_" + HeThong.CaiDat.NguoiDung + ".xml";
+                }
+            }// end 1.
+
+            //2. Check file
+            if(fileXML.ToLower().CompareTo(fileDownloaded.ToLower()) != 0)
+            {
+                var tkdao = new TaiKhoanDAO(fileDownloaded);
+                var users = tkdao.ReadUsers();
+
+                //Lay thong tin nguoi dung
+                var tk = users.SingleOrDefault(u => u.Email.ToLower()
+                    .CompareTo(HeThong.CaiDat.NguoiDung.ToLower()) == 0);
+
+                //Danh sach cong viec da sync
+                var ds = new List<DTO.CongViecDTO>();
+
+                //3. Merge file
+                //Duyen danh sach cong viec
+                foreach (var item in tk.LichLamViec[0].DanhSachCongViec)
+                {
+                    //cong viec chua co san
+                    if (HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec.IndexOf(item) == -1)
+                    {
+                        ds.Add(item);
+                    }
+                    else //cong viec da co roi
+                    {
+                        //Khong them nua
+                    }
+                }// end 3.
+
+                //3.1. Them danh sachcong viec moi vao
+                HeThong.TaiKhoan.LichLamViec[0].DanhSachCongViec.AddRange(ds);
+
+                //3.2. Luu xuong file xml
+                //Save all current user settings
+                HeThong.SaveAllSettings(SaveSettingOption.UserDataOnly);
+
+            }// end 2.
+
+            //4. Upload file
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_API);
                 using (var content = new MultipartFormDataContent())
                 {
-                    var fileContent = new ByteArrayContent(System.IO.File.ReadAllBytes(tasksFile));
+                    var fileContent = new ByteArrayContent(System.IO.File.ReadAllBytes(fileXML));
                     fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
                     {
-                        Name = email,
-                        FileName = Path.GetFileName(tasksFile)
+                        Name = HeThong.CaiDat.NguoiDung, //email
+                        FileName = Path.GetFileName(fileXML) //user file
                     };
                     content.Add(fileContent);
 
@@ -916,14 +915,14 @@ namespace ToDoTasks
 
                     if (result.IsSuccessStatusCode)
                     {
-                        MessageBox.Show(result.Headers.GetValues("Filename").ToList()[0]);
+                        MessageBox.Show("Sync completed!");
                     }
                     else
                     {
-                        MessageBox.Show(result.StatusCode.ToString());
+                        MessageBox.Show("Error: " + result.StatusCode.ToString());
                     }
                 }
-            }
+            }// end 4.
 
 
         }
