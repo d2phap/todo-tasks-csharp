@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using DAO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows.Forms.Calendar;
-using System.Threading;
 
 namespace ToDoTasks
 {
@@ -575,6 +569,7 @@ namespace ToDoTasks
             LoadTasksOnListStatus();
 
             lblVersion.Text = "Version:    " + Application.ProductVersion;
+            tabsFun.Multiline = true;
         }
 
         private void frmMain_Shown(object sender, EventArgs e)
