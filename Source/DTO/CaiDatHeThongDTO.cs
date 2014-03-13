@@ -69,7 +69,7 @@ namespace DTO
             this.amLuongThongBao = 800;
             this.tapTinAmThanh = "";
             this.anCTKhiKhoiDong = false;
-            this.khoiDongCungHeDieuHanh = true;
+            this.khoiDongCungHeDieuHanh = false;
             this.anCTKhiThuNho = false;
             this.nguoiDung = "anomyous";
             this.maXacThuc = "";

@@ -20,7 +20,8 @@ namespace ToDoTasks
     public partial class frmMain : Form
     {
         private Color _FONT_COLOR = Color.FromArgb(255, 86, 90, 95);
-        private string _API = "http://localhost:53456/";
+        //private string _API = "http://localhost:53456/";
+        private string _API = "http://www.todotasks.somee.com/";
         //40, 95
 
         public frmMain()
@@ -893,6 +894,13 @@ namespace ToDoTasks
                 //3.2. Luu xuong file xml
                 //Save all current user settings
                 HeThong.SaveAllSettings(SaveSettingOption.UserDataOnly);
+
+                //3.3 Xoa file temp_
+                try
+                {
+                    File.Delete(fileDownloaded);
+                }
+                catch { }
 
             }// end 2.
 
